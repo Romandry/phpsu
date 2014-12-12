@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta http-equiv="Content-language" content="en" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <style type="text/css">
+
+        html, body {
+            color: #888;
+            background: #111;
+        }
+
+        #container {
+            margin: 0 auto;
+            padding: 80px 0;
+            width: 60%;
+            font-size: 13px;
+        }
+
+        h1 {
+            padding-left: 36px;
+        }
+
+        pre {
+            line-height: 20px;
+            font-size: 10px;
+        }
+
+        #sign {
+            position: absolute;
+            margin-top: -56px;
+            font-size: 32px;
+            color: #900;
+        }
+
+    </style>
+
+    <title><?=$report['title']?> :: <?=$report['description']?></title>
+
+</head>
+<body>
+
+    <div id="container">
+
+        <h1><?=$report['title']?></h1>
+        <div id="sign"><?="\342\226\266"?></div>
+
+        <h4><?=$report['code']?>: <?=$report['description']?></h4>
+        <h4>Initiator: #<?=$report['initiator_id']?></h4>
+
+        <p>Throw in <i><?=$report['file']?></i> on line <b><?=$report['line']?></b></p>
+
+        <h3>Stacktrace:</h3>
+
+<pre>
+<?php print_r($report['trace']); ?>
+</pre>
+
+    </div>
+
+</body>
+</html>
