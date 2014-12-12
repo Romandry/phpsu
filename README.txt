@@ -20,10 +20,6 @@ VERY IMPORTANT!
     via copying content from archive/hosts-EXAMPLE.json
     and set actually hostnames!
 
-3) You must be create file: application/config/system_sync.json
-    via copying content from archive/system_sync-EXAMPLE.json
-    and set actually server timezone offset for your PC!
-
 
 
 
