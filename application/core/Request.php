@@ -7,7 +7,7 @@
  * Request environment, get and set headers, redirect, refresh
  */
 
-abstract class Request
+class Request
 {
 
 

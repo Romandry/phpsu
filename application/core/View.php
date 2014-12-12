@@ -7,7 +7,7 @@
  * Global view class
  */
 
-abstract class View
+class View
 {
 
 

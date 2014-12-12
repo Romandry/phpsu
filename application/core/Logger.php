@@ -7,7 +7,7 @@
  * Rotate log files class
  */
 
-abstract class Logger
+class Logger
 {
 
 

@@ -9,7 +9,7 @@
  * ~$ /usr/bin/php /path/do/htdocs/index.php -r[--request] /a/b/c?z=x&q=w -p[--post] r=1&s=2
  */
 
-abstract class CliEnv
+class CliEnv
 {
 
 

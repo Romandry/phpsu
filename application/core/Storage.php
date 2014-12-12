@@ -7,7 +7,7 @@
  * Session storage class
  */
 
-abstract class Storage
+class Storage
 {
 
 

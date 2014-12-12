@@ -7,7 +7,7 @@
  * Global application class
  */
 
-abstract class App
+class App
 {
 
 

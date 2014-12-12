@@ -7,7 +7,7 @@
  * Еext plain output context builder class
  */
 
-abstract class TextPlainOutput
+class TextPlainOutput
 {
 
 
