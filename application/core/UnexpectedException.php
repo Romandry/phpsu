@@ -7,7 +7,8 @@
  * Unexpected exception taker class
  */
 
-class UnexpectedException {
+class UnexpectedException
+{
 
 
     /**
