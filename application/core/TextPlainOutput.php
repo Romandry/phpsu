@@ -4,7 +4,7 @@
 /**
  * TextPlainOutput
  *
- * Еext plain output context builder class
+ * Text plain output context builder class
  */
 
 class TextPlainOutput

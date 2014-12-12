@@ -3,10 +3,10 @@
 
 
 
-upload_images - directory of uploaded images: http://imgN.domain/
 application   - application directory
 public_html   - main domain directory: http://domain/
 static_html   - static data (images, styles, scripts, etc.) subdomain directory: http://stN.domain/
+upload_images - directory of uploaded images: http://imgN.domain/
 
 
 
@@ -16,8 +16,11 @@ VERY IMPORTANT!
 
 1) You must be install gmp php module!
 
-2) You must be create file: application/config/hosts.json
-    via copying content from archive/hosts-EXAMPLE.json
+2) You must be create file: application/config/main.json
+    via copying content from misc/main-EXAMPLE.json
+
+3) You must be create file: application/config/hosts.json
+    via copying content from misc/hosts-EXAMPLE.json
     and set actually hostnames!
 
 

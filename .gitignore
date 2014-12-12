@@ -1,6 +1,7 @@
 
 
 application/config/main.json
+application/config/hosts.json
 application/logs/*.log
 
 

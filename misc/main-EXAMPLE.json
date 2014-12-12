@@ -1,0 +1,92 @@
+
+
+{
+
+
+    /**
+     * global site settings
+     */
+
+    "site": {
+
+        // SEO defaults: Keywords, Description, Title
+        "default_description" : "",
+        "default_keywords"    : "",
+        "default_title"       : "",
+
+        // block prefetch requests
+        "block_prefetch_requests": true,
+
+        // default language
+        "default_language": "ru"
+
+    },
+
+
+    /**
+     * system settings of application
+     */
+
+    "system": {
+
+
+        /**
+         * debug mode for developers
+         * this option show very verbosity trace of application events
+         */
+
+        "debug_mode": true,
+
+        // write logs of application (members) events
+        "write_log": true,
+
+        // max size of separated log file
+        "log_file_max_size": 16384,
+
+        // default output context
+        "default_output_context": "html",
+
+
+        /**
+         * names of session and cookies
+         * note: for compatibility set only alphabetic symbols
+         */
+
+        "session_name" : "phpsu",
+        "cookie_name"  : "phpsumember",
+
+        "cookie_expires_time": 94608000 // 3 years
+
+    },
+
+
+    /**
+     * database connection settings
+     */
+
+    "db": {
+
+        // host or IP of database server
+        "host": "localhost",
+
+        // port of connection
+        "port": 3306,
+
+        // name of database
+        "dbname": "phpsu",
+
+        // name of database user
+        "user": "phpsu",
+
+        // database user password
+        "pass": "phpsu",
+
+        // client connection charset
+        "charset": "utf8"
+
+    }
+
+
+}
+
+
