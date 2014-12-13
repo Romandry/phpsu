@@ -410,8 +410,8 @@ class View
     public static function draw()
     {
 
-        $isDebug = App::getConfig('main')->system->debug_mode;
-        foreach (array(0, 1) as $try) {
+        $renderTries = 2;
+        while ( $renderTries-- ) {
 
             try {
 
@@ -451,13 +451,10 @@ class View
 
 
             } catch (Exception $e) {
-
                 ob_clean();
                 self::assignException($e);
                 continue;
-
             }
-
             $layoutContent = ob_get_clean();
             break;
 
