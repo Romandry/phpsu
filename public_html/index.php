@@ -3,9 +3,7 @@
 
 /**
  * CLI mode for example:
- * ~$ /usr/bin/php /path/do/htdocs/index.php -r[--request] /a/b/c?z=x&q=w -p[--post] r=1&s=2
- *
- * WARNING! Uncomplete now for POST!
+ * ~$ /usr/bin/php /path/do/htdocs/index.php -r[--request] /a/b/c?z=x&q=w
  */
 
 
@@ -79,4 +77,3 @@ try {
     View::assignException($e);
 }
 View::draw();
-//App::shutDown();

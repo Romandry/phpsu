@@ -174,7 +174,6 @@ class Storage
 
     public static function clear()
     {
-        self::$_session = array();
         self::$_session[self::$_storageKey] = array();
     }
 
