@@ -162,7 +162,7 @@ class View
     {
 
         if (!in_array($type, self::$_availableContexts)) {
-            throw new systemErrorException(array(
+            throw new SystemErrorException(array(
                 'title'       => 'View error',
                 'description' => 'Unavailable output context: ' . $type
             ));
@@ -283,6 +283,22 @@ class View
 
 
     /**
+     * setXSDSchema
+     *
+     * Set XDS-schema array structure for XML output context
+     *
+     * @param  array $schema XSD schema array
+     * @return null
+     */
+
+    public static function setXSDSchema($schema)
+    {
+        XmlSchemaValidator::check($schema);
+        self::$_XSDSchema = $schema;
+    }
+
+
+    /**
      * isAssigned
      *
      * Return status of assigned public output variable
@@ -356,7 +372,7 @@ class View
             } else {
 
                 /*self::$layout = 'exception.phtml';
-                if ($e instanceof systemErrorException) {
+                if ($e instanceof SystemErrorException) {
                     $report['code']        = 404;
                     $report['title']       = view::$language->error . ' 404';
                     $report['description'] = view::$language->page_not_found;
@@ -401,7 +417,7 @@ class View
 
 
                 ob_start();
-
+                self::$_outputContext = 'xml';
                 // txt context
                 if (self::$_outputContext == 'txt') {
                     Request::addHeader('Content-Type: text/plain');
@@ -505,7 +521,7 @@ class View
     private static function _normalizeHtmlContext()
     {
 
-        $config = app::getConfig('main')->site;
+        $config = App::getConfig('main')->site;
         if (!array_key_exists('meta_description', self::$_data)) {
             self::$_data['meta_description'] = $config->default_description;
         }
