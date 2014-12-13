@@ -417,7 +417,6 @@ class View
 
 
                 ob_start();
-                self::$_outputContext = 'xml';
                 // txt context
                 if (self::$_outputContext == 'txt') {
                     Request::addHeader('Content-Type: text/plain');
