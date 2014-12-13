@@ -46,13 +46,17 @@ class Logger
             }
         }
 
-        /*$item = array_merge(
-            $item, request::getClientInfo(), array('url' => request::getOriginURL())
-        );*/
+        $item = array_merge(
+            $item,
+            Request::getClientInfo(),
+            array('url' => Request::getRawUrl())
+        );
 
-        $item = ($existsLog ? ",\n" : '' ) . json_encode($item);
+        $item = ($existsLog ? ",\n" : '') . json_encode($item);
         file_put_contents($logFile, $item, LOCK_EX | FILE_APPEND);
-        chmod($logFile, 0666);
+        if (!$existsLog) {
+            chmod($logFile, 0666);
+        }
 
     }
 }

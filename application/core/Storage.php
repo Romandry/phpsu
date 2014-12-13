@@ -30,6 +30,15 @@ class Storage
 
 
     /**
+     * $_session
+     *
+     * Session compatible pointer
+     */
+
+    private static $_session = null;
+
+
+    /**
      * init
      *
      * Initialization of session storage
@@ -55,15 +64,16 @@ class Storage
     {
 
         if (App::isCLI()) {
-            $_SESSION = array();
+            self::$_session = array();
         } else {
             $config = App::getConfig('main')->system;
             session_name($config->session_name);
             @ session_start();
             session_regenerate_id();
+            self::_setSessionPointer($_SESSION);
         }
 
-        if (!array_key_exists(self::$_storageKey, $_SESSION)) {
+        if (!array_key_exists(self::$_storageKey, self::$_session)) {
             self::$_inSession = false;
             self::clear();
         }
@@ -97,7 +107,7 @@ class Storage
 
     public static function write($key, $data)
     {
-        $_SESSION[self::$_storageKey][$key] = $data;
+        self::$_session[self::$_storageKey][$key] = $data;
     }
 
 
@@ -112,8 +122,8 @@ class Storage
 
     public static function remove($key)
     {
-        if (array_key_exists($key, $_SESSION[self::$_storageKey])) {
-            unset($_SESSION[self::$_storageKey][$key]);
+        if (array_key_exists($key, self::$_session[self::$_storageKey])) {
+            unset(self::$_session[self::$_storageKey][$key]);
         }
     }
 
@@ -129,8 +139,8 @@ class Storage
 
     public static function read($key)
     {
-        return array_key_exists($key, $_SESSION[self::$_storageKey])
-            ? $_SESSION[self::$_storageKey][$key]
+        return array_key_exists($key, self::$_session[self::$_storageKey])
+            ? self::$_session[self::$_storageKey][$key]
             : null;
     }
 
@@ -164,7 +174,22 @@ class Storage
 
     public static function clear()
     {
-        $_SESSION = array();
-        $_SESSION[self::$_storageKey] = array();
+        self::$_session = array();
+        self::$_session[self::$_storageKey] = array();
+    }
+
+
+    /**
+     * _setSessionPointer
+     *
+     * Set inner session pointer
+     *
+     * @param  mixed $sessionData Session data
+     * @return null
+     */
+
+    private static function _setSessionPointer( & $sessionData)
+    {
+        self::$_session = & $sessionData;
     }
 }

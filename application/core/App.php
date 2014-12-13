@@ -125,6 +125,7 @@ class App
 
         Storage::init();
         View::init();
+        Request::init();
         if (self::$_isCLIMode) {
         } else {
         }
