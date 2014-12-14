@@ -129,7 +129,10 @@ class Request
         }
         self::$_url = '/' . $parts['mca'];
         foreach (explode('/', $parts['mca']) as $param) {
-            Router::pushParam(rawurldecode($param));
+            $param = rawurldecode($param);
+            if ($param) {
+                Router::pushParam($param);
+            }
         }
         if (isset($parts['gp'])) {
             parse_str($parts['gp'], self::$_params);

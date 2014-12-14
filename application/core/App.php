@@ -48,6 +48,15 @@ class App
 
 
     /**
+     * $_instances
+     *
+     * Initialized instances
+     */
+
+    private static $_instances = array();
+
+
+    /**
      * isCLI
      *
      * Return CLI mode status
@@ -101,7 +110,9 @@ class App
 
     public static function getConfig($name)
     {
-        return array_key_exists($name, self::$_configs) ? self::$_configs[$name] : self::_loadConfig($name);
+        return array_key_exists($name, self::$_configs)
+            ? self::$_configs[$name]
+            : self::_loadConfig($name);
     }
 
 
@@ -126,9 +137,38 @@ class App
         Storage::init();
         View::init();
         Request::init();
-        if (self::$_isCLIMode) {
-        } else {
+        Router::run();
+
+    }
+
+
+    /**
+     * getInstance
+     *
+     * Return object instance
+     *
+     * @param  string $nameSpace Namespace of instance
+     * @return mixed             Object instance
+     */
+
+    public static function getInstance($nameSpace)
+    {
+
+        if (!array_key_exists($nameSpace, self::$_instances)) {
+            if (method_exists($nameSpace, '__construct')) {
+                $args = array();
+                foreach (func_get_args() as $k => $arg) {
+                    if ($k > 0) {
+                        $args[] = $arg;
+                    }
+                }
+                $ref = new ReflectionClass($nameSpace);
+                self::$_instances[$nameSpace] = $ref->newInstanceArgs($args);
+            } else {
+                self::$_instances[$nameSpace] = new $nameSpace;
+            }
         }
+        return self::$_instances[$nameSpace];
 
     }
 
@@ -146,10 +186,11 @@ class App
     {
 
         $config = APPLICATION . 'config/' . $name . '.json';
+        $errPrf = 'Configuration file ' . $config . ' ';
         if (!is_file($config)) {
-            exit('Configuration file ' . $config . ' not found or don\'t have readable permission');
+            exit($errPrf . 'not found or don\'t have readable permission');
         } else if (!$configData = self::_loadJsonFile($config)) {
-            exit('Configuration file ' . $config . ' is broken or have syntax error');
+            exit($errPrf . 'is broken or have syntax error');
         }
         self::$_configs[$name] = $configData;
         return self::$_configs[$name];

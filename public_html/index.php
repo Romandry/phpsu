@@ -46,8 +46,9 @@ set_include_path(APPLICATION . join(PATH_SEPARATOR . APPLICATION, $pathes));
 function mainAutoloader($className)
 {
 
+    $className = ltrim($className, '\\');
     if (strpos($className, '\\', 1)) {
-        $className = str_replace('\\', '/', ltrim($className, '\\'));
+        $className = str_replace('\\', '/', $className);
         $classPath = APPLICATION . $className . '.php';
         if (!is_file($classPath)) {
             throw new SystemErrorException(array(
