@@ -30,14 +30,14 @@ class TextPlainOutput
 
         $output = '';
         $currentPad = self::_getPadSize(array_keys($data));
-        $leftPad = str_repeat(' ', $lastPad);
 
         foreach ($data as $k => $v) {
             if (is_object($v)) {
                 $v = (array) $v;
             }
             $k = is_numeric($k) ? '' : ($k . ': ');
-            $output .= PHP_EOL . $leftPad . str_pad($k, $currentPad, ' ', STR_PAD_RIGHT);
+            $output .= PHP_EOL . str_repeat(' ', $lastPad);
+            $output .= str_pad($k, $currentPad, ' ', STR_PAD_RIGHT);
             if (is_array($v)) {
                 $output .= self::getContent($v, $currentPad);
             } else {

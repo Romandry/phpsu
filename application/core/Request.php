@@ -79,7 +79,11 @@ class Request
          * and I'm want after the "action" immediately "?"
          */
 
-        self::$_rawUrl = preg_replace('/([^\/=\?&]+)\/(\?)/', '$1$2', $_SERVER['REQUEST_URI']);
+        self::$_rawUrl = preg_replace(
+            '/([^\/=\?&]+)\/(\?)/',
+            '$1$2',
+            $_SERVER['REQUEST_URI']
+        );
         self::$_rawUrl = rtrim(self::$_rawUrl, '/');
         if (!self::$_rawUrl) {
             self::$_rawUrl = '/';
@@ -278,11 +282,13 @@ class Request
     private static function _blockPrefetchRequest()
     {
 
-        if (array_key_exists('HTTP_X_MOZ', $_SERVER) && $_SERVER['HTTP_X_MOZ'] == 'prefetch') {
+        $x = 'HTTP_X_MOZ';
+        if (array_key_exists($x, $_SERVER) && $_SERVER[$x] == 'prefetch') {
             self::$_headers = array();
+            $gmDate = gmdate('D, d M Y H:i:s');
 	        self::addHeader('HTTP/1.1 403 Prefetching Forbidden');
 	        self::addHeader('Expires: Thu, 21 Jul 1977 07:30:00 GMT');
-	        self::addHeader('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
+	        self::addHeader('Last-Modified: ' . $gmDate . ' GMT');
 	        self::addHeader('Cache-Control: post-check=0, pre-check=0');
 	        self::addHeader('Pragma: no-cache');
             self::sendHeaders();

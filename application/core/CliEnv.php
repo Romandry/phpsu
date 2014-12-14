@@ -28,13 +28,16 @@ class CliEnv
         View::setOutputContext('txt');
         View::lockOutputContext();
 
+        $key = 'REQUEST_URI';
         foreach ($argv as $k => $arg) {
-            $next = $k + 1;
-            if (($arg == '-r' || $arg == '--request') and array_key_exists($next, $argv)) {
-                $_SERVER['REQUEST_URI'] = $argv[$next];
+            if ($arg == '-r' || $arg == '--request') {
+                $next = $k + 1;
+                if (array_key_exists($next, $argv)) {
+                    $_SERVER[$key] = $argv[$next];
+                }
             }
         }
-        if (!array_key_exists('REQUEST_URI', $_SERVER) or !$_SERVER['REQUEST_URI']) {
+        if (!array_key_exists($key, $_SERVER) || !$_SERVER[$key]) {
             throw new MemberErrorException(array(
                 'title'       => 'CLI mode error',
                 'description' => '--request argument not found or invalid'

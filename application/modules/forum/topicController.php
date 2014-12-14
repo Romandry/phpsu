@@ -1,17 +1,39 @@
 <?php
 
 
+/**
+ * topicController
+ *
+ * Topic controller of forum module
+ */
+
 namespace modules\forum;
 
 class topicController extends \BaseController
 {
 
 
+    /**
+     * indexAction
+     *
+     * Index action of topic controller forum module
+     *
+     * @return null
+     */
+
     public function indexAction()
     {
         \App::dump('This is indexAction of \\modules\\forum\\topicController');
     }
 
+
+    /**
+     * testAction
+     *
+     * Test action of topic controller forum module
+     *
+     * @return null
+     */
 
     public function testAction()
     {

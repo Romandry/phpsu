@@ -220,7 +220,10 @@ class View
             self::$language = array();
             foreach (self::$_langItems as $langFile) {
                 $langPath = $langDir . '/' . $langFile . '.php';
-                self::$language = array_merge(self::$language, (require $langPath));
+                self::$language = array_merge(
+                    self::$language,
+                    (require $langPath)
+                );
             }
 
             self::$_currentLang = $name;
@@ -259,9 +262,13 @@ class View
     {
 
         if (self::$_currentLang && !in_array($name, self::$_langItems)) {
-            $lang = APPLICATION . 'languages/' . self::$_currentLang . '/' . $name . '.php';
+            $lang  = APPLICATION . 'languages/';
+            $lang .= self::$_currentLang . '/' . $name . '.php';
             self::$_langItems[] = $name;
-            self::$language = (object) array_merge((array) self::$language, (require $lang));
+            self::$language = (object) array_merge(
+                (array) self::$language,
+                (require $lang)
+            );
         }
 
     }

@@ -46,7 +46,7 @@ class SystemException extends Exception
             $this->_report['code'] = 0;
         }
 
-        $this->_report['initiator_id'] = 0;//member::getProfile()->id;
+        $this->_report['initiator_id'] = 0;//Member::getProfile()->id;
 
         $this->_report['type']  = $this->_type;
         $this->_report['file']  = $this->file;

@@ -104,8 +104,8 @@ class App
      *
      * Will returned config object with lazy loading
      *
-     * @param  string $name Name of configuration file
-     * @return object       Configuration object
+     * @param  string   $name Name of configuration file
+     * @return StdClass       Configuration object
      */
 
     public static function getConfig($name)
