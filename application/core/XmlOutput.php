@@ -31,7 +31,7 @@ class XmlOutput
      * @return string          Generated XML string
      */
 
-    public static function getContent($data, $schema, $docType)
+    public static function getContent($data, array $schema, array $docType)
     {
 
         if ($docType === null) {
@@ -79,7 +79,7 @@ class XmlOutput
      * @return null
      */
 
-    private static function _createXmlChildren( & $data, & $parentNode, & $parentSchema, $schemaElements = null)
+    private static function _createXmlChildren( & $data, DOMDocument & $parentNode, array & $parentSchema, $schemaElements = null)
     {
 
         if (is_array($data)) {
@@ -194,7 +194,7 @@ class XmlOutput
      * @return null
      */
 
-    private static function _setElementAttributes( & $element, & $data)
+    private static function _setElementAttributes(DOMDocument & $element, array & $data)
     {
 
         if (array_key_exists('attributes', $data)) {

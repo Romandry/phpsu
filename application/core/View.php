@@ -298,7 +298,7 @@ class View
      * @return null
      */
 
-    public static function setXSDSchema($schema)
+    public static function setXSDSchema(array $schema)
     {
         XmlSchemaValidator::check($schema);
         self::$_XSDSchema = $schema;
@@ -362,7 +362,7 @@ class View
      * @return null
      */
 
-    public static function assignException($e)
+    public static function assignException(Exception $e)
     {
 
         $isDebug = App::getConfig('main')->system->debug_mode;

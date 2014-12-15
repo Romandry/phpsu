@@ -21,7 +21,7 @@ class UnexpectedException
      * @return null
      */
 
-    public static function take($e, $isDebug = false)
+    public static function take(Exception $e, $isDebug = false)
     {
 
         if ($e instanceof SystemException) {

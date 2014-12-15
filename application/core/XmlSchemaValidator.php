@@ -20,7 +20,7 @@ class XmlSchemaValidator
      * @return null
      */
 
-    public static function check($schemaElement)
+    public static function check(array $schemaElement)
     {
 
         if (!is_array($schemaElement)) {
@@ -81,7 +81,7 @@ class XmlSchemaValidator
      * @return null
      */
 
-    public static function checkAttributes($attributes)
+    public static function checkAttributes(array $attributes)
     {
 
         if (!is_array($attributes)) {

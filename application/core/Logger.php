@@ -20,7 +20,7 @@ class Logger
      * @return null
      */
 
-    public static function writeItem($item)
+    public static function writeItem(array $item)
     {
 
         $existsLog = false;

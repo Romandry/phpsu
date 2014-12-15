@@ -23,7 +23,18 @@ class topicController extends \BaseController
 
     public function indexAction()
     {
-        \App::dump('This is indexAction of \\modules\\forum\\topicController');
+
+        \View::setOutputContext('json');
+        \View::assign('info', 'This is indexAction of \\modules\\forum\\topicController');
+
+        $db = \Db::getConnection('slave');
+
+        $stmt = $db->sendQuery('SHOW TABLES');
+        \View::assign('tables', $stmt->fetchAll(\PDO::FETCH_ASSOC));
+
+        $stmt = $db->sendQuery('SELECT * FROM information_schema.USER_PRIVILEGES');
+        \View::assign('privileges', $stmt->fetchAll(\PDO::FETCH_ASSOC));
+
     }
 
 

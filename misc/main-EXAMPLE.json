@@ -66,23 +66,14 @@
 
     "db": {
 
-        // host or IP of database server
-        "host": "localhost",
-
-        // port of connection
-        "port": 3306,
-
-        // name of database
-        "dbname": "phpsu",
-
-        // name of database user
-        "user": "phpsu",
-
-        // database user password
-        "pass": "phpsu",
-
-        // client connection charset
-        "charset": "utf8"
+        "slave": {
+            "host"    : "localhost",
+            "port"    : 3306,
+            "dbname"  : "phpsu",
+            "user"    : "phpsu",
+            "pass"    : "phpsu",
+            "charset" : "utf8"
+        }
 
     }
 

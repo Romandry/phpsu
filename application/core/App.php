@@ -137,6 +137,11 @@ class App
         Storage::init();
         View::init();
         Request::init();
+
+        foreach (self::getConfig('main')->db as $key => $params) {
+            Db::addConnection($key, $params);
+        }
+
         Router::run();
 
     }
