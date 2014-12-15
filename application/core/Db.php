@@ -57,12 +57,12 @@ class Db
 
 
     /**
-     * $_counter
+     * $_stat
      *
-     * Transactions (queries) counter
+     * Transactions (queries) statistics counter
      */
 
-    private $_counter = array('read' => 0, 'change' => 0);
+    private $_stat = array('read' => 0, 'change' => 0);
 
 
     /**
@@ -299,7 +299,7 @@ class Db
 
         $preg = '/^\s*(?:INSERT|REPLACE|UPDATE|DELETE|DROP)/i';
         $type = preg_match($preg, $queryString) ? 'change' : 'read';
-        $this->_counter[$type] += 1;
+        $this->_stat[$type] += 1;
 
         $stmtKey = md5($queryString);
         if (array_key_exists($stmtKey, $this->_stmtCache)) {
@@ -336,6 +336,20 @@ class Db
     public function lastInsertId()
     {
         return $this->_PDO->lastInsertId();
+    }
+
+
+    /**
+     * getStat
+     *
+     * Return connection queries statistics
+     *
+     * @return array Statistics result
+     */
+
+    public function getStat()
+    {
+        return $this->_stat;
     }
 
 
