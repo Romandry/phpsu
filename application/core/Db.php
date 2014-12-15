@@ -82,7 +82,7 @@ class Db
         }
         if (!array_key_exists($poolKey, self::$_connections)) {
             throw new SystemErrorException(array(
-                'title'       => 'Db error',
+                'title'       => 'Database error',
                 'description' => 'Connection ' . $poolKey . ' is closed'
             ));
         }
@@ -201,7 +201,7 @@ class Db
         $params = array_merge($defaults, (array) $params);
         if (!array_key_exists('dbname', $params)) {
             throw new SystemErrorException(array(
-                'title'       => 'Database connection error',
+                'title'       => 'Database error',
                 'description' => 'You not set dbname option'
             ));
         }
@@ -228,7 +228,7 @@ class Db
 
         } catch (PDOException $e) {
             throw new SystemErrorException(array(
-                'title'       => 'Database connection error',
+                'title'       => 'Database error',
                 'description' => $e->getMessage()
             ));
         }
