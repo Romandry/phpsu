@@ -390,6 +390,7 @@ class View
             // debug mode
             } else {
                 $report['debug'] = 1;
+                $report['stat']  = App::getStat();
             }
 
             // normalize report output format

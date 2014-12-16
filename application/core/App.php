@@ -179,6 +179,56 @@ class App
 
 
     /**
+     * getStat
+     *
+     * Return statistics
+     *
+     * @return array Statistics data
+     */
+
+    public static function getStat()
+    {
+        return array(
+            'db'     => Db::getAllStat(),
+            'time'   => sprintf('%1.6f', microtime(true) - self::$_startTime) . ' sec.',
+            'memory' => self::getMemoryUsage()
+        );
+    }
+
+
+    /**
+     * getMemoryUsage
+     *
+     * Return memory usage information
+     *
+     * @return string Memory usage information
+     */
+
+    public static function getMemoryUsage()
+    {
+        $size = memory_get_peak_usage() - self::$_useMemory;
+        return '~' . self::humanityByteSize($size) . ' (' . $size . ' bytes)';
+    }
+
+
+    /**
+     * humanityByteSize
+     *
+     * Return humanity bytes size
+     *
+     * @param  int $size Bytes number
+     * @return string    Humanity bytes size
+     */
+
+    public static function humanityByteSize($size)
+    {
+        $types = array('B', 'KiB', 'MiB', 'GiB', 'TiB');
+        $size = $size < 1 ? 1 : (int) $size;
+        return round( $size / pow( 1024, ($type = floor(log($size, 1024))) ) , 1 ) . ' ' . $types[$type];
+    }
+
+
+    /**
      * _loadConfig
      *
      * Trying load and build config
