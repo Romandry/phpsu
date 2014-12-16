@@ -27,11 +27,11 @@ class XmlOutput
      *
      * @param  mixed  $data    Input data
      * @param  array  $schema  XSD-schema exposed as array
-     * @param  array  $docType Doctype and XML namespace
+     * @param  mixed  $docType Doctype and XML namespace
      * @return string          Generated XML string
      */
 
-    public static function getContent($data, array $schema, array $docType)
+    public static function getContent($data, array $schema, $docType)
     {
 
         if ($docType === null) {
@@ -52,8 +52,8 @@ class XmlOutput
         if (array_key_exists('attributes', $schema)) {
             $mainAttributes = $schema['attributes'];
         }
-        if (sizeof($data) > 1) {
-            $data = array('response' => $data);
+        if (!$data || sizeof($data) > 1) {
+            $data = array($data);
         }
 
         self::_createXmlChildren(
@@ -72,14 +72,14 @@ class XmlOutput
      *
      * Create XML children with schema
      *
-     * @param  mixed       $data           Input data pointer
-     * @param  DOMDocument $parentNode     Parent node pointer
-     * @param  array       $parentSchema   Parent node schema segment pointer
-     * @param  mixed       $schemaElements Current schema segment
+     * @param  mixed $data           Input data pointer
+     * @param  mixed $parentNode     Parent node pointer
+     * @param  array $parentSchema   Parent node schema segment pointer
+     * @param  mixed $schemaElements Current schema segment
      * @return null
      */
 
-    private static function _createXmlChildren( & $data, DOMDocument & $parentNode, array & $parentSchema, $schemaElements = null)
+    private static function _createXmlChildren( & $data, & $parentNode, array & $parentSchema, $schemaElements = null)
     {
 
         if (is_array($data)) {
@@ -112,6 +112,9 @@ class XmlOutput
                 }
 
                 // value is array, need recursive execute
+                if (is_object($value)) {
+                    $value = (array) $value;
+                }
                 if (is_array($value)) {
 
                     $childrenSchema = null;
@@ -144,7 +147,7 @@ class XmlOutput
                 // value is not array
                 } else {
 
-                    if (is_object($value) or is_resource($value)) {
+                    if (is_resource($value)) {
                         throw new SystemErrorException(array(
                             'title'       => 'Schema XML error',
                             'description' => 'Value of schema element is not string'
@@ -189,12 +192,12 @@ class XmlOutput
      *
      * Set attributes of element with schema
      *
-     * @param  DOMDocument $element Current node pointer
-     * @param  array       $data    Pointer of node data
+     * @param  DOMElement $element Current node pointer
+     * @param  array      $data    Pointer of node data
      * @return null
      */
 
-    private static function _setElementAttributes(DOMDocument & $element, array & $data)
+    private static function _setElementAttributes(DOMElement & $element, array & $data)
     {
 
         if (array_key_exists('attributes', $data)) {

@@ -60,4 +60,67 @@ class topicController extends \BaseController
         );
 
     }
+
+
+    /**
+     * test_exceptionAction
+     *
+     * JSON exception test action
+     *
+     * @return null
+     */
+
+    public function test_exceptionAction()
+    {
+
+        \View::setOutputContext('json');
+        throw new \MemberErrorException(array(
+            'title'       => 'Test error',
+            'description' => 'Description of test error',
+            'other_data'  => array(1,2,3,4,5,6)
+        ));
+
+    }
+
+
+    /**
+     * test_exception__xmlAction
+     *
+     * XML exception test action
+     *
+     * @return null
+     */
+
+    public function test_exception__xmlAction()
+    {
+
+        \View::setOutputContext('xml');
+        throw new \MemberErrorException(array(
+            'code'        => 404,
+            'title'       => 'Test error',
+            'description' => 'Description of test error',
+            'other_data'  => array(1,2,3,4,5,6)
+        ));
+
+    }
+
+
+    /**
+     * test_exception__htmlAction
+     *
+     * HTML exception test action
+     *
+     * @return null
+     */
+
+    public function test_exception__htmlAction()
+    {
+
+        throw new \MemberErrorException(array(
+            'title'       => 'Test error',
+            'description' => 'Description of test error',
+            'other_data'  => array(1,2,3,4,5,6)
+        ));
+
+    }
 }

@@ -263,7 +263,7 @@ class View
 
         if (self::$_currentLang && !in_array($name, self::$_langItems)) {
             $lang  = APPLICATION . 'languages/';
-            $lang .= self::$_currentLang . '/' . $name . '.php';
+            $lang .= self::$_currentLang . '/' . $name . '.lang.php';
             self::$_langItems[] = $name;
             self::$language = (object) array_merge(
                 (array) self::$language,
@@ -370,35 +370,53 @@ class View
             UnexpectedException::take($e, $isDebug);
         } else {
 
-            $report = $e->getReport();
             self::$_data = array();
+            $report = $e->getReport();
 
-            if ($isDebug) {
-                self::$_layout = 'debug.phtml';
-                self::assign('report', $report);
-            } else {
-
-                /*self::$layout = 'exception.phtml';
-                if ($e instanceof SystemErrorException) {
-                    $report['code']        = 404;
-                    $report['title']       = view::$language->error . ' 404';
-                    $report['description'] = view::$language->page_not_found;
+            // production mode
+            if (!$isDebug) {
+                // clear unused report data
+                $cleanKeys = array('initiator_id', 'file', 'line', 'trace');
+                foreach ($cleanKeys as $key) {
+                    unset($report[$key]);
                 }
+                // normalize report
+                if ($e instanceof SystemErrorException) {
+                    self::addLanguageItem('exception');
+                    $report['code']        = 404;
+                    $report['title']       = self::$language->exception_error_404;
+                    $report['description'] = self::$language->exception_page_not_found;
+                }
+            // debug mode
+            } else {
+                $report['debug'] = 1;
+            }
 
-                if (self::$outputContext == 'json') {
+            // normalize report output format
+            if (self::$_outputContext == 'xml') {
+                self::assign('response', array('report' => $report));
+            } else if (self::$_outputContext == 'html') {
+
+                if ($isDebug) {
+                    self::$_layout = 'debug.phtml';
                     self::assign('report', $report);
                 } else {
-
-                    self::assign($report);
-                    if ($report['code'] == 404) {
-                        request::addHeader($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found');
-                    }
                     if (!self::isAssigned('hosts')) {
-                        self::assign('hosts', app::getConfig('hosts.json'));
+                        self::assign('hosts', App::getConfig('hosts'));
                     }
+                    self::assign($report);
+                    self::$_layout = 'exception.phtml';
+                }
 
-                }*/
+            } else {
+                self::assign('report', $report);
+            }
 
+            // add report headers
+            if (!App::isCLI() && self::$_outputContext != 'json') {
+                if ($report['code'] == 404) {
+                    request::addHeader($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found');
+                }
             }
 
         }
