@@ -402,9 +402,6 @@ class View
                     self::$_layout = 'debug.phtml';
                     self::assign('report', $report);
                 } else {
-                    if (!self::isAssigned('hosts')) {
-                        self::assign('hosts', App::getConfig('hosts'));
-                    }
                     self::assign($report);
                     self::$_layout = 'exception.phtml';
                 }
@@ -542,6 +539,10 @@ class View
 
     private static function _normalizeHtmlContext()
     {
+
+        if (!self::isAssigned('hosts')) {
+            self::assign('hosts', App::getConfig('hosts'));
+        }
 
         $config = App::getConfig('main')->site;
         if (!array_key_exists('meta_description', self::$_data)) {

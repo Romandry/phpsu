@@ -1,0 +1,312 @@
+
+
+* {
+    margin: 0;
+    padding: 0;
+    line-height: 16px;
+    font-family: Verdana, Tahoma, Arial;
+    font-size: 13px;
+    color: #202020;
+}
+
+html, body {
+    background: #f0f0f0;
+}
+
+a {
+    outline: none;
+    color: #2020b2;
+}
+
+a:hover {
+    color: #828282;
+}
+
+p {
+    padding: 0 0 16px 0;
+}
+
+ul, ol {
+    padding: 10px 0 26px 36px;
+}
+
+ul.no-style, ol.no-style {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    padding: 1px 0;
+}
+
+h1 {
+    padding: 0 0 10px 0;
+    line-height: 38px;
+    font-size: 33px;
+}
+
+h2 {
+    padding: 0 0 6px 0;
+    line-height: 26px;
+    font-size: 21px;
+}
+
+h3 {
+    padding: 0 0 4px 0;
+    line-height: 21px;
+    font-size: 17px;
+}
+
+.clear {
+    clear: both;
+}
+
+.box {
+    margin: 3px 0;
+    padding: 10px;
+    background: #e7e7e7;
+    border: solid 1px #d2d2d2;
+    border-radius: 3px;
+}
+
+.right-box {
+    float: right;
+}
+
+.left-box {
+    float: left;
+}
+
+#container {
+    margin: 0 auto;
+    padding: 0 20px;
+    min-width: 800px;
+    max-width: 1060px;
+}
+
+#header {
+    height: 100px;
+}
+
+a#main-logo {
+    display: block;
+    float: left;
+    width: 170px;
+    height: 90px;
+    background: url(../images/php-logo.png) no-repeat center center;
+}
+
+#member-box {
+    float: right;
+    width: 400px;
+}
+
+#member-box .member-actions {
+    padding: 0 0 10px 0;
+    text-align: right;
+}
+
+#member-box .member-actions a {
+    margin: 0 0 0 4px;
+}
+
+#member-box .member-actions-extended {
+    padding: 10px 10px 0 10px;
+    height: 60px;
+    border: solid 1px #b2b2b2;
+    border-radius: 3px;
+}
+
+#member-box .member-actions-extended .action-group {
+    float: left;
+    width: 125px;
+}
+
+#main-menu {
+    margin: 3px 0;
+    height: 36px;
+    background: #e7e7e7;
+    border: solid 1px #d2d2d2;
+    border-radius: 3px;
+}
+
+#main-menu a {
+    display: block;
+    float: left;
+    padding: 0 10px;
+    height: 36px;
+    line-height: 36px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #000000;
+    transition: line-height 0.06s;
+}
+
+#main-menu > a:first-child {
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+a#forum-link {
+    padding: 0 10px 0 3px;
+}
+
+a#forum-link-last {
+    margin: 0 0 0 10px;
+    padding: 0;
+    width: 25px;
+    background-repeat: no-repeat;
+    background-image: url(../images/forum-new-sprite.png);
+    background-position: center 0px;
+}
+
+#main-menu a:hover {
+    line-height: 33px;
+    text-shadow: 0 1px 5px #2020b2;
+}
+
+a#forum-link-last:hover {
+    background-position: center -36px;
+}
+
+.breadcrumbs {
+    padding: 5px 0;
+}
+
+.breadcrumbs a, .breadcrumbs span {
+    font-size: 11px;
+}
+
+.breadcrumbs span {
+    color: #828282;
+}
+
+#footer {
+}
+
+#footer .small-logo {
+    float: left;
+    width: 75px;
+    height: 40px;
+    background: url(../images/php-logo-small.png) no-repeat center center;
+}
+
+#footer .footer-group {
+    float: right;
+    padding: 0 30px 0 0;
+}
+
+#footer .footer-group .item {
+    padding: 0 0 3px 0;
+}
+
+#main-statistics {
+    padding: 10px 0;
+    text-align: center;
+}
+
+.box-wrapper {
+    display: table;
+    width: 100%;
+}
+
+.box-padding {
+    padding: 20px 0;
+}
+
+.right-box-300 {
+    width: 300px;
+}
+
+.left-box-pad-320 {
+    margin: 0 320px 0 0;
+}
+
+.announce-items {
+    padding: 10px 0;
+}
+
+.announce-items a {
+    display: block;
+    padding: 0 0 10px 0;
+}
+
+.pagination {
+    padding: 10px 0;
+}
+
+.pagination a, .pagination span {
+    display: block;
+    float: left;
+    padding: 2px 5px;
+}
+
+.pagination a {
+    text-decoration: none;
+    border: solid 1px #d2d2d2;
+}
+
+.pagination span {
+    margin: 0 5px;
+    font-weight: bold;
+    border-top: solid 1px #f0f0f0;
+    border-bottom: solid 1px #f0f0f0;
+}
+
+table.forum {
+    width: 100%;
+    border-collapse: separate;
+    background: #d2d2d2;
+    border: solid 1px #d2d2d2;
+    border-radius: 3px;
+}
+
+table.forum tr.table-heading * {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+table.forum td {
+    padding: 5px 7px;
+    vertical-align: middle;
+    background: #f0f0f0;
+}
+
+table.forum td.last-update {
+    width: 260px;
+}
+
+table.forum td.topics-count, table.forum td.answers-count {
+    text-align: center;
+}
+
+table.forum td.answers-count {
+    width: 80px;
+}
+
+table.forum td.topics-count {
+    width: 70px;
+}
+
+table.forum td.target-info {
+    vertical-align: top;
+}
+
+table.forum .td-wrapper {
+    position: relative;
+}
+
+table.forum .target-info .title {
+    font-weight: bold;
+}
+
+
+
+
+
+
+
+
+
+
+

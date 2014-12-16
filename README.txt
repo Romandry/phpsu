@@ -3,10 +3,10 @@
 
 
 
-application   - application directory
-public_html   - main domain directory: http://domain/
-static_html   - static data (images, styles, scripts, etc.) subdomain directory: http://stN.domain/
-upload_images - directory of uploaded images: http://imgN.domain/
+application  - application directory
+public_html  - main domain directory: http://domain/
+static_html  - static data (images, styles, scripts, etc.) subdomain directory: http://stN.domain/
+uploads_html - directory of uploaded items: http://fsN.domain/
 
 
 
@@ -31,7 +31,7 @@ VERY IMPORTANT!
 
 127.0.0.1 domain
 127.0.0.1 stN.domain
-127.0.0.1 imgN.domain
+127.0.0.1 fsN.domain
 
 
 
@@ -52,8 +52,8 @@ apache hosts example:
         DocumentRoot /path/do/project_name/static_html
 </VirtualHost>
 <VirtualHost *:80>
-        ServerName imgN.domain
-        DocumentRoot /path/do/project_name/upload_images
+        ServerName fsN.domain
+        DocumentRoot /path/do/project_name/uploads_html
 </VirtualHost>
 
 

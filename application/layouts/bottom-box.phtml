@@ -1,0 +1,33 @@
+
+
+    <div id="footer" class="box">
+
+        <div class="small-logo"></div>
+        <div class="footer-group">
+            <div class="item"><a href="/search">Поиск</a></div>
+            <div class="item"><a href="/help">Помощь</a></div>
+        </div>
+
+        <div class="footer-group">
+            <div class="item"><a href="/documentation">Документация</a></div>
+            <div class="item"><a href="/scripts">PHP скрипты</a></div>
+            <div class="item"><a href="/books">Книги/Учебники</a></div>
+            <div class="item"><a href="/downloads">Download</a></div>
+        </div>
+
+        <div class="footer-group">
+            <div class="item"><a href="/">PHP.SU</a></div>
+            <div class="item"><a href="/forum">Форум</a></div>
+            <div class="item"><a href="/articles">Статьи</a></div>
+        </div>
+        <div class="clear"></div>
+
+    </div><!-- #footer-->
+
+
+    <div id="main-statistics">
+        <?php $stat = App::getStat(); ?>
+        <?= $stat['time'] . ' ' . $stat['memory'] ?>
+    </div>
+
+

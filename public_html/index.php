@@ -17,9 +17,9 @@ ini_set('html_errors', 'On');
 error_reporting(E_ALL | E_STRICT);
 
 // define application pathes
-define('PUBLIC_HTML',   dirname(__FILE__) . '/');
-define('APPLICATION',   realpath(PUBLIC_HTML . '../application') . '/');
-define('UPLOAD_IMAGES', realpath(PUBLIC_HTML . '../upload_images') . '/');
+define('PUBLIC_HTML', dirname(__FILE__) . '/');
+define('APPLICATION', realpath(PUBLIC_HTML . '../application') . '/');
+define('UPLOADS',     realpath(PUBLIC_HTML . '../uploads_html') . '/');
 
 // set global encoding value
 mb_internal_encoding('UTF-8');

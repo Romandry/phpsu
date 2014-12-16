@@ -23,13 +23,6 @@ class mainController extends \BaseController
 
     public function indexAction()
     {
-
-        \View::assign('text', 'Text');
-        \View::assign(array(
-            'range' => range(0, 10),
-            'more'  => 'More text'
-        ));
         \View::setLayout('main.phtml');
-
     }
 }
