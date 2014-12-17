@@ -77,7 +77,7 @@ class Router
             }
             $bootAction .= 'Action';
 
-            if (ClassUtils::isCallableMethod($moduleBoot, $bootAction)) {
+            if (method_exists($moduleBoot, $bootAction)) {
                 // run action of module boot controller
                 $moduleBoot->$bootAction();
             } else {
@@ -98,7 +98,7 @@ class Router
                 $ctrlAction .= 'Action';
 
                 // run action of controller
-                if (!ClassUtils::isCallableMethod($moduleCtrl, $ctrlAction)) {
+                if (!method_exists($moduleCtrl, $ctrlAction)) {
                     throw new SystemErrorException(array(
                         'title'       => 'Execute action error',
                         'description' => 'Action ' . $ctrlAction . ' not found'
