@@ -22,7 +22,7 @@
     "group_priority": 1001,
 
 
-    /*
+    /**
      * Member (guest) status:
      *
      * 0 - Free

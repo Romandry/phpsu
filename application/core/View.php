@@ -543,16 +543,11 @@ class View
         if (!self::isAssigned('hosts')) {
             self::assign('hosts', App::getConfig('hosts'));
         }
-
-        $config = App::getConfig('main')->site;
-        if (!array_key_exists('meta_description', self::$_data)) {
-            self::$_data['meta_description'] = $config->default_description;
-        }
-        if (!array_key_exists('meta_keywords', self::$_data)) {
-            self::$_data['meta_keywords'] = $config->default_keywords;
-        }
-        if (!array_key_exists('title', self::$_data)) {
-            self::$_data['title'] = $config->default_title;
+        $expectedKeys = array('meta_description', 'meta_keywords', 'title');
+        foreach ($expectedKeys as $key) {
+            if (!array_key_exists($key, self::$_data)) {
+                self::$_data[$key] = '';
+            }
         }
 
     }

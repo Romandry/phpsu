@@ -22,7 +22,7 @@
     "group_priority": 0,
 
 
-    /*
+    /**
      * Member CLI (cron) status:
      *
      * 0 - Free

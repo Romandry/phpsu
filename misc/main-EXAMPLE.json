@@ -9,11 +9,6 @@
 
     "site": {
 
-        // SEO defaults: Keywords, Description, Title
-        "default_description" : "",
-        "default_keywords"    : "",
-        "default_title"       : "",
-
         // block prefetch requests
         "block_prefetch_requests": true,
 
