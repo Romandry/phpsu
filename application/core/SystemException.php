@@ -17,7 +17,7 @@ class SystemException extends Exception
      * Type of exception
      */
 
-    protected $_type   = 'system';
+    protected $_type = 'system';
 
 
     /**
