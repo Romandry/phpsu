@@ -33,7 +33,7 @@ class mainController extends \BaseController
     /**
      * sign_outAction
      *
-     * Global member logout
+     * Global member sign out
      *
      * @return null
      */
