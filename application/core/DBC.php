@@ -41,41 +41,23 @@ class DBC
     public function __construct(StdClass $params)
     {
 
-        $defaults = array(
-            'host'    => '127.0.0.1',
-            'port'    => 3306,
-            'user'    => 'root',
-            'pass'    => '',
-            'charset' => 'utf8'
-        );
-
-        $params = array_merge($defaults, (array) $params);
-        if (!array_key_exists('dbname', $params)) {
-            throw new SystemErrorException(array(
-                'title'       => 'Database error',
-                'description' => 'You not set dbname option'
-            ));
-        }
-
         $options = array();
         foreach (array('host', 'port', 'dbname', 'charset') as $key) {
-            $options[] = $key . '=' . $params[$key];
+            $options[] = $key . '=' . $params->{$key};
         }
 
         try {
 
             $this->_PDO = new PDO(
                 'mysql:' . join(';', $options),
-                $params['user'],
-                $params['pass'],
-                array(
-                    PDO::ATTR_PERSISTENT => true
-                    // this is not working on Debian squeeze with MySQL 5.1.73-1
-                    // PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES '{$params['charset']}'",
-                )
+                $params->user,
+                $params->pass,
+                // this is not working on Debian squeeze with MySQL 5.1.73-1
+                // PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES '{$params['charset']}'",
+                array(PDO::ATTR_PERSISTENT => true)
             );
             $this->_PDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $this->_PDO->exec('SET NAMES \'' . $params['charset'] . '\'');
+            $this->_PDO->exec('SET NAMES \'' . $params->charset . '\'');
 
         } catch (PDOException $e) {
             throw new SystemErrorException(array(
