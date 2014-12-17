@@ -27,12 +27,12 @@ class topicController extends \BaseController
         \View::setOutputContext('json');
         \View::assign('info', 'This is indexAction of \\modules\\forum\\topicController');
 
-        $db = \Db::getConnection('slave');
+        $conn = \DBI::getConnection('slave');
 
-        $stmt = $db->sendQuery('SHOW TABLES');
+        $stmt = $conn->sendQuery('SHOW TABLES');
         \View::assign('tables', $stmt->fetchAll(\PDO::FETCH_ASSOC));
 
-        $stmt = $db->sendQuery('SELECT * FROM information_schema.USER_PRIVILEGES');
+        $stmt = $conn->sendQuery('SELECT * FROM information_schema.USER_PRIVILEGES');
         \View::assign('privileges', $stmt->fetchAll(\PDO::FETCH_ASSOC));
 
     }

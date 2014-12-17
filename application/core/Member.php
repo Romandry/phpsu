@@ -6,15 +6,6 @@ class Member
 
 
     /**
-     * $_storageKey
-     *
-     * Member working cache storage key
-     */
-
-    private static $_storageKey = '__member_cache';
-
-
-    /**
      * $_profile
      *
      * Default member profile
@@ -123,7 +114,7 @@ class Member
                 $value = (string) $_COOKIE[$cnf->cookie_name];
                 $value = trim(substr($value, 0, 32));
                 if ($value) {
-                    $conn = Db::getConnection('slave');
+                    $conn = DBI::getConnection('slave');
                     $data = $conn->sendQuery(
                         'SELECT * FROM members WHERE cookie = :cookie',
                         array(':cookie' => $value)
@@ -159,7 +150,7 @@ class Member
 
     public static function initPermissions()
     {
-        $conn = Db::getConnection('slave');
+        $conn = DBI::getConnection('slave');
         $permissions = $conn->sendQuery(
             'SELECT p.name
                 FROM groups_permissions gp

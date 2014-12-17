@@ -140,7 +140,7 @@ class App
         Request::init();
 
         foreach (self::getConfig('main')->db as $key => $params) {
-            Db::addConnection($key, $params);
+            DBI::addConnection($key, $params);
         }
 
         Member::init();
@@ -191,7 +191,7 @@ class App
     public static function getStat()
     {
         return array(
-            'db'     => Db::getAllStat(),
+            'db'     => DBI::getStat(),
             'time'   => sprintf('%1.6f', microtime(true) - self::$_startTime) . ' sec.',
             'memory' => self::getMemoryUsage()
         );
