@@ -97,7 +97,7 @@ class Member
      * @return bool Auth status of member
      */
 
-    public static function init()
+    public static function initGuest()
     {
         self::$_profile = App::getConfig('member_defaults');
     }

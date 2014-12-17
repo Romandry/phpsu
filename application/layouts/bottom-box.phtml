@@ -27,7 +27,7 @@
 
     <div id="main-statistics">
         <?php $stat = App::getStat(); ?>
-        <?= $stat['time'] . ' ' . $stat['memory'] ?>
+        <?= $stat['time'] . ' ' . $stat['memory'] . ' SQL reads: ' . $stat['db']['read'] . ', changes: ' . $stat['db']['change'] ?>
     </div>
 
 
