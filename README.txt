@@ -23,6 +23,8 @@ VERY IMPORTANT!
     via copying content from misc/hosts-EXAMPLE.json
     and set actually hostnames!
 
+4) You must be (re)load SQL dump file misc/phpsu.sql into your Database
+
 
 
 
