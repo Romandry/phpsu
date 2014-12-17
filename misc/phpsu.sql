@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS `groups_permissions` (
   `group_id` smallint(5) unsigned NOT NULL,
   `permission_id` smallint(5) unsigned NOT NULL,
   PRIMARY KEY (`group_id`,`permission_id`),
-  UNIQUE KEY `pk_revert` (`permission_id`,`group_id`)
+  KEY `permission_id` (`permission_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
