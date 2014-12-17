@@ -30,6 +30,20 @@ class DBI
 
 
     /**
+     * initConnections
+     *
+     * Add (init) all used connections
+     *
+     * @return null
+     */
+
+    public static function initConnections()
+    {
+        self::$_connections[] = new DBC(App::getConfig('main')->db);
+    }
+
+
+    /**
      * getConnection
      *
      * Return connection object (instance of self)
@@ -52,30 +66,6 @@ class DBI
             ));
         }
         return self::$_connections[$key];
-
-    }
-
-
-    /**
-     * addConnection
-     *
-     * Add new connection object into connections pool
-     *
-     * @param  string   $key     Key of connection instance
-     * @param  StdClass $params  Connection parameters
-     * @return null
-     */
-
-    public static function addConnection($key, StdClass $params)
-    {
-
-        if (!$key) {
-            $key = sizeof(self::$_connections);
-        }
-        if (array_key_exists($key, self::$_connections)) {
-            self::$_connections[$key]->close();
-        }
-        self::$_connections[$key] = new DBC($params);
 
     }
 

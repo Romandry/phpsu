@@ -138,11 +138,7 @@ class App
         View::init();
         Member::beforeInit();
         Request::init();
-
-        foreach (self::getConfig('main')->db as $key => $params) {
-            DBI::addConnection($key, $params);
-        }
-
+        DBI::initConnections();
         Member::init();
         Router::run();
 

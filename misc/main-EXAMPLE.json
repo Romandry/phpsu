@@ -56,20 +56,29 @@
 
 
     /**
-     * database connection settings
+     * Database connections settings
+     *
+     * Connection types:
+     *
+     * single - global single connection
+     * slave  - slave connection
+     * master - global master connection
+     *
+     * WARNING!
+     *
+     * 1) Application will be used only one (last declared) master connection
+     * 2) Application will be used only one (last declared) single connection
+     * 3) Single connection has a higher priority over others
      */
 
     "db": {
 
-        "slave": {
-            "host"    : "localhost",
-            "port"    : 3306,
-            "dbname"  : "phpsu",
-            "user"    : "phpsu",
-            "pass"    : "phpsu",
-            "charset" : "utf8"
-        }
-
+        "host"    : "localhost",
+        "port"    : 3306,
+        "dbname"  : "phpsu",
+        "user"    : "phpsu",
+        "pass"    : "phpsu",
+        "charset" : "utf8"
     }
 
 
