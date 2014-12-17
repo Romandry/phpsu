@@ -136,13 +136,14 @@ class App
 
         Storage::init();
         View::init();
-        Member::initGuest();
+        Member::beforeInit();
         Request::init();
 
         foreach (self::getConfig('main')->db as $key => $params) {
             Db::addConnection($key, $params);
         }
 
+        Member::init();
         Router::run();
 
     }

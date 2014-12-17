@@ -6,12 +6,12 @@
         <div id="member-box">
             <div class="member-actions">
                 <?php if (!Member::isAuth()) { ?>
-                    <a href="/login">Вход</a>
-                    <a href="/register">Регистрация</a>
+                    <a href="/user/sign-in">Вход</a>
+                    <a href="/user/register">Регистрация</a>
                 <?php } else { ?>
                     <a href="/profile/private-messages">Личные сообщения (0)</a>
                     <a href="/profile/settings">Настройки аккаунта</a>
-                    <a href="/logout">Выход</a>
+                    <a href="/user/sign-out">Выход</a>
                 <?php } ?>
             </div>
             <?php if (Member::isAuth()) { ?>

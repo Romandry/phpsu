@@ -69,7 +69,6 @@ class Storage
             $config = App::getConfig('main')->system;
             session_name($config->session_name);
             @ session_start();
-            session_regenerate_id();
             self::_setSessionPointer($_SESSION);
         }
 

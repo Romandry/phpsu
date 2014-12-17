@@ -7,7 +7,7 @@
     "auth": false,
 
     // Auth cookies value
-    "hash": null,
+    "cookie": null,
 
     // Guest ID always is zero
     "id": 0,
@@ -47,7 +47,7 @@
      * because the value of timezone is not yet known
      */
 
-    "timezone": null,
+    "time_zone": null,
 
 
     /**

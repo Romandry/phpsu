@@ -90,15 +90,98 @@ class Member
 
 
     /**
-     * init
+     * beforeInit
      *
-     * Return auth status of member
+     * Init default profile via config
      *
-     * @return bool Auth status of member
+     * @return null
      */
 
-    public static function initGuest()
+    public static function beforeInit()
     {
-        self::$_profile = App::getConfig('member_defaults');
+        self::$_profile = App::getConfig(App::isCLI() ? 'member_cli' : 'member_guest');
+    }
+
+
+    /**
+     * init
+     *
+     * Try member authenfication
+     *
+     * @return null
+     */
+
+    public static function init()
+    {
+
+        $initPermissions = false;
+        if (App::isCLI()) {
+            $initPermissions = true;
+        } else {
+            $cnf = App::getConfig('main')->system;
+            if (array_key_exists($cnf->cookie_name, $_COOKIE)) {
+                $value = (string) $_COOKIE[$cnf->cookie_name];
+                $value = trim(substr($value, 0, 32));
+                if ($value) {
+                    $conn = Db::getConnection('slave');
+                    $data = $conn->sendQuery(
+                        'SELECT * FROM members WHERE cookie = :cookie',
+                        array(':cookie' => $value)
+                    )->fetch(PDO::FETCH_OBJ);
+                    if (!$data) {
+                        setcookie($cnf->cookie_name, '', -1, '/');
+                    } else {
+                        $initPermissions = true;
+                        $expires = time() + $cnf->cookie_expires_time;
+                        setcookie($cnf->cookie_name, $value, $expires, '/');
+                        self::$_profile->auth = true;
+                        foreach ($data as $k => $v) {
+                            self::$_profile->{$k} = $v;
+                        }
+                    }
+                }
+            }
+        }
+        if ($initPermissions) {
+            self::initPermissions();
+        }
+
+    }
+
+
+    /**
+     * initPermissions
+     *
+     * Set member role permissions with group_id
+     *
+     * @return null
+     */
+
+    public static function initPermissions()
+    {
+        $conn = Db::getConnection('slave');
+        $permissions = $conn->sendQuery(
+            'SELECT p.name
+                FROM groups_permissions gp
+                INNER JOIN permissions p ON p.id = gp.permission_id
+                WHERE gp.group_id = :group_id',
+            array(':group_id' => self::$_profile->group_id)
+        )->fetch(PDO::FETCH_OBJ);
+        self::$_permissions = $permissions ? $permissions : new StdClass();
+    }
+
+
+    /**
+     * signOut
+     *
+     * Sign out with remove member auth cookie
+     *
+     * @return null
+     */
+
+    public static function signOut()
+    {
+        setcookie(App::getConfig('main')->system->cookie_name, '', -1, '/');
+        self::beforeInit();
     }
 }

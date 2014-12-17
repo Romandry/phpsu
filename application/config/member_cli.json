@@ -1,0 +1,67 @@
+
+
+{
+
+
+    // CLI (cron) always is logged
+    "auth": true,
+
+    // Auth cookies value
+    "cookie": null,
+
+    // CLI (cron) ID always is zero
+    "id": 0,
+
+    // CLI (cron) profile always is protected (undeletable)
+    "is_protected": 1,
+
+    // Default CLI (cron) group (role) ID
+    "group_id": 2,
+
+    // Default CLI (cron) group (role) priority
+    "group_priority": 0,
+
+
+    /*
+     * Member CLI (cron) status:
+     *
+     * 0 - Free
+     * 1 - Readonly
+     * 2 - Banned
+     * 3 - Not confirm from email (not exists, like deleted)
+     */
+
+    "status": 0,
+
+
+    /**
+     * Language can be set only after init,
+     * because the value of language is not yet known
+     */
+
+    "language": null,
+
+
+    /**
+     * Timezone can be set only after init,
+     * because the value of timezone is not yet known
+     */
+
+    "time_zone": null,
+
+    // CLI (cron) login
+    "login": "Cron (CLI mode)",
+
+    // CLI (cron) can be have email
+    "email": null,
+
+    // CLI (cron) is not have password
+    "password": null,
+
+    // Default CLI (cron) avatar
+    "avatar": "/images/no-avatar.png"
+
+
+}
+
+
