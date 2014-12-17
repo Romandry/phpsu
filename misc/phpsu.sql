@@ -3,17 +3,12 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 17, 2014 at 07:26 AM
+-- Generation Time: Dec 17, 2014 at 10:00 PM
 -- Server version: 5.1.73
 -- PHP Version: 5.3.3-7+squeeze19
 
+SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `phpsu`
@@ -27,10 +22,10 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 DROP TABLE IF EXISTS `groups`;
 CREATE TABLE IF NOT EXISTS `groups` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
   `is_protected` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `priority` int(4) unsigned NOT NULL,
-  `name` char(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `priority` smallint(4) unsigned NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
@@ -51,10 +46,10 @@ INSERT INTO `groups` (`id`, `is_protected`, `priority`, `name`) VALUES
 
 DROP TABLE IF EXISTS `groups_permissions`;
 CREATE TABLE IF NOT EXISTS `groups_permissions` (
-  `group_id` bigint(20) unsigned NOT NULL,
-  `permission_id` bigint(20) unsigned NOT NULL,
-  KEY `group_id` (`group_id`),
-  KEY `permission_id` (`permission_id`)
+  `group_id` smallint(5) unsigned NOT NULL,
+  `permission_id` smallint(5) unsigned NOT NULL,
+  PRIMARY KEY (`group_id`,`permission_id`),
+  UNIQUE KEY `pk_revert` (`permission_id`,`group_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -71,17 +66,19 @@ CREATE TABLE IF NOT EXISTS `groups_permissions` (
 DROP TABLE IF EXISTS `members`;
 CREATE TABLE IF NOT EXISTS `members` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `cookie` char(32) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `email` char(255) NOT NULL,
-  `login` char(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `cookie` char(32) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'unknown column',
+  `email` varchar(255) NOT NULL,
+  `login` varchar(255) NOT NULL,
   `password` char(32) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `time_zone` char(6) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `creation_date` datetime NOT NULL,
-  `last_ip` char(15) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `time_zone` char(6) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'unknown column',
+  `creation_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `last_ip` binary(16) NOT NULL COMMENT 'use php.net/inet_pton',
   `last_visit` datetime NOT NULL,
-  `status` tinyint(1) unsigned NOT NULL,
-  `activation_hash` char(32) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `status` tinyint(1) unsigned NOT NULL COMMENT 'unknown column',
+  `activation_hash` char(32) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'unknown column',
   PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`),
+  UNIQUE KEY `login` (`login`),
   KEY `activation_hash` (`activation_hash`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
@@ -98,8 +95,8 @@ CREATE TABLE IF NOT EXISTS `members` (
 
 DROP TABLE IF EXISTS `permissions`;
 CREATE TABLE IF NOT EXISTS `permissions` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `name` char(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
@@ -107,3 +104,15 @@ CREATE TABLE IF NOT EXISTS `permissions` (
 -- Dumping data for table `permissions`
 --
 
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `groups_permissions`
+--
+ALTER TABLE `groups_permissions`
+  ADD CONSTRAINT `groups_permissions_ibfk_2` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`),
+  ADD CONSTRAINT `groups_permissions_ibfk_1` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`);
+SET FOREIGN_KEY_CHECKS=1;
