@@ -136,6 +136,7 @@ class App
 
         Storage::init();
         View::init();
+        Member::init();
         Request::init();
 
         foreach (self::getConfig('main')->db as $key => $params) {

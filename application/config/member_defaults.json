@@ -1,0 +1,72 @@
+
+
+{
+
+
+    // Guest always is unlogged
+    "auth": false,
+
+    // Auth cookies value
+    "hash": null,
+
+    // Guest ID always is zero
+    "id": 0,
+
+    // Guest profile always is protected (undeletable)
+    "is_protected": 1,
+
+    // Default guest group (role) ID
+    "group_id": 1,
+
+    // Default guest group (role) priority
+    "group_priority": 1001,
+
+
+    /*
+     * Member (guest) status:
+     *
+     * 0 - Free
+     * 1 - Readonly
+     * 2 - Banned
+     * 3 - Not confirm from email (not exists, like deleted)
+     */
+
+    "status": 0,
+
+
+    /**
+     * Language can be set only after init,
+     * because the value of language is not yet known
+     */
+
+    "language": null,
+
+
+    /**
+     * Timezone can be set only after init,
+     * because the value of timezone is not yet known
+     */
+
+    "timezone": null,
+
+
+    /**
+     * Member login set only after init,
+     * because may be member login will be the "Guest" with selected language
+     */
+
+    "login": null,
+
+    // Guest is not have email
+    "email": null,
+
+    // Guest is not have password
+    "password": null,
+
+    // Default guest avatar
+    "avatar": "/images/no-avatar.png"
+
+
+}
+
+
