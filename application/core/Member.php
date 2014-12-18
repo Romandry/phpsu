@@ -114,22 +114,28 @@ class Member
                 $value = (string) $_COOKIE[$cnf->cookie_name];
                 $value = trim(substr($value, 0, 32));
                 if ($value) {
+
                     $conn = DBI::getConnection('slave');
                     $data = $conn->sendQuery(
-                        'SELECT * FROM members WHERE cookie = :cookie',
+                        'SELECT m.*, g.priority group_priority, g.is_protected
+                            FROM members m
+                            LEFT JOIN groups g ON g.id = m.group_id
+                            WHERE m.cookie = :cookie',
                         array(':cookie' => $value)
                     )->fetch(PDO::FETCH_OBJ);
+
                     if (!$data) {
                         setcookie($cnf->cookie_name, '', -1, '/');
                     } else {
+
                         $initPermissions = true;
                         $expires = time() + $cnf->cookie_expires_time;
                         setcookie($cnf->cookie_name, $value, $expires, '/');
+                        self::$_profile = $data;
                         self::$_profile->auth = true;
-                        foreach ($data as $k => $v) {
-                            self::$_profile->{$k} = $v;
-                        }
+
                     }
+
                 }
             }
         }
