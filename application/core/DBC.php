@@ -21,15 +21,6 @@ class DBC
 
 
     /**
-     * $_isRollBack
-     *
-     * Rollback transaction status
-     */
-
-    private $_isRollBack = false;
-
-
-    /**
      * __construct
      *
      * Connection constructor
@@ -95,7 +86,7 @@ class DBC
 
     public function commit()
     {
-        if (!$this->_isRollBack && !!$this->_PDO->inTransaction()) {
+        if ($this->_PDO->inTransaction()) {
             $this->_PDO->commit();
         }
     }
@@ -111,7 +102,7 @@ class DBC
 
     public function rollBack()
     {
-        if (!!$this->_PDO->inTransaction()) {
+        if ($this->_PDO->inTransaction()) {
             $this->_PDO->rollBack();
         }
     }
@@ -135,8 +126,7 @@ class DBC
             $stmt = $this->_PDO->prepare($queryString);
             $stmt->execute($queryParams);
         } catch (PDOException $e) {
-            if (!!$this->_PDO->inTransaction()) {
-                $this->_isRollBack = true;
+            if ($this->_PDO->inTransaction()) {
                 $this->_PDO->rollBack();
             }
             throw new SystemErrorException(array(
@@ -187,9 +177,6 @@ class DBC
 
     public function close()
     {
-        if (!!$this->_PDO->inTransaction()) {
-            $this->_PDO->rollBack();
-        }
         $this->_PDO = null;
     }
 }
