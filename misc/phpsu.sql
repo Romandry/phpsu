@@ -3,12 +3,17 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 17, 2014 at 10:00 PM
+-- Generation Time: Dec 19, 2014 at 12:22 AM
 -- Server version: 5.1.73
 -- PHP Version: 5.3.3-7+squeeze19
 
-SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `phpsu`
@@ -49,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `groups_permissions` (
   `group_id` smallint(5) unsigned NOT NULL,
   `permission_id` smallint(5) unsigned NOT NULL,
   PRIMARY KEY (`group_id`,`permission_id`),
-  KEY `permission_id` (`permission_id`)
+  UNIQUE KEY `pk_revert` (`permission_id`,`group_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -66,16 +71,18 @@ CREATE TABLE IF NOT EXISTS `groups_permissions` (
 DROP TABLE IF EXISTS `members`;
 CREATE TABLE IF NOT EXISTS `members` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `cookie` char(32) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'unknown column',
+  `group_id` smallint(5) unsigned NOT NULL,
+  `cookie` char(32) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `email` varchar(255) NOT NULL,
   `login` varchar(255) NOT NULL,
   `password` char(32) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `time_zone` char(6) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'unknown column',
+  `time_zone` char(6) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `creation_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `last_ip` binary(16) NOT NULL COMMENT 'use php.net/inet_pton',
   `last_visit` datetime NOT NULL,
-  `status` tinyint(1) unsigned NOT NULL COMMENT 'unknown column',
-  `activation_hash` char(32) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'unknown column',
+  `status` tinyint(1) unsigned NOT NULL,
+  `activation_hash` char(32) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `avatar` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `login` (`login`),
@@ -115,4 +122,3 @@ CREATE TABLE IF NOT EXISTS `permissions` (
 ALTER TABLE `groups_permissions`
   ADD CONSTRAINT `groups_permissions_ibfk_2` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`),
   ADD CONSTRAINT `groups_permissions_ibfk_1` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`);
-SET FOREIGN_KEY_CHECKS=1;
