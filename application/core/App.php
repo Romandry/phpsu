@@ -138,7 +138,6 @@ class App
         View::init();
         Member::beforeInit();
         Request::init();
-        DBI::initConnections();
         Member::init();
         Router::run();
 

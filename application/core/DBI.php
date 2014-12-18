@@ -30,20 +30,6 @@ class DBI
 
 
     /**
-     * initConnections
-     *
-     * Add (init) all used connections
-     *
-     * @return null
-     */
-
-    public static function initConnections()
-    {
-        self::$_connections[] = new DBC(App::getConfig('main')->db);
-    }
-
-
-    /**
      * getConnection
      *
      * Return connection object (instance of self)
@@ -60,31 +46,10 @@ class DBI
             $key = key(self::$_connections);
         }
         if (!array_key_exists($key, self::$_connections)) {
-            throw new SystemErrorException(array(
-                'title'       => 'Database error',
-                'description' => 'Connection ' . $key . ' is closed'
-            ));
+            self::$_connections[$key] = new DBC(App::getConfig('main')->db);
         }
         return self::$_connections[$key];
 
-    }
-
-
-    /**
-     * closeConnection
-     *
-     * Close connection
-     *
-     * @param  string $key Key of connection instance
-     * @return null
-     */
-
-    public static function closeConnection($key)
-    {
-        if (array_key_exists($key, self::$_connections)) {
-            self::$_connections[$key]->close();
-            unset(self::$_connections[$key]);
-        }
     }
 
 
