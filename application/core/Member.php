@@ -90,7 +90,9 @@ class Member
 
     public static function beforeInit()
     {
-        self::$_profile = App::getConfig(App::isCLI() ? 'member_cli' : 'member_guest');
+        $prf = App::getConfig(App::isCLI() ? 'member_cli' : 'member_guest');
+        $prf->avatar = '//' . App::getConfig('hosts')->st . $prf->avatar;
+        self::$_profile = $prf;
     }
 
 
@@ -131,8 +133,12 @@ class Member
                         $initPermissions = true;
                         $expires = time() + $cnf->cookie_expires_time;
                         setcookie($cnf->cookie_name, $value, $expires, '/');
+
+                        $data->auth = true;
+                        if (!$data->avatar) {
+                            $data->avatar = self::$_profile->avatar;
+                        }
                         self::$_profile = $data;
-                        self::$_profile->auth = true;
 
                     }
 
