@@ -3,10 +3,11 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 19, 2014 at 12:22 AM
+-- Generation Time: Dec 19, 2014 at 12:25 AM
 -- Server version: 5.1.73
 -- PHP Version: 5.3.3-7+squeeze19
 
+SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 
@@ -122,3 +123,4 @@ CREATE TABLE IF NOT EXISTS `permissions` (
 ALTER TABLE `groups_permissions`
   ADD CONSTRAINT `groups_permissions_ibfk_2` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`),
   ADD CONSTRAINT `groups_permissions_ibfk_1` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`);
+SET FOREIGN_KEY_CHECKS=1;
