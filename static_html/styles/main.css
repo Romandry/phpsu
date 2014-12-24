@@ -300,6 +300,79 @@ table.forum .target-info .title {
     font-weight: bold;
 }
 
+.label, label {
+    display: block;
+    position: relative;
+    padding: 0 0 2px 0;
+    font-style: italic;
+}
+
+.elem {
+    position: relative;
+    padding: 0 0 8px 0;
+}
+
+.half-box {
+    float: left;
+}
+
+.protection-box {
+    display: none;
+}
+
+.protection-box img {
+    cursor: pointer;
+}
+
+input[type="text"], input[type="password"], textarea {
+    line-height: 16px;
+    font-family: Verdana, Tahoma, Arial;
+    font-size: 13px;
+    color: #000000;
+    border: solid 1px #969696;
+    border-radius: 4px;
+}
+
+textarea {
+    resize: vertical;
+    padding: 2px;
+    width: 400px;
+    height: 80px;
+}
+
+input[type="text"], input[type="password"] {
+    padding: 4px 2px;
+    width: 240px;
+}
+
+input[type="text"].short {
+    width: 100px;
+}
+
+input[type="text"].middle {
+    width: 300px;
+}
+
+input[type="submit"], input[type="button"], input[type="reset"], button {
+    zoom: 1;
+    display: inline-block;
+    padding: 0 23px;
+    height: 28px;
+    line-height: 28px;
+    font-weight: bold;
+    color: #fde9d1;
+    background: #de322d;
+    border: solid 1px #e3554b;
+    border-radius: 4px;
+    box-shadow: 0 -10px 20px -10px #444444 inset;
+    -webkit-box-shadow: 0 -10px 20px -10px #444444 inset;
+}
+
+input[type="submit"]:hover, input[type="button"]:hover, input[type="reset"]:hover, button:hover {
+    cursor: pointer;
+    box-shadow: 0 -10px 20px -10px #000000 inset;
+    -webkit-box-shadow: 0 -10px 20px -10px #000000 inset;
+}
 
 
 

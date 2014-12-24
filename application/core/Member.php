@@ -6,6 +6,15 @@ class Member
 
 
     /**
+     * $_isAuth
+     *
+     * Auth status
+     */
+
+    private static $_isAuth = false;
+
+
+    /**
      * $_profile
      *
      * Default member profile
@@ -21,7 +30,7 @@ class Member
      * Empty array denied from all delegated actions
      */
 
-    private static $_permissions = array();
+    private static $_permissions = null;
 
 
     /**
@@ -34,7 +43,7 @@ class Member
 
     public static function getProfile()
     {
-        return self::$_profile;
+        return clone self::$_profile;
     }
 
 
@@ -76,7 +85,7 @@ class Member
 
     public static function isAuth()
     {
-        return self::$_profile->auth;
+        return self::$_isAuth;
     }
 
 
@@ -90,9 +99,17 @@ class Member
 
     public static function beforeInit()
     {
-        $prf = App::getConfig(App::isCLI() ? 'member_cli' : 'member_guest');
+
+        $isCLI = App::isCLI();
+        $prf = App::getConfig($isCLI ? 'member_cli' : 'member_guest');
         $prf->avatar = '//' . App::getConfig('hosts')->st . $prf->avatar;
+
+        self::$_permissions = new StdClass();
         self::$_profile = $prf;
+        if ($isCLI) {
+            self::$_isAuth = true;
+        }
+
     }
 
 
@@ -119,7 +136,10 @@ class Member
 
                     $conn = DBI::getConnection('slave');
                     $data = $conn->sendQuery(
-                        'SELECT m.*, g.priority group_priority, g.is_protected
+                        'SELECT
+                                m.*,
+                                g.priority group_priority,
+                                g.is_protected
                             FROM members m
                             LEFT JOIN groups g ON g.id = m.group_id
                             WHERE m.cookie = :cookie',
@@ -134,10 +154,10 @@ class Member
                         $expires = time() + $cnf->cookie_expires_time;
                         setcookie($cnf->cookie_name, $value, $expires, '/');
 
-                        $data->auth = true;
                         if (!$data->avatar) {
                             $data->avatar = self::$_profile->avatar;
                         }
+                        self::$_isAuth  = true;
                         self::$_profile = $data;
 
                     }
@@ -145,32 +165,12 @@ class Member
                 }
             }
         }
+
+        self::_setEnvironment();
         if ($initPermissions) {
-            self::initPermissions();
+            self::_initPermissions();
         }
 
-    }
-
-
-    /**
-     * initPermissions
-     *
-     * Set member role permissions with group_id
-     *
-     * @return null
-     */
-
-    public static function initPermissions()
-    {
-        $conn = DBI::getConnection('slave');
-        $permissions = $conn->sendQuery(
-            'SELECT p.name
-                FROM groups_permissions gp
-                INNER JOIN permissions p ON p.id = gp.permission_id
-                WHERE gp.group_id = :group_id',
-            array(':group_id' => self::$_profile->group_id)
-        )->fetch(PDO::FETCH_OBJ);
-        self::$_permissions = $permissions ? $permissions : new StdClass();
     }
 
 
@@ -185,6 +185,48 @@ class Member
     public static function signOut()
     {
         setcookie(App::getConfig('main')->system->cookie_name, '', -1, '/');
-        self::beforeInit();
+    }
+
+
+    /**
+     * _setEnvironment
+     *
+     * Set member environment (time_zone, language, etc)
+     *
+     * @return null
+     */
+
+    private static function _setEnvironment()
+    {
+
+        $conn = DBI::getConnection('slave');
+        // set timezone
+
+    }
+
+
+    /**
+     * _initPermissions
+     *
+     * Set member role permissions with group_id
+     *
+     * @return null
+     */
+
+    private static function _initPermissions()
+    {
+
+        $conn = DBI::getConnection('slave');
+        $permissions = $conn->sendQuery(
+            'SELECT p.name
+                FROM groups_permissions gp
+                INNER JOIN permissions p ON p.id = gp.permission_id
+                WHERE gp.group_id = :group_id',
+            array(':group_id' => self::$_profile->group_id)
+        )->fetch(PDO::FETCH_OBJ);
+        if ($permissions) {
+            self::$_permissions = $permissions;
+        }
+
     }
 }

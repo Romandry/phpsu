@@ -3,13 +3,10 @@
 {
 
 
-    // CLI (cron) always is logged
-    "auth": true,
-
     // Auth cookies value
     "cookie": null,
 
-    // CLI (cron) ID always is zero
+    // CLI (cron) member ID always is zero
     "id": 0,
 
     // CLI (cron) profile always is protected (undeletable)

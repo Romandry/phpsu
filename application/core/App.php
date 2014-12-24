@@ -121,9 +121,9 @@ class App
      *
      * Run application
      *
-     * @param  int   $useMemory Value of initial allowed memory
-     * @param  int   $startTime Value of begin running time
-     * @param  bool  $isCLI     CLI mode flag
+     * @param  int  $useMemory Value of initial allowed memory
+     * @param  int  $startTime Value of begin running time
+     * @param  bool $isCLI     CLI mode flag
      * @return null
      */
 

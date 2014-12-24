@@ -26,4 +26,20 @@ class sign_inController extends \BaseController
         \View::assign('pageH1', 'Вход в аккаунт');
         \View::setLayout('user-sign-in.phtml');
     }
+
+
+    /**
+     * tryAction
+     *
+     * Try sign in user
+     *
+     * @return null
+     */
+
+    public function tryAction()
+    {
+
+        \View::setOutputContext('json');
+
+    }
 }

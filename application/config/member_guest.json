@@ -3,9 +3,6 @@
 {
 
 
-    // Guest always is unlogged
-    "auth": false,
-
     // Auth cookies value
     "cookie": null,
 
