@@ -3,11 +3,10 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 19, 2014 at 12:25 AM
+-- Generation Time: Dec 24, 2014 at 03:07 PM
 -- Server version: 5.1.73
 -- PHP Version: 5.3.3-7+squeeze19
 
-SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 
@@ -19,6 +18,99 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 -- Database: `phpsu`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `forum_categories`
+--
+
+DROP TABLE IF EXISTS `forum_categories`;
+CREATE TABLE IF NOT EXISTS `forum_categories` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `sort` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `title` varchar(255) NOT NULL,
+  `description` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `forum_categories`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `forum_forums`
+--
+
+DROP TABLE IF EXISTS `forum_forums`;
+CREATE TABLE IF NOT EXISTS `forum_forums` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `sort` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `category_id` bigint(20) unsigned NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `description` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `forum_forums`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `forum_posts`
+--
+
+DROP TABLE IF EXISTS `forum_posts`;
+CREATE TABLE IF NOT EXISTS `forum_posts` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `topic_id` bigint(20) unsigned NOT NULL,
+  `forum_id` bigint(20) unsigned NOT NULL,
+  `topic_start` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `authored_by` bigint(20) unsigned NOT NULL,
+  `edited_by` bigint(20) unsigned DEFAULT NULL,
+  `moderated_by` bigint(20) unsigned DEFAULT NULL,
+  `creation_date` datetime NOT NULL,
+  `last_modified` datetime NOT NULL,
+  `post_text` text NOT NULL,
+  `post_html` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `forum_posts`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `forum_topics`
+--
+
+DROP TABLE IF EXISTS `forum_topics`;
+CREATE TABLE IF NOT EXISTS `forum_topics` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `forum_id` bigint(20) unsigned NOT NULL,
+  `authored_by` bigint(20) unsigned NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `creation_date` datetime NOT NULL,
+  `last_modified` datetime NOT NULL,
+  `count_views` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `locked` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `forum_topics`
+--
+
 
 -- --------------------------------------------------------
 
@@ -123,4 +215,3 @@ CREATE TABLE IF NOT EXISTS `permissions` (
 ALTER TABLE `groups_permissions`
   ADD CONSTRAINT `groups_permissions_ibfk_2` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`),
   ADD CONSTRAINT `groups_permissions_ibfk_1` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`);
-SET FOREIGN_KEY_CHECKS=1;
