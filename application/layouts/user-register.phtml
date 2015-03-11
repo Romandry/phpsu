@@ -22,6 +22,59 @@
 
                 <h1><?=$pageH1?></h1>
 
+                <form action="/user/register/process" method="post">
+                    <div class="label">E-mail</div>
+                    <div class="elem">
+                        <input type="text"
+                                name="email"
+                                value=""
+                                autocomplete="off" />
+                    </div>
+                    <div class="label">Логин (псевдоним)</div>
+                    <div class="elem">
+                        <input type="text"
+                                name="login"
+                                value=""
+                                autocomplete="off" />
+                    </div>
+                    <div class="label">Пароль</div>
+                    <div class="elem">
+                        <input type="password" name="password" value="" />
+                    </div>
+                    <div class="label">Подтвердите пароль</div>
+                    <div class="elem">
+                        <input type="password" name="confirm_password" value="" />
+                    </div>
+                    <div class="half-box">
+                        <div class="label">Защитный код</div>
+                        <div class="elem">
+                            <input class="short"
+                                    type="text"
+                                    name="protection_code"
+                                    value=""
+                                    autocomplete="off" />
+                        </div>
+                    </div>
+                    <div class="half-box">
+                        <img class="protection-image"
+                                title="Кликни чтобы обновить"
+                                alt=""
+                                src="/protection-image.jpg?action=register&_=<?=md5(microtime(true))?>"
+                                onclick="this.src = '/protection-image.jpg?action=sign-in&_' + Math.random();" />
+                    </div>
+                    <div class="clear"></div>
+                    <div class="label">&nbsp;</div>
+                    <div class="elem">
+                        <input type="submit" value="Зарегистрироваться" />
+                    </div>
+                    <div class="label">&nbsp;</div>
+                    <div class="elem">
+                        <a href="/user/sign-in">Уже есть аккаунт?</a>
+                        |
+                        <a href="/user/recovery">Забыли логин или пароль?</a>
+                    </div>
+                </form>
+
             </div>
         </div>
     </div>

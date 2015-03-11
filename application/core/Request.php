@@ -21,15 +21,6 @@ class Request
 
 
     /**
-     * $_client
-     *
-     * Request client information
-     */
-
-    private static $_client = array();
-
-
-    /**
      * $_rawUrl
      *
      * Origin request string with $_GET parameters
@@ -66,12 +57,10 @@ class Request
 
     public static function init()
     {
-
         if (App::getConfig('main')->site->block_prefetch_requests) {
             self::_blockPrefetchRequest();
         }
         self::_preValidateRequest();
-        self::_storeClientInfo();
 
 
         /**
@@ -141,7 +130,6 @@ class Request
         if (isset($parts['gp'])) {
             parse_str($parts['gp'], self::$_params);
         }
-
     }
 
 
@@ -156,13 +144,11 @@ class Request
 
     public static function redirect($destination)
     {
-
         self::$_headers = array();
         self::addHeader('HTTP/1.1 301 Moved Permanently');
         self::addHeader('Location: ' . $destination);
         self::sendHeaders();
         exit();
-
     }
 
 
@@ -202,14 +188,31 @@ class Request
     /**
      * getClientInfo
      *
-     * Return all available client info
+     * Get client information from headers
      *
-     * @return array Available client info
+     * @param  string Key (name) of client header
+     * @return string Header value
      */
 
-    public static function getClientInfo()
+    public static function getClientInfo($key)
     {
-        return self::$_client;
+        if ($key == 'IP') {
+            $hcip = getenv('HTTP_CLIENT_IP');
+            $hxff = getenv('HTTP_X_FORWARDED_FOR');
+            $radd = getenv('REMOTE_ADDR');
+            if ($hcip) {
+                $ip = $hcip;
+            } else if ($hxff) {
+                $ip = $hxff;
+            } else {
+                $ip = false;
+            }
+            return (!$ip || $ip == 'unknown') ? $radd : $ip;
+        } else {
+            return array_key_exists($key, $_SERVER)
+                ? $_SERVER[$key]
+                : 'unknown';
+        }
     }
 
 
@@ -253,7 +256,27 @@ class Request
 
     public static function getParam($key, $default = null)
     {
-        return array_key_exists($key, self::$_params) ? self::$_params[$key] : $default;
+        return array_key_exists($key, self::$_params)
+            ? self::$_params[$key]
+            : $default;
+    }
+
+
+    /**
+     * getPostParam
+     *
+     * Will return value of $_POST parameter or default value
+     *
+     * @param  string $key     Key of POST parameter
+     * @param  mixed  $default Default value
+     * @return mixed           Value
+     */
+
+    public static function getPostParam($key, $default = null)
+    {
+        return ($_POST && array_key_exists($key, $_POST))
+            ? $_POST[$key]
+            : $default;
     }
 
 
@@ -267,7 +290,7 @@ class Request
 
     public static function isPost()
     {
-        return (isset($_POST) && sizeof($_POST) > 0);
+        return !!$_POST;
     }
 
 
@@ -281,7 +304,6 @@ class Request
 
     private static function _blockPrefetchRequest()
     {
-
         $x = 'HTTP_X_MOZ';
         if (array_key_exists($x, $_SERVER) && $_SERVER[$x] == 'prefetch') {
             self::$_headers = array();
@@ -294,7 +316,6 @@ class Request
             self::sendHeaders();
 	        exit();
         }
-
     }
 
 
@@ -312,67 +333,18 @@ class Request
 
     private static function _preValidateRequest()
     {
-
         if (strlen($_SERVER['REQUEST_URI']) > 2048) {
             // long request, expected only maximum 2048 bytes length
-            $_SERVER['REQUEST_URI'] = '';
             throw new SystemErrorException(array(
                 'title'       => 'Request error',
                 'description' => 'Request string too long'
             ));
-        } else if (strstr($_SERVER['REQUEST_URI'], '//')) {
-            // double slash
+        } else if (preg_match('/(?:%20|\/\/)+$/', $_SERVER['REQUEST_URI'])) {
+            // double slash or bad spaces
             throw new SystemErrorException(array(
                 'title'       => 'Request error',
-                'description' => 'Double slash found on request URI'
-            ));
-        } else if (preg_match('/(?:%20)+$/', $_SERVER['REQUEST_URI'])) {
-            // bad spaces
-            throw new SystemErrorException(array(
-                'title'       => 'Request error',
-                'description' => 'Bad SEO spaces on request URI'
+                'description' => 'Broken query string format'
             ));
         }
-
-    }
-
-
-    /**
-     * _storeClientInfo
-     *
-     * Store client information
-     * IP, useragent, referer, etc.
-     *
-     * @return null
-     */
-
-    private static function _storeClientInfo()
-    {
-
-        $expectedKeys = array(
-            'HTTP_USER_AGENT',
-            'HTTP_REFERER',
-            'HTTP_ACCEPT',
-            'HTTP_ACCEPT_LANGUAGE',
-            'HTTP_ACCEPT_ENCODING'
-        );
-
-        foreach ($expectedKeys as $v) {
-            $lcv = strtolower($v);
-            self::$_client[$lcv] = array_key_exists($v, $_SERVER) ? $_SERVER[$v] : '[no match]';
-        }
-
-        $hcip = getenv('HTTP_CLIENT_IP');
-        $hxff = getenv('HTTP_X_FORWARDED_FOR');
-        $radd = getenv('REMOTE_ADDR');
-        if ($hcip) {
-            $ip = $hcip;
-        } else if ($hxff) {
-            $ip = $hxff;
-        } else {
-            $ip = false;
-        }
-        self::$_client['ip'] = (!$ip || $ip == 'unknown') ? $radd : $ip;
-
     }
 }

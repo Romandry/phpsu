@@ -31,7 +31,6 @@ class DBC
 
     public function __construct(StdClass $params)
     {
-
         $options = array();
         foreach (array('host', 'port', 'dbname', 'charset') as $key) {
             $options[] = $key . '=' . $params->{$key};
@@ -44,10 +43,13 @@ class DBC
                 $params->user,
                 $params->pass,
                 // this is not working on Debian squeeze with MySQL 5.1.73-1
-                // PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES '{$params['charset']}'",
+                // PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'blahblah'",
                 array(PDO::ATTR_PERSISTENT => true)
             );
-            $this->_PDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $this->_PDO->setAttribute(
+                PDO::ATTR_ERRMODE,
+                PDO::ERRMODE_EXCEPTION
+            );
             $this->_PDO->exec('SET NAMES \'' . $params->charset . '\'');
 
         } catch (PDOException $e) {
@@ -56,7 +58,6 @@ class DBC
                 'description' => $e->getMessage()
             ));
         }
-
     }
 
 
@@ -120,7 +121,6 @@ class DBC
 
     public function sendQuery($queryString, array $queryParams = array())
     {
-
         try {
             DBI::addToStat($queryString);
             $stmt = $this->_PDO->prepare($queryString);
@@ -134,8 +134,8 @@ class DBC
                 'description' => $e->getMessage()
             ));
         }
-        return $stmt;
 
+        return $stmt;
     }
 
 

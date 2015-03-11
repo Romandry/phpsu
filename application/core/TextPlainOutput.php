@@ -23,7 +23,6 @@ class TextPlainOutput
 
     public static function getContent($data, $lastPad = 0)
     {
-
         if (!is_array($data)) {
             $data = array($data);
         }
@@ -44,8 +43,8 @@ class TextPlainOutput
                 $output .= $v;
             }
         }
-        return $output . PHP_EOL;
 
+        return $output . PHP_EOL;
     }
 
 
@@ -64,6 +63,7 @@ class TextPlainOutput
         foreach ($names as $name) {
             $len[] = mb_strlen($name);
         }
+
         return ($len ? max($len) : 0) + 2;
     }
 }

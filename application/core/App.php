@@ -80,7 +80,6 @@ class App
 
     public static function dump()
     {
-
         if (self::$_isCLIMode) {
             $prefix = '';
             $suffix = '';
@@ -94,8 +93,8 @@ class App
             var_dump($item);
             echo $suffix;
         }
-        exit();
 
+        exit();
     }
 
 
@@ -117,9 +116,9 @@ class App
 
 
     /**
-     * run
+     * init
      *
-     * Run application
+     * Init application
      *
      * @param  int  $useMemory Value of initial allowed memory
      * @param  int  $startTime Value of begin running time
@@ -127,20 +126,34 @@ class App
      * @return null
      */
 
-    public static function run($useMemory, $startTime, $isCLI)
+    public static function init($useMemory, $startTime, $isCLI)
     {
-
         self::$_useMemory = $useMemory;
         self::$_startTime = $startTime;
         self::$_isCLIMode = $isCLI;
+    }
 
-        Storage::init();
-        View::init();
-        Member::beforeInit();
+
+    /**
+     * run
+     *
+     * Run application
+     *
+     * @return null
+     */
+
+    public static function run()
+    {
         Request::init();
+        $sessionHandler = self::getConfig('main')->system->session_handler;
+        if ($sessionHandler == 'database') {
+            Storage::setHandler('StorageDatabaseHandler');
+        } else if ($sessionHandler == 'memcache') {
+            Storage::setHandler('StorageMemcacheHandler');
+        }
+        Storage::init();
         Member::init();
         Router::run();
-
     }
 
 
@@ -155,7 +168,6 @@ class App
 
     public static function getInstance($nameSpace)
     {
-
         if (!array_key_exists($nameSpace, self::$_instances)) {
             if (method_exists($nameSpace, '__construct')) {
                 $args = array();
@@ -170,8 +182,8 @@ class App
                 self::$_instances[$nameSpace] = new $nameSpace;
             }
         }
-        return self::$_instances[$nameSpace];
 
+        return self::$_instances[$nameSpace];
     }
 
 
@@ -187,8 +199,8 @@ class App
     {
         return array(
             'db'     => DBI::getStat(),
-            'time'   => sprintf('%1.6f', microtime(true) - self::$_startTime) . ' sec.',
-            'memory' => self::getMemoryUsage()
+            'memory' => self::getMemoryUsage(),
+            'time'   => sprintf('%1.6f', microtime(true) - self::$_startTime) . ' sec.'
         );
     }
 
@@ -220,8 +232,10 @@ class App
     public static function humanityByteSize($size)
     {
         $types = array('B', 'KiB', 'MiB', 'GiB', 'TiB');
-        $size = $size < 1 ? 1 : (int) $size;
-        return round( $size / pow( 1024, ($type = floor(log($size, 1024))) ) , 1 ) . ' ' . $types[$type];
+        $size  = $size < 1 ? 1 : (int) $size;
+        $type  = floor(log($size, 1024));
+
+        return sprintf('%1.1f', $size / pow(1024, $type)) . ' ' . $types[$type];
     }
 
 
@@ -236,7 +250,6 @@ class App
 
     private static function _loadConfig($name)
     {
-
         $config = APPLICATION . 'config/' . $name . '.json';
         $errPrf = 'Configuration file ' . $config . ' ';
         if (!is_file($config)) {
@@ -245,8 +258,8 @@ class App
             exit($errPrf . 'is broken or have syntax error');
         }
         self::$_configs[$name] = $configData;
-        return self::$_configs[$name];
 
+        return self::$_configs[$name];
     }
 
 

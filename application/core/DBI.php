@@ -40,7 +40,6 @@ class DBI
 
     public static function getConnection($key = null)
     {
-
         if (!$key || sizeof(self::$_connections) == 1) {
             reset(self::$_connections);
             $key = key(self::$_connections);
@@ -48,8 +47,8 @@ class DBI
         if (!array_key_exists($key, self::$_connections)) {
             self::$_connections[$key] = new DBC(App::getConfig('main')->db);
         }
-        return self::$_connections[$key];
 
+        return self::$_connections[$key];
     }
 
 

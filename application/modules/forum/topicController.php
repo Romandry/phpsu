@@ -23,18 +23,21 @@ class topicController extends \BaseController
 
     public function indexAction()
     {
-
         \View::setOutputContext('json');
-        \View::assign('info', 'This is indexAction of \\modules\\forum\\topicController');
+        \View::assign(
+            'info',
+            'This is indexAction of \\modules\\forum\\topicController'
+        );
 
         $conn = \DBI::getConnection('slave');
 
         $stmt = $conn->sendQuery('SHOW TABLES');
         \View::assign('tables', $stmt->fetchAll(\PDO::FETCH_ASSOC));
 
-        $stmt = $conn->sendQuery('SELECT * FROM information_schema.USER_PRIVILEGES');
+        $stmt = $conn->sendQuery(
+            'SELECT * FROM information_schema.USER_PRIVILEGES'
+        );
         \View::assign('privileges', $stmt->fetchAll(\PDO::FETCH_ASSOC));
-
     }
 
 
@@ -48,7 +51,6 @@ class topicController extends \BaseController
 
     public function testAction()
     {
-
         $params = array();
         while ($param = \Router::shiftParam()) {
             $params[] = $param;
@@ -58,7 +60,6 @@ class topicController extends \BaseController
             'This is testAction of \\modules\\forum\\topicController',
             'You can get more params: ' . join(', ', $params)
         );
-
     }
 
 
@@ -72,14 +73,12 @@ class topicController extends \BaseController
 
     public function test_exceptionAction()
     {
-
         \View::setOutputContext('json');
         throw new \MemberErrorException(array(
             'title'       => 'Test error',
             'description' => 'Description of test error',
             'other_data'  => array(1,2,3,4,5,6)
         ));
-
     }
 
 
@@ -93,7 +92,6 @@ class topicController extends \BaseController
 
     public function test_exception__xmlAction()
     {
-
         \View::setOutputContext('xml');
         throw new \MemberErrorException(array(
             'code'        => 404,
@@ -101,7 +99,6 @@ class topicController extends \BaseController
             'description' => 'Description of test error',
             'other_data'  => array(1,2,3,4,5,6)
         ));
-
     }
 
 
@@ -115,12 +112,10 @@ class topicController extends \BaseController
 
     public function test_exception__htmlAction()
     {
-
         throw new \MemberErrorException(array(
             'title'       => 'Test error',
             'description' => 'Description of test error',
             'other_data'  => array(1,2,3,4,5,6)
         ));
-
     }
 }

@@ -39,28 +39,26 @@ set_include_path(APPLICATION . join(PATH_SEPARATOR . APPLICATION, $pathes));
  *
  * Autoload classes function
  *
- * @param  string $className with(out) namespace
+ * @param  string $name  Name of loaded target with(out) namespace
  * @return null
  */
 
-function mainAutoloader($className)
+function mainAutoloader($name)
 {
-
-    $className = ltrim($className, '\\');
-    if (strpos($className, '\\', 1)) {
-        $className = str_replace('\\', '/', $className);
-        $classPath = APPLICATION . $className . '.php';
-        if (!is_file($classPath)) {
+    $name = ltrim($name, '\\');
+    if (strpos($name, '\\', 1)) {
+        $name = str_replace('\\', '/', $name);
+        $path = APPLICATION . $name . '.php';
+        if (!is_file($path)) {
             throw new SystemErrorException(array(
                 'title'       => 'Autoload error',
-                'description' => 'File ' . $classPath . ' is not exists'
+                'description' => 'File ' . $path . ' is not exists'
             ));
         }
     } else {
-        $classPath = $className . '.php';
+        $path = $name . '.php';
     }
-    require $classPath;
-
+    require $path;
 }
 spl_autoload_register('mainAutoloader', false);
 
@@ -69,10 +67,13 @@ spl_autoload_register('mainAutoloader', false);
 try {
 
     $isCLI = PHP_SAPI == 'cli';
+    App::init($useMemory, $startTime, $isCLI);
+    Member::beforeInit();
+    View::init();
     if ($isCLI) {
         CliEnv::init($argv);
     }
-    App::run($useMemory, $startTime, $isCLI);
+    App::run();
 
 } catch (Exception $e) {
     View::assignException($e);

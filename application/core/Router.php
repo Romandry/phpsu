@@ -45,7 +45,6 @@ class Router
 
     public static function run()
     {
-
         // get module boot controller
         $moduleName = self::shiftParam();
         if ($moduleName == 'main') {
@@ -111,7 +110,6 @@ class Router
 
         }
         $moduleBoot->runAfter();
-
     }
 
 
@@ -129,6 +127,7 @@ class Router
         if (self::$_params) {
             $param = self::_normalizeParam(array_shift(self::$_params));
         }
+
         return $param;
     }
 
@@ -144,7 +143,6 @@ class Router
 
     private static function _normalizeParam($name)
     {
-
         if ($name) {
             $blah = md5(microtime());
             $name = str_replace(
@@ -153,7 +151,7 @@ class Router
                 $name
             );
         }
-        return $name;
 
+        return $name;
     }
 }

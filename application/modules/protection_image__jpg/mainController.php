@@ -89,19 +89,12 @@ class mainController extends \BaseController
 
     public function runBefore()
     {
-
-        if (!\Storage::inSession()) {
-            throw new \SystemErrorException(array(
-                'title'       => 'Storage error',
-                'description' => 'Client is not in session'
-            ));
-        } else if (\Router::shiftParam()) {
+        if (\Router::shiftParam()) {
             throw new \SystemErrorException(array(
                 'title'       => 'Protection image error',
                 'description' => 'More route parameters found'
             ));
         }
-
     }
 
 
@@ -115,7 +108,6 @@ class mainController extends \BaseController
 
     public function indexAction()
     {
-
         if ($this->_length === 'random') {
             $this->_length = mt_rand(5, 8);
         }
@@ -350,7 +342,7 @@ class mainController extends \BaseController
         imagedestroy($img);
 
         $action = preg_replace('/[^a-z-]+/', '', \Request::getParam('action'));
-        \Storage::write(($action ? $action . '-captcha' : 'captcha'), $keyString);
+        \Storage::write('__captcha' . ($action ?: '-' . $action), $keyString);
 
         \Request::addHeader('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
         \Request::addHeader('Cache-Control: no-store, no-cache, must-revalidate');
@@ -360,7 +352,7 @@ class mainController extends \BaseController
 
         \Request::sendHeaders();
         imagejpeg($img2, null, $this->_jpegQuality);
-        exit();
 
+        exit();
     }
 }

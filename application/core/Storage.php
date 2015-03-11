@@ -12,30 +12,45 @@ class Storage
 
 
     /**
-     * $_inSession
+     * $_data
      *
-     * Status of exists storage session data
+     * Session storage data pointer
      */
 
-    private static $_inSession = true;
+    private static $_data = array();
 
 
     /**
-     * $_storageKey
+     * $_handler
      *
-     * Global key of storage session data
+     * Session storage handler
      */
 
-    private static $_storageKey = '__storage';
+    private static $_handler = null;
 
 
     /**
-     * $_session
+     * setHandler
      *
-     * Session compatible pointer
+     * Set session storage handler
+     *
+     * @param  string $handlerClassName Storage handler class name
+     * @return null
      */
 
-    private static $_session = null;
+    public static function setHandler($handlerClassName)
+    {
+        self::$_handler = new $handlerClassName();
+        session_write_close();
+        session_set_save_handler(
+            array(self::$_handler, 'open'   ),
+            array(self::$_handler, 'close'  ),
+            array(self::$_handler, 'read'   ),
+            array(self::$_handler, 'write'  ),
+            array(self::$_handler, 'destroy'),
+            array(self::$_handler, 'gc'     )
+        );
+    }
 
 
     /**
@@ -62,67 +77,13 @@ class Storage
 
     public static function init()
     {
-
-        if (App::isCLI()) {
-            self::$_session = array();
-        } else {
-            $config = App::getConfig('main')->system;
-            session_name($config->session_name);
+        if (!App::isCLI()) {
+            if (self::$_handler) {
+                register_shutdown_function('session_write_close');
+            }
+            session_name(App::getConfig('main')->system->session_name);
             @ session_start();
             self::_setSessionPointer($_SESSION);
-        }
-
-        if (!array_key_exists(self::$_storageKey, self::$_session)) {
-            self::$_inSession = false;
-            self::clear();
-        }
-
-    }
-
-
-    /**
-     * inSession
-     *
-     * Returned status of exists storage session data
-     *
-     * @return bool Status of exists storage session data
-     */
-
-    public static function inSession()
-    {
-        return self::$_inSession;
-    }
-
-
-    /**
-     * write
-     *
-     * Save data into storage
-     *
-     * @param  string $key  Data key
-     * @param  mixed  $data Stored data
-     * @return null
-     */
-
-    public static function write($key, $data)
-    {
-        self::$_session[self::$_storageKey][$key] = $data;
-    }
-
-
-    /**
-     * remove
-     *
-     * Remove data from storage with key
-     *
-     * @param  string $key Data key
-     * @return null
-     */
-
-    public static function remove($key)
-    {
-        if (array_key_exists($key, self::$_session[self::$_storageKey])) {
-            unset(self::$_session[self::$_storageKey][$key]);
         }
     }
 
@@ -138,27 +99,57 @@ class Storage
 
     public static function read($key)
     {
-        return array_key_exists($key, self::$_session[self::$_storageKey])
-            ? self::$_session[self::$_storageKey][$key]
+        return array_key_exists($key, self::$_data)
+            ? self::$_data[$key]
             : null;
     }
 
 
     /**
-     * shift
+     * write
      *
-     * Read data from storage with key,
-     * and unset it (like shift from stack)
+     * Save data into storage
      *
-     * @param  string $key Data key
-     * @return mixed       Exists stored data or null
+     * @param  string $key  Data key
+     * @param  mixed  $data Stored data
+     * @return null
      */
 
-    public static function shift($key)
+    public static function write($key, $data)
     {
-        $data = self::read($key);
-        self::remove($key);
-        return $data;
+        self::$_data[$key] = $data;
+    }
+
+
+    /**
+     * remove
+     *
+     * Remove data from storage with key
+     *
+     * @param  string $key Data key
+     * @return null
+     */
+
+    public static function remove($key)
+    {
+        if (array_key_exists($key, self::$_data)) {
+            unset(self::$_data[$key]);
+        }
+    }
+
+
+    /**
+     * isExists
+     *
+     * Return status of exists data in storage
+     *
+     * @param  string $key Data key
+     * @return bool        Status of exists data
+     */
+
+    public static function isExists($key)
+    {
+        return array_key_exists($key, self::$_data);
     }
 
 
@@ -173,7 +164,7 @@ class Storage
 
     public static function clear()
     {
-        self::$_session[self::$_storageKey] = array();
+        self::$_data = array();
     }
 
 
@@ -182,12 +173,12 @@ class Storage
      *
      * Set inner session pointer
      *
-     * @param  mixed $sessionData Session data
+     * @param  mixed $sessionPointer  Pointer of session resource
      * @return null
      */
 
-    private static function _setSessionPointer( & $sessionData)
+    private static function _setSessionPointer( & $sessionPointer)
     {
-        self::$_session = & $sessionData;
+        self::$_data = & $sessionPointer;
     }
 }

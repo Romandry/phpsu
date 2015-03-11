@@ -24,7 +24,6 @@ class CliEnv
 
     public static function init($argv)
     {
-
         View::setOutputContext('txt');
         View::lockOutputContext();
 
@@ -43,6 +42,5 @@ class CliEnv
                 'description' => '--request argument not found or invalid'
             ));
         }
-
     }
 }

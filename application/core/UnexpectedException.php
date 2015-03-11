@@ -23,13 +23,13 @@ class UnexpectedException
 
     public static function take(Exception $e, $isDebug = false)
     {
-
         if ($e instanceof SystemException) {
             $report = $e->getReport();
             if ($isDebug) {
                 App::dump($report);
             } else {
-                echo 'Unexpected system ' . $report['type'] . ' exception inside catch context' . PHP_EOL;
+                echo 'Unexpected system ' . $report['type']
+                   . ' exception inside catch context' . PHP_EOL;
             }
         } else {
             if ($isDebug) {
@@ -38,6 +38,5 @@ class UnexpectedException
                 echo 'Unexpected exception inside catch context' . PHP_EOL;
             }
         }
-
     }
 }

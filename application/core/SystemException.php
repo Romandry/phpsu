@@ -40,7 +40,6 @@ class SystemException extends Exception
 
     public function __construct(array $report)
     {
-
         $this->_report = $report;
         if (!array_key_exists('code', $this->_report)) {
             $this->_report['code'] = 0;
@@ -56,7 +55,6 @@ class SystemException extends Exception
         if (App::getConfig('main')->system->write_log) {
             Logger::writeItem($this->_report);
         }
-
     }
 
 

@@ -33,13 +33,16 @@ class XmlOutput
 
     public static function getContent($data, array $schema, $docType)
     {
-
         if ($docType === null) {
             self::$_xmlDOM = new DOMDocument("1.0", "utf-8");
         } else {
 
             $imp = new DOMImplementation();
-            $dtd = $imp->createDocumentType($docType['name'], '', $docType['id']);
+            $dtd = $imp->createDocumentType(
+                $docType['name'],
+                '',
+                $docType['id']
+            );
             self::$_xmlDOM = $imp->createDocument("", "", $dtd);
             self::$_xmlDOM->encoding = 'utf-8';
 
@@ -79,9 +82,13 @@ class XmlOutput
      * @return null
      */
 
-    private static function _createXmlChildren( & $data, & $parentNode, array & $parentSchema, $schemaElements = null)
+    private static function _createXmlChildren(
+        & $data,
+        & $parentNode,
+        array & $parentSchema,
+        $schemaElements = null
+    )
     {
-
         if (is_array($data)) {
 
             $dataLength = sizeof($data);
@@ -103,8 +110,12 @@ class XmlOutput
                 }
                 if ($schemaElements !== null) {
                     foreach ($schemaElements as $schemaElement) {
-                        if ($isNumericItems || $currentSchema['name'] == $schemaElement['name']) {
-                            $currentSchema = array_merge($currentSchema, $schemaElement);
+                        if ($isNumericItems ||
+                            $currentSchema['name'] == $schemaElement['name']) {
+                            $currentSchema = array_merge(
+                                $currentSchema,
+                                $schemaElement
+                            );
                             $useSchemaElement = true;
                             break;
                         }
@@ -127,8 +138,15 @@ class XmlOutput
 
                     foreach ($value as $vv) {
 
-                        $element = self::$_xmlDOM->createElement($currentSchema['name']);
-                        self::_createXmlChildren($vv, $element, $currentSchema, $childrenSchema);
+                        $element = self::$_xmlDOM->createElement(
+                            $currentSchema['name']
+                        );
+                        self::_createXmlChildren(
+                            $vv,
+                            $element,
+                            $currentSchema,
+                            $childrenSchema
+                        );
 
 
                         /**
@@ -158,20 +176,33 @@ class XmlOutput
                     if (array_key_exists('attributes', $parentSchema)) {
                         foreach ($parentSchema['attributes'] as $k => $attribute) {
                             if ($currentSchema['name'] == $attribute['name']) {
-                                $parentSchema['attrvalues'][$attribute['name']] = $value;
+                                $parentSchema['attrvalues'][$attribute['name']]
+                                    = $value;
                                 $isParentAttributeSet = true;
                             }
                         }
                     }
 
-                    $acceptValue = (!is_bool($value) && $value !== '' && $value !== null);
+                    $acceptValue = (
+                        !is_bool($value) && $value !== '' && $value !== null
+                    );
                     if (!$isParentAttributeSet && $acceptValue) {
-                        if ($dataLength == 1 && $parentNode->childNodes->length == 0) {
-                            $parentNode->appendChild(self::$_xmlDOM->createTextNode($value));
+                        if ($dataLength == 1
+                            && $parentNode->childNodes->length == 0) {
+                            $parentNode->appendChild(
+                                self::$_xmlDOM->createTextNode($value)
+                            );
                         } else {
-                            $element = self::$_xmlDOM->createElement($currentSchema['name']);
-                            self::_setElementAttributes($element, $currentSchema);
-                            $element->appendChild(self::$_xmlDOM->createTextNode($value));
+                            $element = self::$_xmlDOM->createElement(
+                                $currentSchema['name']
+                            );
+                            self::_setElementAttributes(
+                                $element,
+                                $currentSchema
+                            );
+                            $element->appendChild(
+                                self::$_xmlDOM->createTextNode($value)
+                            );
                             $parentNode->appendChild($element);
                         }
                     }
@@ -183,7 +214,6 @@ class XmlOutput
             }
 
         }
-
     }
 
 
@@ -197,9 +227,11 @@ class XmlOutput
      * @return null
      */
 
-    private static function _setElementAttributes(DOMElement & $element, array & $data)
+    private static function _setElementAttributes(
+        DOMElement & $element,
+        array & $data
+    )
     {
-
         if (array_key_exists('attributes', $data)) {
             foreach ($data['attributes'] as $attribute) {
 
@@ -213,16 +245,21 @@ class XmlOutput
                 } else if ($value === false) {
                     if (array_key_exists($name, $data['attrvalues'])) {
                         if ($data['attrvalues'][$name] != '') {
-                            $element->setAttribute($name, $data['attrvalues'][$name]);
+                            $element->setAttribute(
+                                $name,
+                                $data['attrvalues'][$name]
+                            );
                         }
                     }
                 // custom value from schema
                 } else {
-                    $element->setAttribute($attribute['name'], $attribute['value']);
+                    $element->setAttribute(
+                        $attribute['name'],
+                        $attribute['value']
+                    );
                 }
 
             }
         }
-
     }
 }

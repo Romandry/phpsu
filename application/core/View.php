@@ -138,14 +138,9 @@ class View
 
     public static function init()
     {
-
         $cnf = App::getConfig('main');
         self::setOutputContext($cnf->system->default_output_context);
-        if (!$lang = Storage::read(self::$_langStorageKey)) {
-            $lang = $cnf->site->default_language;
-        }
-        self::setLanguage($lang);
-
+        self::setLanguage($cnf->site->default_language);
     }
 
 
@@ -160,7 +155,6 @@ class View
 
     public static function setOutputContext($type)
     {
-
         if (!in_array($type, self::$_availableContexts)) {
             throw new SystemErrorException(array(
                 'title'       => 'View error',
@@ -170,7 +164,6 @@ class View
         if (!self::$_lockedContext) {
             self::$_outputContext = $type;
         }
-
     }
 
 
@@ -213,7 +206,6 @@ class View
 
     public static function setLanguage($name)
     {
-
         if ($name != self::$_currentLang) {
 
             $langDir = APPLICATION . 'languages/' . $name;
@@ -227,11 +219,10 @@ class View
             }
 
             self::$_currentLang = $name;
-            storage::write(self::$_langStorageKey, $name);
+            Storage::write(self::$_langStorageKey, $name);
             self::$language = (object) self::$language;
 
         }
-
     }
 
 
@@ -260,7 +251,6 @@ class View
 
     public static function addLanguageItem($name)
     {
-
         if (self::$_currentLang && !in_array($name, self::$_langItems)) {
             $lang  = APPLICATION . 'languages/';
             $lang .= self::$_currentLang . '/' . $name . '.lang.php';
@@ -270,7 +260,6 @@ class View
                 (require $lang)
             );
         }
-
     }
 
 
@@ -364,7 +353,6 @@ class View
 
     public static function assignException(Exception $e)
     {
-
         $isDebug = App::getConfig('main')->system->debug_mode;
         if (!($e instanceof SystemException)) {
             UnexpectedException::take($e, $isDebug);
@@ -383,9 +371,10 @@ class View
                 // normalize report
                 if ($e instanceof SystemErrorException) {
                     self::addLanguageItem('exception');
-                    $report['code']        = 404;
-                    $report['title']       = self::$language->exception_error_404;
-                    $report['description'] = self::$language->exception_page_not_found;
+                    $report['code']  = 404;
+                    $report['title'] = self::$language->exception_error_404;
+                    $report['description']
+                        = self::$language->exception_page_not_found;
                 }
             // debug mode
             } else {
@@ -413,12 +402,13 @@ class View
             // add report headers
             if (!App::isCLI() && self::$_outputContext != 'json') {
                 if ($report['code'] == 404) {
-                    request::addHeader($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found');
+                    request::addHeader(
+                        $_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found'
+                    );
                 }
             }
 
         }
-
     }
 
 
@@ -432,7 +422,6 @@ class View
 
     public static function draw()
     {
-
         $renderTries = 2;
         while ( $renderTries-- ) {
 
@@ -447,11 +436,17 @@ class View
                 // json context
                 } else if (self::$_outputContext == 'json') {
                     Request::addHeader('Content-Type: application/json');
-                    $raw = json_encode(self::$_data ? self::$_data : new StdClass());
+                    $raw = json_encode(
+                        self::$_data ? self::$_data : new StdClass()
+                    );
                 // xml context
                 } else if (self::$_outputContext == 'xml') {
                     Request::addHeader('Content-Type: application/xml');
-                    $raw = XmlOutput::getContent(self::$_data, self::$_XSDSchema, self::$_docType);
+                    $raw = XmlOutput::getContent(
+                        self::$_data,
+                        self::$_XSDSchema,
+                        self::$_docType
+                    );
                 // html context error
                 } else if (!self::$_layout) {
                     throw new SystemErrorException(array(
@@ -460,7 +455,9 @@ class View
                     ));
                 // html context
                 } else {
-                    Request::addHeader('Content-Type: text/html; charset=utf-8');
+                    Request::addHeader(
+                        'Content-Type: text/html; charset=utf-8'
+                    );
                     self::_normalizeHtmlContext();
                     extract(self::$_protectedData);
                     extract(self::$_data);
@@ -488,7 +485,6 @@ class View
         }
         Request::sendHeaders();
         echo $layoutContent;
-
     }
 
 
@@ -505,7 +501,6 @@ class View
 
     private static function _assignData($item, $i = null, $toPublic = false)
     {
-
         $data = array();
         if (!is_array($item) and $i !== null) {
             $data[$item] = $i;
@@ -525,7 +520,6 @@ class View
         } else {
             self::$_protectedData = array_merge(self::$_protectedData, $data);
         }
-
     }
 
 
@@ -539,7 +533,6 @@ class View
 
     private static function _normalizeHtmlContext()
     {
-
         if (!self::isAssigned('hosts')) {
             self::assign('hosts', App::getConfig('hosts'));
         }
@@ -549,6 +542,5 @@ class View
                 self::$_data[$key] = '';
             }
         }
-
     }
 }

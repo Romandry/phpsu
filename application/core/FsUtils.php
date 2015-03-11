@@ -28,6 +28,7 @@ class FsUtils
         if (!$result = glob($pattern, $flags)) {
             $result = array();
         }
+
         return $result;
     }
 
@@ -44,7 +45,6 @@ class FsUtils
 
     public static function globRecursive($path, $mask = "*")
     {
-
         $items = self::glob($path . $mask);
         $dirs = self::glob($path . '*', GLOB_ONLYDIR | GLOB_NOSORT);
         foreach ($dirs as $dir) {
@@ -53,7 +53,7 @@ class FsUtils
                 self::globRecursive($dir . '/', $mask)
             );
         }
-        return $items;
 
+        return $items;
     }
 }

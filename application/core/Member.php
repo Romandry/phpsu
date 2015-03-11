@@ -43,7 +43,7 @@ class Member
 
     public static function getProfile()
     {
-        return clone self::$_profile;
+        return self::$_profile;
     }
 
 
@@ -99,7 +99,6 @@ class Member
 
     public static function beforeInit()
     {
-
         $isCLI = App::isCLI();
         $prf = App::getConfig($isCLI ? 'member_cli' : 'member_guest');
         $prf->avatar = '//' . App::getConfig('hosts')->st . $prf->avatar;
@@ -109,7 +108,6 @@ class Member
         if ($isCLI) {
             self::$_isAuth = true;
         }
-
     }
 
 
@@ -123,15 +121,14 @@ class Member
 
     public static function init()
     {
-
-        $initPermissions = false;
+        $needPermissions = false;
         if (App::isCLI()) {
-            $initPermissions = true;
+            $needPermissions = true;
         } else {
             $cnf = App::getConfig('main')->system;
             if (array_key_exists($cnf->cookie_name, $_COOKIE)) {
                 $value = (string) $_COOKIE[$cnf->cookie_name];
-                $value = trim(substr($value, 0, 32));
+                $value = trim(substr($value, 0, 512));
                 if ($value) {
 
                     $conn = DBI::getConnection('slave');
@@ -141,16 +138,17 @@ class Member
                                 g.priority group_priority,
                                 g.is_protected
                             FROM members m
-                            LEFT JOIN groups g ON g.id = m.group_id
+                            LEFT JOIN groups g
+                                ON g.id = m.group_id
                             WHERE m.cookie = :cookie',
                         array(':cookie' => $value)
                     )->fetch(PDO::FETCH_OBJ);
 
                     if (!$data) {
-                        setcookie($cnf->cookie_name, '', -1, '/');
+                        self::signOut();
                     } else {
 
-                        $initPermissions = true;
+                        $needPermissions = true;
                         $expires = time() + $cnf->cookie_expires_time;
                         setcookie($cnf->cookie_name, $value, $expires, '/');
 
@@ -167,10 +165,9 @@ class Member
         }
 
         self::_setEnvironment();
-        if ($initPermissions) {
+        if ($needPermissions) {
             self::_initPermissions();
         }
-
     }
 
 
@@ -198,10 +195,15 @@ class Member
 
     private static function _setEnvironment()
     {
-
         $conn = DBI::getConnection('slave');
         // set timezone
-
+        $tz = self::$_profile->time_zone
+            ? self::$_profile->time_zone
+            : App::getConfig('main')->site->default_time_zone;
+        $conn->sendQuery(
+            'SET time_zone = :time_zone',
+            array(':time_zone' => $tz)
+        );
     }
 
 
@@ -215,18 +217,18 @@ class Member
 
     private static function _initPermissions()
     {
-
         $conn = DBI::getConnection('slave');
         $permissions = $conn->sendQuery(
-            'SELECT p.name
+            'SELECT
+                    p.name
                 FROM groups_permissions gp
-                INNER JOIN permissions p ON p.id = gp.permission_id
+                INNER JOIN permissions p
+                    ON p.id = gp.permission_id
                 WHERE gp.group_id = :group_id',
             array(':group_id' => self::$_profile->group_id)
         )->fetch(PDO::FETCH_OBJ);
         if ($permissions) {
             self::$_permissions = $permissions;
         }
-
     }
 }

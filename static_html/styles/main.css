@@ -320,7 +320,7 @@ table.forum .target-info .title {
     display: none;
 }
 
-.protection-box img {
+.protection-box img, img.protection-image {
     cursor: pointer;
 }
 

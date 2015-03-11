@@ -22,7 +22,6 @@ class XmlSchemaValidator
 
     public static function check(array $schemaElement)
     {
-
         if (!is_array($schemaElement)) {
             throw new SystemErrorException(array(
                 'title'       => 'Schema XML error',
@@ -68,7 +67,6 @@ class XmlSchemaValidator
                 ));
             }
         }
-
     }
 
 
@@ -83,7 +81,6 @@ class XmlSchemaValidator
 
     public static function checkAttributes(array $attributes)
     {
-
         if (!is_array($attributes)) {
             throw new SystemErrorException(array(
                 'title'       => 'Schema XML error',
@@ -112,6 +109,5 @@ class XmlSchemaValidator
             }
 
         }
-
     }
 }

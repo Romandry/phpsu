@@ -22,7 +22,6 @@ class Logger
 
     public static function writeItem(array $item)
     {
-
         $existsLog = false;
         $logDir    = APPLICATION . 'logs';
         $logFile   = $logDir . '/main.log';
@@ -47,17 +46,12 @@ class Logger
             }
         }
 
-        $item = array_merge(
-            $item,
-            Request::getClientInfo(),
-            array('url' => Request::getRawUrl())
-        );
+        $item['url'] = Request::getRawUrl();
 
         $item = ($existsLog ? ",\n" : '') . json_encode($item);
         file_put_contents($logFile, $item, LOCK_EX | FILE_APPEND);
         if (!$existsLog) {
             chmod($logFile, 0666);
         }
-
     }
 }
