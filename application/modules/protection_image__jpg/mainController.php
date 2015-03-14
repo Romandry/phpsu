@@ -342,7 +342,8 @@ class mainController extends \BaseController
         imagedestroy($img);
 
         $action = preg_replace('/[^a-z-]+/', '', \Request::getParam('action'));
-        \Storage::write('__captcha' . ($action ?: '-' . $action), $keyString);
+        $action = 'protection-code' . ($action ? ('-' . $action) : '');
+        \Storage::write($action, $keyString);
 
         \Request::addHeader('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
         \Request::addHeader('Cache-Control: no-store, no-cache, must-revalidate');

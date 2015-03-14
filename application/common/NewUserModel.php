@@ -2,14 +2,14 @@
 
 
 /**
- * UserModel
+ * NewUserModel
  *
- * Implementation of user model
+ * Users creation model
  */
 
 namespace common;
 
-class UserModel
+class NewUserModel
 {
 
 

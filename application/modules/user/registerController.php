@@ -16,7 +16,7 @@ class registerController extends \BaseController
     /**
      * indexAction
      *
-     * Index action of register controller user module
+     * Index action of registration controller user module
      *
      * @return null
      */
@@ -41,8 +41,33 @@ class registerController extends \BaseController
         // set json context
         \View::setOutputContext('json');
         \View::lockOutputContext();
+
         // validate form
         $registerForm = \App::getInstance('\modules\user\RegisterForm');
+        $registerForm->validate();
+        $data = $registerForm->getData();
+        // compare protection code
+        if (property_exists($data, 'protection_code')) {
+            $protectionCode = \Storage::read('protection-code-register');
+            if ($data->protection_code !== $protectionCode) {
+                \Storage::remove('protection-code-register');
+                $registerForm->addMessage(
+                    'protection_code',
+                    'Некорректный защитный код'
+                );
+            }
+        }
+        // compare password confirmation
+        if (property_exists($data, 'password')
+            && property_exists($data, 'confirm_password')
+            && $data->password !== $data->confirm_password) {
+            $registerForm->addMessage(
+                'confirm_password',
+                'Пароль и подтверждение пароля не совпадают'
+            );
+        }
+
+        // invalid form data
         if (!$registerForm->isValid()) {
             throw new \MemberErrorException(array(
                 'title'         => 'Ошибка',
@@ -52,11 +77,9 @@ class registerController extends \BaseController
         }
 
         // create a new user
-        $newUser = \App::getInstance(
-            'common\UserModel',
-            $registerForm->getData()
-        );
+        $newUser = \App::getInstance('common\NewUserModel', $data);
         $newUser->save();
+        \App::dump($data);
         // redirect to complete page
         \Storage::write('__register_complete', true);
         throw new \MemberSuccessException(array(

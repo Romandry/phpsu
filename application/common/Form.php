@@ -89,62 +89,20 @@ class Form
 
 
     /**
-     * isValid
-     *
-     * Run validation process and return status
-     *
-     * @return bool Validation status
-     */
-
-    public function isValid()
-    {
-        $this->_validate();
-        return $this->_isValid;
-    }
-
-
-    /**
-     * getMessages
-     *
-     * Return list of validation messages
-     *
-     * @return array List of validation messages
-     */
-
-    public function getMessages()
-    {
-        return $this->_messages;
-    }
-
-
-    /**
-     * getData
-     *
-     * Return filtered and sanitized form data
-     *
-     * @return StdClass Form data
-     */
-
-    public function getData()
-    {
-        return $this->_data;
-    }
-
-
-    /**
-     * _validate
+     * validate
      *
      * Run validation process
      *
      * @return null
      */
 
-    protected function _validate()
+    public function validate()
     {
         $prevRule = null;
         // each fields
         foreach ($this->_rules as $fieldName => & $rules) {
 
+            $isValid = true;
             $value = $this->_type == 'POST'
                 ? \Request::getPostParam($fieldName)
                 : \Request::getParam($fieldName);
@@ -174,7 +132,6 @@ class Form
                 // validation
                 } else if ($rule[0] == 'negation' || $rule[0] == 'assertion') {
 
-                    $isValid = true;
                     $validatorNS = '\common\validators\\' . $rule[1];
                     $validator = \App::getInstance($validatorNS);
                     if ($ruleSize > 3) {
@@ -191,11 +148,7 @@ class Form
                     }
                     // update status, append message and out of chain
                     if (!$isValid) {
-                        $this->_isValid = false;
-                        $this->_messages[] = array(
-                            'field'       => $fieldName,
-                            'description' => array_pop($rule)
-                        );
+                        $this->addMessage($fieldName, array_pop($rule));
                         break;
                     }
 
@@ -205,6 +158,72 @@ class Form
                 }
 
             }
+            // store sanitized value
+            if ($isValid) {
+                $this->_data->{$fieldName} = $value;
+            }
         }
+    }
+
+
+    /**
+     * addMessage
+     *
+     * Add new item into validation messages
+     *
+     * @param string $fieldName   Name of field
+     * @param string $description Message text
+     * @return null
+     */
+
+    public function addMessage($fieldName, $description)
+    {
+        $this->_isValid = false;
+        $this->_messages[] = array(
+            'field'       => $fieldName,
+            'description' => $description
+        );
+    }
+
+
+    /**
+     * isValid
+     *
+     * Run validation process and return status
+     *
+     * @return bool Validation status
+     */
+
+    public function isValid()
+    {
+        return $this->_isValid;
+    }
+
+
+    /**
+     * getMessages
+     *
+     * Return list of validation messages
+     *
+     * @return array List of validation messages
+     */
+
+    public function getMessages()
+    {
+        return $this->_messages;
+    }
+
+
+    /**
+     * getData
+     *
+     * Return filtered and sanitized form data
+     *
+     * @return StdClass Form data
+     */
+
+    public function getData()
+    {
+        return $this->_data;
     }
 }

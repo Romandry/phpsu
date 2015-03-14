@@ -48,6 +48,24 @@ class RegisterForm extends \common\Form
                 array('filter',    'ToString'                                   ),
                 array('filter',    'Trim',                                      ),
                 array('assertion', 'IsEmpty',  'Вы не указали Логин (псевдоним)')
+            ),
+            'password' => array(
+                array('negation',  'IsString', 'Некорректный формат данных'),
+                array('filter',    'ToString'                              ),
+                array('filter',    'Trim',                                 ),
+                array('assertion', 'IsEmpty',  'Вы не указали пароль'      )
+            ),
+            'confirm_password' => array(
+                array('negation',  'IsString', 'Некорректный формат данных'),
+                array('filter',    'ToString'                              ),
+                array('filter',    'Trim',                                 ),
+                array('assertion', 'IsEmpty',  'Вы не подтвердили пароль'  )
+            ),
+            'protection_code' => array(
+                array('negation',  'IsString', 'Некорректный формат данных'),
+                array('filter',    'ToString'                              ),
+                array('filter',    'Trim',                                 ),
+                array('assertion', 'IsEmpty',  'Вы не ввели защитный код'  )
             )
         );
     }

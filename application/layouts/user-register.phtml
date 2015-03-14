@@ -31,7 +31,7 @@
                                 name="email"
                                 value=""
                                 autocomplete="off">
-                        <span class="elem-description"></span>
+                        <span class="elem-message for-email"></span>
                     </div>
                     <div class="label">Логин (псевдоним)</div>
                     <div class="elem">
@@ -39,21 +39,21 @@
                                 name="login"
                                 value=""
                                 autocomplete="off">
-                        <span class="elem-description"></span>
+                        <span class="elem-message for-login"></span>
                     </div>
                     <div class="label">Пароль</div>
                     <div class="elem">
                         <input type="password"
                                 name="password"
                                 value="">
-                        <span class="elem-description"></span>
+                        <span class="elem-message for-password"></span>
                     </div>
                     <div class="label">Подтвердите пароль</div>
                     <div class="elem">
                         <input type="password"
                                 name="confirm_password"
                                 value="">
-                        <span class="elem-description"></span>
+                        <span class="elem-message for-confirm_password"></span>
                     </div>
                     <div class="half-box">
                         <div class="label">Защитный код</div>
@@ -70,20 +70,21 @@
                                 title="Кликни чтобы обновить"
                                 alt=""
                                 src="/protection-image.jpg?action=register&_=<?=md5(microtime(true))?>"
-                                onclick="this.src = '/protection-image.jpg?action=sign-in&_' + Math.random();">
+                                onclick="this.src = '/protection-image.jpg?action=register&_' + Math.random();">
+                        <span class="elem-message for-protection_code"></span>
                     </div>
                     <div class="clear"></div>
                     <div class="label">&nbsp;</div>
                     <div class="elem">
                         <input type="submit" value="Зарегистрироваться">
                     </div>
-                    <div class="label">&nbsp;</div>
-                    <div class="elem">
-                        <a href="/user/sign-in">Уже есть аккаунт?</a>
-                        |
-                        <a href="/user/recovery">Забыли логин или пароль?</a>
-                    </div>
+                    <div class="loading-cover"></div>
                 </form>
+                <p>
+                    <a href="/user/sign-in">Уже есть аккаунт?</a>
+                    |
+                    <a href="/user/recovery">Забыли логин или пароль?</a>
+                </p>
 
             </div>
         </div>
