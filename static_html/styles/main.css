@@ -361,8 +361,8 @@ input[type="submit"], input[type="button"], input[type="reset"], button {
     line-height: 28px;
     font-weight: bold;
     color: #fde9d1;
-    background: #de322d;
-    border: solid 1px #e3554b;
+    background: #2d32de;
+    border: solid 1px #4b55e3;
     border-radius: 4px;
     box-shadow: 0 -10px 20px -10px #444444 inset;
     -webkit-box-shadow: 0 -10px 20px -10px #444444 inset;
@@ -374,7 +374,14 @@ input[type="submit"]:hover, input[type="button"]:hover, input[type="reset"]:hove
     -webkit-box-shadow: 0 -10px 20px -10px #000000 inset;
 }
 
+.elem-description {
+    padding: 4px 10px;
+}
 
+.elem-description.error {
+    color: #ffffff;
+    background: #a20000;
+}
 
 
 

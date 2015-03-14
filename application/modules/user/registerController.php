@@ -42,12 +42,12 @@ class registerController extends \BaseController
         \View::setOutputContext('json');
         \View::lockOutputContext();
         // validate form
-        $registerForm = \App::getInstance('modules\user\RegisterForm');
+        $registerForm = \App::getInstance('\modules\user\RegisterForm');
         if (!$registerForm->isValid()) {
             throw new \MemberErrorException(array(
-                'title'       => 'Ошибка',
-                'description' => 'Некорректно заполнена форма регистрации',
-                'messages'    => $registerForm->getMessages()
+                'title'         => 'Ошибка',
+                'description'   => 'Некорректно заполнена форма регистрации',
+                'form_messages' => $registerForm->getMessages()
             ));
         }
 
@@ -60,8 +60,6 @@ class registerController extends \BaseController
         // redirect to complete page
         \Storage::write('__register_complete', true);
         throw new \MemberSuccessException(array(
-            'title'       => 'Готово',
-            'description' => 'Новый пользователь успешно создан',
             'redirection' => '/user/register/complete'
         ));
     }

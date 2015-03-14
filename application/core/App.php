@@ -84,8 +84,8 @@ class App
             $prefix = '';
             $suffix = '';
         } else {
-            $prefix = '<hr /><pre>';
-            $suffix = '</pre><hr />';
+            $prefix = '<hr><pre>';
+            $suffix = '</pre><hr>';
         }
 
         foreach (func_get_args() as $item) {

@@ -22,28 +22,38 @@
 
                 <h1><?=$pageH1?></h1>
 
-                <form action="/user/register/process" method="post">
+                <form class="ajax-form"
+                        action="/user/register/process"
+                        method="post">
                     <div class="label">E-mail</div>
                     <div class="elem">
                         <input type="text"
                                 name="email"
                                 value=""
-                                autocomplete="off" />
+                                autocomplete="off">
+                        <span class="elem-description"></span>
                     </div>
                     <div class="label">Логин (псевдоним)</div>
                     <div class="elem">
                         <input type="text"
                                 name="login"
                                 value=""
-                                autocomplete="off" />
+                                autocomplete="off">
+                        <span class="elem-description"></span>
                     </div>
                     <div class="label">Пароль</div>
                     <div class="elem">
-                        <input type="password" name="password" value="" />
+                        <input type="password"
+                                name="password"
+                                value="">
+                        <span class="elem-description"></span>
                     </div>
                     <div class="label">Подтвердите пароль</div>
                     <div class="elem">
-                        <input type="password" name="confirm_password" value="" />
+                        <input type="password"
+                                name="confirm_password"
+                                value="">
+                        <span class="elem-description"></span>
                     </div>
                     <div class="half-box">
                         <div class="label">Защитный код</div>
@@ -52,7 +62,7 @@
                                     type="text"
                                     name="protection_code"
                                     value=""
-                                    autocomplete="off" />
+                                    autocomplete="off">
                         </div>
                     </div>
                     <div class="half-box">
@@ -60,12 +70,12 @@
                                 title="Кликни чтобы обновить"
                                 alt=""
                                 src="/protection-image.jpg?action=register&_=<?=md5(microtime(true))?>"
-                                onclick="this.src = '/protection-image.jpg?action=sign-in&_' + Math.random();" />
+                                onclick="this.src = '/protection-image.jpg?action=sign-in&_' + Math.random();">
                     </div>
                     <div class="clear"></div>
                     <div class="label">&nbsp;</div>
                     <div class="elem">
-                        <input type="submit" value="Зарегистрироваться" />
+                        <input type="submit" value="Зарегистрироваться">
                     </div>
                     <div class="label">&nbsp;</div>
                     <div class="elem">
