@@ -69,4 +69,39 @@ class RegisterForm extends \common\Form
             )
         );
     }
+
+
+    /**
+     * validate
+     *
+     * Run validation process
+     *
+     * @return null
+     */
+
+    public function validate()
+    {
+        parent::validate();
+
+        // compare protection code
+        if (property_exists($this->_data, 'protection_code')) {
+            $protectionCode = \Storage::read('protection-code-register');
+            if ($this->_data->protection_code !== $protectionCode) {
+                \Storage::remove('protection-code-register');
+                $this->addMessage(
+                    'protection_code',
+                    'Некорректный защитный код'
+                );
+            }
+        }
+        // compare password confirmation
+        if (property_exists($this->_data, 'password')
+            && property_exists($this->_data, 'confirm_password')
+            && $this->_data->password !== $this->_data->confirm_password) {
+            $this->addMessage(
+                'confirm_password',
+                'Пароль и подтверждение пароля не совпадают'
+            );
+        }
+    }
 }

@@ -45,28 +45,6 @@ class registerController extends \BaseController
         // validate form
         $registerForm = \App::getInstance('\modules\user\RegisterForm');
         $registerForm->validate();
-        $data = $registerForm->getData();
-        // compare protection code
-        if (property_exists($data, 'protection_code')) {
-            $protectionCode = \Storage::read('protection-code-register');
-            if ($data->protection_code !== $protectionCode) {
-                \Storage::remove('protection-code-register');
-                $registerForm->addMessage(
-                    'protection_code',
-                    'Некорректный защитный код'
-                );
-            }
-        }
-        // compare password confirmation
-        if (property_exists($data, 'password')
-            && property_exists($data, 'confirm_password')
-            && $data->password !== $data->confirm_password) {
-            $registerForm->addMessage(
-                'confirm_password',
-                'Пароль и подтверждение пароля не совпадают'
-            );
-        }
-
         // invalid form data
         if (!$registerForm->isValid()) {
             throw new \MemberErrorException(array(
@@ -75,11 +53,14 @@ class registerController extends \BaseController
                 'form_messages' => $registerForm->getMessages()
             ));
         }
-
         // create a new user
-        $newUser = \App::getInstance('common\NewUserModel', $data);
+        $newUser = \App::getInstance(
+            'common\NewUserModel',
+            $registerForm->getData()
+        );
         $newUser->save();
-        \App::dump($data);
+        \App::dump($newUser);
+
         // redirect to complete page
         \Storage::write('__register_complete', true);
         throw new \MemberSuccessException(array(

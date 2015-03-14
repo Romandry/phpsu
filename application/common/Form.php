@@ -98,7 +98,6 @@ class Form
 
     public function validate()
     {
-        $prevRule = null;
         // each fields
         foreach ($this->_rules as $fieldName => & $rules) {
 

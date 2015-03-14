@@ -18,16 +18,13 @@ $(function() {
 
         form.addClass('loading');
         $.ajax({
-            type     : (method == 'POST' ? method : 'GET'),
-            url      : form.attr('action'),
-            data     : form.serialize(),
-            cache    : false,
-            complete : function() {
-                protectionImage.click();
-                form.removeClass('loading');
-            },
-            success: function(response) {
+            type    : (method == 'POST' ? method : 'GET'),
+            url     : form.attr('action'),
+            data    : form.serialize(),
+            cache   : false,
+            success : function(response) {
                 messageBoxes.hide();
+                protectionImage.click();
                 if (response.report) {
                     if (response.report.redirection) {
                         window.location.href = response.report.redirection;
@@ -38,6 +35,7 @@ $(function() {
                         );
                     }
                 }
+                form.removeClass('loading');
             }
         });
 
