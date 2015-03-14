@@ -14,6 +14,20 @@ class registerController extends \BaseController
 
 
     /**
+     * runBefore
+     *
+     * Run before action
+     *
+     * @return null
+     */
+
+    public function runBefore()
+    {
+        \View::addLanguageItem('registerController');
+    }
+
+
+    /**
      * indexAction
      *
      * Index action of registration controller user module
@@ -23,7 +37,7 @@ class registerController extends \BaseController
 
     public function indexAction()
     {
-        \View::assign('pageH1', 'Регистрация аккаунта');
+        \View::assign('title', \View::$language->register_title);
         \View::setLayout('user-register.phtml');
     }
 
@@ -48,8 +62,8 @@ class registerController extends \BaseController
         // invalid form data
         if (!$registerForm->isValid()) {
             throw new \MemberErrorException(array(
-                'title'         => 'Ошибка',
-                'description'   => 'Некорректно заполнена форма регистрации',
+                'title'         => \View::$language->register_error,
+                'description'   => \View::$language->register_proc_err_descr,
                 'form_messages' => $registerForm->getMessages()
             ));
         }
@@ -83,7 +97,7 @@ class registerController extends \BaseController
             \Request::redirect('/');
         }
         \Storage::remove('__register_complete');
-        \View::assign('pageH1', 'Поздравляем с успешной регистрацией');
+        \View::assign('title', \View::$language->register_title_complete);
         \View::setLayout('user-register-complete.phtml');
     }
 }

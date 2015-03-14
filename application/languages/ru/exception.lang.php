@@ -1,6 +1,10 @@
 <?php
 
 
+/**
+ * Exception language file
+ */
+
 return array(
 
     'exception_error_404'      => 'Ошибка 404',

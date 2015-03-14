@@ -34,38 +34,83 @@ class RegisterForm extends \common\Form
     public function __construct()
     {
         parent::__construct();
+        \View::addLanguageItem('RegisterForm');
 
         $this->_rules = array(
             'email' => array(
-                array('negation',  'IsString', 'Некорректный формат данных'),
-                array('filter',    'ToString'                              ),
-                array('filter',    'Trim',                                 ),
-                array('assertion', 'IsEmpty',  'Вы не указали E-mail адрес'),
-                array('negation',  'Email',    'Некорректный E-mail адрес' )
+                array(
+                    'negation',
+                    'IsString',
+                    \View::$language->register_form_data_invalid
+                ),
+                array('filter', 'ToString'),
+                array('filter', 'Trim'),
+                array(
+                    'assertion',
+                    'IsEmpty',
+                    \View::$language->register_form_email_is_empty
+                ),
+                array(
+                    'negation',
+                    'Email',
+                    \View::$language->register_form_email_invalid
+                )
             ),
             'login' => array(
-                array('negation',  'IsString', 'Некорректный формат данных'     ),
-                array('filter',    'ToString'                                   ),
-                array('filter',    'Trim',                                      ),
-                array('assertion', 'IsEmpty',  'Вы не указали Логин (псевдоним)')
+                array(
+                    'negation',
+                    'IsString',
+                    \View::$language->register_form_data_invalid
+                ),
+                array('filter', 'ToString'),
+                array('filter', 'Trim'),
+                array(
+                    'assertion',
+                    'IsEmpty',
+                    \View::$language->register_form_login_is_empty
+                )
             ),
             'password' => array(
-                array('negation',  'IsString', 'Некорректный формат данных'),
-                array('filter',    'ToString'                              ),
-                array('filter',    'Trim',                                 ),
-                array('assertion', 'IsEmpty',  'Вы не указали пароль'      )
+                array(
+                    'negation',
+                    'IsString',
+                    \View::$language->register_form_data_invalid
+                ),
+                array('filter', 'ToString'),
+                array('filter', 'Trim'),
+                array(
+                    'assertion',
+                    'IsEmpty',
+                    \View::$language->register_form_password_is_empty
+                )
             ),
             'confirm_password' => array(
-                array('negation',  'IsString', 'Некорректный формат данных'),
-                array('filter',    'ToString'                              ),
-                array('filter',    'Trim',                                 ),
-                array('assertion', 'IsEmpty',  'Вы не подтвердили пароль'  )
+                array(
+                    'negation',
+                    'IsString',
+                    \View::$language->register_form_data_invalid
+                ),
+                array('filter', 'ToString'),
+                array('filter', 'Trim'),
+                array(
+                    'assertion',
+                    'IsEmpty',
+                    \View::$language->register_form_password_confirm_is_empty
+                )
             ),
             'protection_code' => array(
-                array('negation',  'IsString', 'Некорректный формат данных'),
-                array('filter',    'ToString'                              ),
-                array('filter',    'Trim',                                 ),
-                array('assertion', 'IsEmpty',  'Вы не ввели защитный код'  )
+                array(
+                    'negation',
+                    'IsString',
+                    \View::$language->register_form_data_invalid
+                ),
+                array('filter', 'ToString'),
+                array('filter', 'Trim'),
+                array(
+                    'assertion',
+                    'IsEmpty',
+                    \View::$language->register_form_protection_code_is_empty
+                )
             )
         );
     }
@@ -90,7 +135,7 @@ class RegisterForm extends \common\Form
                 \Storage::remove('protection-code-register');
                 $this->addMessage(
                     'protection_code',
-                    'Некорректный защитный код'
+                    \View::$language->register_form_protection_code_invalid
                 );
             }
         }
@@ -100,7 +145,7 @@ class RegisterForm extends \common\Form
             && $this->_data->password !== $this->_data->confirm_password) {
             $this->addMessage(
                 'confirm_password',
-                'Пароль и подтверждение пароля не совпадают'
+                \View::$language->register_form_password_confirm_mismatch
             );
         }
     }
