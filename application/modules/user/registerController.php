@@ -96,7 +96,7 @@ class registerController extends \BaseController
         if (!\Storage::isExists('__register_complete')) {
             \Request::redirect('/');
         }
-        \Storage::remove('__register_complete');
+        //\Storage::remove('__register_complete');
         \View::assign('title', \View::$language->register_title_complete);
         \View::setLayout('user-register-complete.phtml');
     }

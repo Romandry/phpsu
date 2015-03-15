@@ -23,7 +23,7 @@ class sign_inController extends \BaseController
 
     public function indexAction()
     {
-        \View::assign('pageH1', 'Вход в аккаунт');
+        \View::assign('title', 'Вход в аккаунт');
         \View::setLayout('user-sign-in.phtml');
     }
 

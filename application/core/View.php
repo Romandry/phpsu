@@ -536,11 +536,19 @@ class View
         if (!self::isAssigned('hosts')) {
             self::assign('hosts', App::getConfig('hosts'));
         }
-        $expectedKeys = array('meta_description', 'meta_keywords', 'title');
+        $expectedKeys = array(
+            'meta_description',
+            'meta_keywords',
+            'title',
+            'h1'
+        );
         foreach ($expectedKeys as $key) {
             if (!array_key_exists($key, self::$_data)) {
                 self::$_data[$key] = '';
             }
+        }
+        if (!self::$_data['h1']) {
+            self::$_data['h1'] = self::$_data['title'];
         }
     }
 }
