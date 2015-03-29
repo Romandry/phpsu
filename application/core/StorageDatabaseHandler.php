@@ -24,6 +24,7 @@ class StorageDatabaseHandler
 
     public function open($savePath, $sessionName)
     {
+        DBI::getConnection('master')->beginTransaction();
         return true;
     }
 
@@ -125,6 +126,7 @@ class StorageDatabaseHandler
 
     public function close()
     {
+        DBI::getConnection('master')->commit();
         return true;
     }
 }
