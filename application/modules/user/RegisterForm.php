@@ -148,5 +148,19 @@ class RegisterForm extends \common\Form
                 \View::$language->register_form_password_confirm_mismatch
             );
         }
+        // check for existence
+        if ($this->isValid()) {
+            $checkedFields = array(
+                'email',
+                'login'
+            );
+            $UserModel = \App::getInstance('common\UserModel');
+            foreach ($checkedFields as $fName) {
+                if ($UserModel->isExists($fName, $this->_data->{$fName})) {
+                    $mKey = 'register_form_' . $fName . '_is_exists';
+                    $this->addMessage($fName, \View::$language->{$mKey});
+                }
+            }
+        }
     }
 }

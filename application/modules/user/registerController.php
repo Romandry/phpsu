@@ -68,12 +68,19 @@ class registerController extends \BaseController
             ));
         }
         // create a new user
-        $newUser = \App::getInstance(
-            'common\NewUserModel',
-            $registerForm->getData()
-        );
-        $newUser->save();
-        \App::dump($newUser);
+        $userData = $registerForm->getData();
+        // set new user defaults
+        $userData->group_id        = 0;                   // TODO get default user group ID
+        $userData->password        = $userData->password; // TODO need hash password algorythm
+        $userData->time_zone       = '+00:00';            // TODO get default user time zone
+        $userData->status          = 0;                   // TODO get default new registered user status
+        $userData->activation_hash = 'xxx';               // TODO need algorythm for generation of activation hash
+        $userData->avatar          = 'no-avatar.png';     // TODO get default user avatar
+
+        $UserModel = \App::getInstance('common\UserModel');
+        $UserModel->createUser($userData);
+
+        \App::dump($userData);
 
         // redirect to complete page
         \Storage::write('__register_complete', true);
