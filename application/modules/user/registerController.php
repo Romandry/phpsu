@@ -80,6 +80,8 @@ class registerController extends \BaseController
         $UserModel = \App::getInstance('common\UserModel');
         $UserModel->createUser($userData);
 
+        // TODO send email notification of account activation
+
         \App::dump($userData);
 
         // redirect to complete page
