@@ -23,6 +23,7 @@
                     <a name="post-<?=$post->id?>"></a>
                 </div>
                 <div class="forum-topic-post forum-topic-post-<?= ($p % 2 == 0) ? 'even' : 'odd' ?>">
+                    <div class="forum-topic-post-context-separator"></div>
                     <div class="forum-topic-post-author">
                         <div class="forum-topic-post-author-name">
                             <a href="/user?id=<?=$post->author_id?>"><?=$post->author_login?></a>

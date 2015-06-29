@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 29, 2015 at 03:35 AM
+-- Generation Time: Jun 29, 2015 at 06:34 AM
 -- Server version: 5.1.73
 -- PHP Version: 5.3.3-7+squeeze19
 
@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `forum_posts` (
 --
 
 INSERT INTO `forum_posts` (`id`, `topic_id`, `topic_start`, `authored_by`, `edited_by`, `moderated_by`, `creation_date`, `last_modified`, `post_text`, `post_html`) VALUES
-(1, 1, 1, 14, NULL, 14, '2014-12-05 13:29:40', '2014-12-05 13:29:40', 'Жопка!\r\n\r\n ------------------ 13:31:08 ------------------ \r\n\r\nВот она [img]http://apikabu.ru/img_n/2012-08_5/cnf.jpg[/img]', 'Жопка!<br />\r\n<br />\r\n ------------------ 13:31:08 ------------------ <br />\r\n<br />\r\nВот она  <p><a class="fancybox" href="http://apikabu.ru/img_n/2012-08_5/cnf.jpg"><img src="http://apikabu.ru/img_n/2012-08_5/cnf.jpg" /></a></p> '),
+(1, 1, 1, 14, NULL, 14, '2014-12-05 13:29:40', '2014-12-05 13:29:40', 'Жопка!\r\n\r\n ------------------ 13:31:08 ------------------ \r\n\r\nВот она [img]http://apikabu.ru/img_n/2012-08_5/cnf.jpg[/img]', 'Жопка!<br />\r\n<br />\r\n ------------------ 13:31:08 ------------------ <br />\r\n<br />\r\nВот она  <p>\r\n<a class="fancybox" href="http://apikabu.ru/img_n/2012-08_5/cnf.jpg"><img src="http://apikabu.ru/img_n/2012-08_5/cnf.jpg" /></a>\r\n\r\n<a class="fancybox" href="http://062012.imgbb.ru/8/4/c/84c3279bf6baeff86ead375cdece8a12.jpg"><img src="http://062012.imgbb.ru/8/4/c/84c3279bf6baeff86ead375cdece8a12.jpg" /></a>\r\n\r\n<a class="fancybox" href="http://cs10340.vk.me/u71959743/-14/x_1c0ee32e.jpg"><img src="http://cs10340.vk.me/u71959743/-14/x_1c0ee32e.jpg" /></a></p> '),
 (2, 1, 0, 16, NULL, 16, '2014-12-05 13:34:52', '2014-12-05 13:34:52', 'Норм жопа. Ябывдул', 'Норм жопа. Ябывдул'),
 (3, 2, 1, 16, NULL, 16, '2014-12-05 13:36:20', '2014-12-05 13:36:20', 'С++ сила', 'С++ сила'),
 (4, 3, 1, 16, NULL, 16, '2014-12-05 13:37:31', '2014-12-05 13:37:31', 'Куплю самотык недорого. Бу. Диаметр 7-12 см', 'Куплю самотык недорого. Бу. Диаметр 7-12 см'),
@@ -194,7 +194,7 @@ CREATE TABLE IF NOT EXISTS `groups` (
   `priority` smallint(4) unsigned NOT NULL,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `groups`
@@ -319,10 +319,9 @@ INSERT INTO `session_data` (`id`, `data`, `updated_by`) VALUES
 ('qsg73oiqbotd57i9jujni8b1n4', '', '2015-06-29 02:46:41'),
 ('s2nit68g8meeb2p2d11rs203q5', '', '2015-06-29 02:46:42'),
 ('s3ps7404d6f7jbi8fr5j5uego0', 0x587a547671336f77635f4b354b786a454b686e4659774f51736b444f6831624a383747727441364249564f314d446554414c66507250526b4c32507731616f2d696e7a5a656b54535033347033514e4b5f4d746942376e3449545441317065344a755748664379466978673666535a5942513373765157344c716d424d4d5a41335f68447433646b717175304775385a754c517357672e2e, '2015-04-15 00:44:42'),
-('u638o4ukl4535htqqavfd7fgi0', 0x5f72794a666d6c656c7a413875326a35756e6c517a64496a4169397034715131575472347a6d3771506c555679696d767767505349625833596a4e4e326a587a4b52684f79773144785861687a65714839594c6158672e2e, '2015-06-29 03:34:32'),
+('u638o4ukl4535htqqavfd7fgi0', 0x79766e2d31314d51534a677656786d4239473275346675584c4e6e5156426d6162545a5f464e5268736835685a4e684e656c425461474d5f4a47666c4a4e4c75526b5166587656316f6b34706152426f554d637870412e2e, '2015-06-29 06:34:03'),
 ('ud40k8d252980vfrluhdabk0b5', '', '2015-06-23 10:23:06'),
 ('utq7gm4l0d866jgmfen9u2ecs6', 0x4654457a433856504941426b36715056515476544b6733785937505470494d36744d5371697965596d486330745852534a52697359786562475072654449395158774c49596d694b736679304272765f3776536761672e2e, '2015-04-24 04:32:41'),
 ('v5c2aslfq4chbm0maebk7olhq2', 0x724c374142335665506b68684a39315f7036477948554364776b362d6342456b2d476f594a376c57456d6d7a3476646a6f3554614d4f685a43333147696d6c7a5f454b3061643275763174536977476a624741666850547236796d4b6c714f4347375149756d7643555a6c67554f6b305536483449556555724168324d576a4f, '2015-06-10 22:53:09'),
 ('v8ic9g3m4d2osggjg45r9j43o7', '', '2015-06-17 01:57:16');
-
 COMMIT;

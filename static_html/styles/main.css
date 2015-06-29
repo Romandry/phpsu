@@ -325,6 +325,7 @@ table.forum .target-info .title {
 }
 
 .forum-topic-post {
+    position: relative;
     border-bottom: solid 1px #dadada;
 }
 
@@ -332,11 +333,18 @@ table.forum .target-info .title {
     border-bottom: none;
 }
 
+.forum-topic-post-context-separator {
+    position: absolute;
+    top: 0;
+    left: 130px;
+    height: 100%;
+    border-right: dashed 1px #dadada;
+}
+
 .forum-topic-post-author {
     float: left;
     padding: 10px 10px 16px 10px;
     width: 110px;
-    border-right: dashed 1px #dadada;
 }
 
 .forum-topic-post-author-name a {
@@ -409,7 +417,17 @@ table.forum .target-info .title {
 }
 
 .forum-topic-post-body-content {
+    position: relative;
     padding: 10px;
+}
+
+.forum-topic-post-body-content img {
+    margin: 10px 0;
+    padding: 5px;
+    max-width: 50%;
+    max-height: 300px;
+    border: solid 1px #dadada;
+    border-radius: 3px;
 }
 
 .forum-topic-post-info-wrapper {
@@ -423,7 +441,6 @@ table.forum .target-info .title {
     font-style: italic;
     color: #bababa;
     border-top: dashed 1px #dadada;
-    border-left: dashed 1px #dadada;
 }
 
 /* forms */
