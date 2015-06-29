@@ -18,10 +18,10 @@ class TopicPostsHelper
      *
      * Will return array of posts by identification number of topic
      *
-     * @param  int   $topicID    Identification number of topic
-     * @param  int   $offset     Offset number of first post
-     * @param  int   $limit      Number of posts per page
-     * @return array             Array of posts data
+     * @param  int      $topicID Identification number of topic
+     * @param  int      $offset  Offset number of first post
+     * @param  int      $limit   Number of posts per page
+     * @return array             Posts data
      */
 
     public static function getPostsByTopicId($topicID, $offset, $limit)

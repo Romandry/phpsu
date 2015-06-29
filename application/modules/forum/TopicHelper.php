@@ -24,8 +24,7 @@ class TopicHelper
 
     public static function getTopicById($topicID)
     {
-        $conn = \DBI::getConnection('slave');
-        $stmt = $conn->sendQuery(
+        return \DBI::getConnection('slave')->sendQuery(
             'SELECT
                     t.id,
                     t.subforum_id,
@@ -41,8 +40,6 @@ class TopicHelper
                 WHERE t.id = :id
             ',
             array(':id' => $topicID)
-        );
-
-        return $stmt->fetch(\PDO::FETCH_OBJ);
+        )->fetch(\PDO::FETCH_OBJ);
     }
 }
