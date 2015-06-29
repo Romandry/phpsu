@@ -18,20 +18,14 @@ class TopicPostsHelper
      *
      * Will return array of posts by identification number of topic
      *
-     * @param  int   $topicID      Identification number of topic
-     * @param  int   $pageNumber   Number of page (offset)
-     * @param  int   $itemsPerPage Number of posts per page
-     * @return array               Array of posts data
+     * @param  int   $topicID    Identification number of topic
+     * @param  int   $offset     Offset number of first post
+     * @param  int   $limit      Number of posts per page
+     * @return array             Array of posts data
      */
 
-    public static function getPostsByTopicId(
-        $topicID,
-        $pageNumber,
-        $itemsPerPage
-    )
+    public static function getPostsByTopicId($topicID, $offset, $limit)
     {
-        $offset = ($pageNumber - 1) * $itemsPerPage;
-
         $conn  = \DBI::getConnection('slave');
         $posts = $conn->sendQuery(
 
@@ -60,7 +54,7 @@ class TopicPostsHelper
                     ON ag.id = a.group_id
                 WHERE p.topic_id = :topic_id
                 ORDER BY p.topic_start DESC, p.creation_date ASC
-                LIMIT {$offset}, {$itemsPerPage}
+                LIMIT {$offset}, {$limit}
             ",
             array(':topic_id' => $topicID)
 

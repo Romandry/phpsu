@@ -13,6 +13,9 @@
     <div class="box-padding">
 
 
+        <h1><?=$topic->topic_title?></h1>
+
+
         <?php require 'pagination.phtml'; ?>
 
 
@@ -62,7 +65,7 @@
                             <?php } ?>
 
                             <a class="anchor"
-                                href="/forum/to-post?id=<?=$post->id?>">#<?=(1 + $p)?></a>
+                                href="/forum/to-post?id=<?=$post->id?>">#<?=($postsCountOffset + $p)?></a>
 
                         </div>
                         <div class="forum-topic-post-body-content">

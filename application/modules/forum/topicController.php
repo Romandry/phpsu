@@ -38,6 +38,11 @@ class topicController extends \BaseController
         // get request data
         $gtData = $gtForm->getData();
 
+        // get limit settings
+        $gtData->limit = 3; // TODO posts per page from forum(default)/member(custom) settings
+        // calculate offset
+        $gtData->offset = ($gtData->page - 1) * $gtData->limit;
+
         // get topic
         $topic = TopicHelper::getTopicById($gtData->id);
         if (!$topic) {
@@ -51,8 +56,8 @@ class topicController extends \BaseController
         // get topic posts
         $posts = TopicPostsHelper::getPostsByTopicId(
             $gtData->id,
-            $gtData->page,
-            10 // TODO posts per page from forum(default)/member(custom) settings
+            $gtData->offset,
+            $gtData->limit
         );
         if (!$posts) {
             $description = $gtData->page == 1
@@ -83,7 +88,11 @@ class topicController extends \BaseController
         );
 
         // assign data into view
-        \View::assign('posts', $posts);
+        \View::assign(array(
+            'topic'            => $topic,
+            'posts'            => $posts,
+            'postsCountOffset' => $gtData->offset + 1
+        ));
         // set output layout
         \View::setLayout('forum-topic.phtml');
     }
