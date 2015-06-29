@@ -69,12 +69,15 @@ class topicController extends \BaseController
             ));
         }
         // get posts pagination
-        $pagination = \common\PaginationHelper::getItems(
-            '/forum/topic?id=' . $topic->id,
-            $gtData->page,
-            $gtData->limit,
-            $postsData['postsCount']
-        );
+        $pagination = array();
+        if ($postsData['postsCount'] > $gtData->limit) {
+            $pagination = \common\PaginationHelper::getItems(
+                '/forum/topic?id=' . $topic->id,
+                $gtData->page,
+                $gtData->limit,
+                $postsData['postsCount']
+            );
+        }
 
         // append breadcrumbs
         \common\BreadCrumbs::appendItems(

@@ -26,7 +26,7 @@ class TopicPostsHelper
 
     public static function getPostsByTopicId($topicID, $offset, $limit)
     {
-        $conn  = \DBI::getConnection('slave');
+        $conn = \DBI::getConnection('slave');
 
         // get posts
         $posts = $conn->sendQuery(
@@ -73,7 +73,7 @@ class TopicPostsHelper
         }
         if ($authors) {
             $authors = join(',', $authors);
-            $postsCounts = $conn->sendQuery(
+            $counts  = $conn->sendQuery(
                 "SELECT
                         authored_by,
                         COUNT(1) cnt
@@ -82,7 +82,7 @@ class TopicPostsHelper
                     GROUP BY authored_by"
             )->fetchAll(\PDO::FETCH_OBJ);
             foreach ($posts as $post) {
-                foreach ($postsCounts as $item) {
+                foreach ($counts as $item) {
                     if ($post->authored_by == $item->authored_by) {
                         $post->author_posts_count = $item->cnt;
                     }
