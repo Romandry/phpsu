@@ -27,10 +27,13 @@ class TopicPostsHelper
     public static function getPostsByTopicId($topicID, $offset, $limit)
     {
         $conn  = \DBI::getConnection('slave');
+
+        // get posts
         $posts = $conn->sendQuery(
 
             "SELECT
 
+                    SQL_CALC_FOUND_ROWS(p.id),
                     p.id,
                     p.topic_start,
                     p.authored_by,
@@ -59,7 +62,11 @@ class TopicPostsHelper
             array(':topic_id' => $topicID)
 
         )->fetchAll(\PDO::FETCH_OBJ);
+        // get all posts count
+        $postsCount = $conn->sendQuery('SELECT FOUND_ROWS()')
+            ->fetch(\PDO::FETCH_COLUMN);
 
+        // get authors
         $authors = array();
         foreach ($posts as $post) {
             $authors[] = $post->authored_by;
@@ -83,6 +90,9 @@ class TopicPostsHelper
             }
         }
 
-        return $posts;
+        return array(
+            'posts'      =>       $posts,
+            'postsCount' => (int) $postsCount
+        );
     }
 }

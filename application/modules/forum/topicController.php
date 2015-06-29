@@ -39,7 +39,7 @@ class topicController extends \BaseController
         $gtData = $gtForm->getData();
 
         // get limit settings
-        $gtData->limit = 3; // TODO posts per page from forum(default)/member(custom) settings
+        $gtData->limit = 10; // TODO posts per page from forum(default)/member(custom) settings
         // calculate offset
         $gtData->offset = ($gtData->page - 1) * $gtData->limit;
 
@@ -54,12 +54,12 @@ class topicController extends \BaseController
         }
 
         // get topic posts
-        $posts = TopicPostsHelper::getPostsByTopicId(
+        $postsData = TopicPostsHelper::getPostsByTopicId(
             $gtData->id,
             $gtData->offset,
             $gtData->limit
         );
-        if (!$posts) {
+        if (!$postsData['posts']) {
             $description = $gtData->page == 1
                 ? \View::$language->forum_topic_first_post_not_found
                 : \View::$language->forum_topic_page_not_found;
@@ -68,6 +68,13 @@ class topicController extends \BaseController
                 'description' => $description
             ));
         }
+        // get posts pagination
+        $pagination = \common\PaginationHelper::getItems(
+            '/forum/topic?id=' . $topic->id,
+            $gtData->page,
+            $gtData->limit,
+            $postsData['postsCount']
+        );
 
         // append breadcrumbs
         \common\BreadCrumbs::appendItems(
@@ -89,9 +96,10 @@ class topicController extends \BaseController
 
         // assign data into view
         \View::assign(array(
-            'topic'            => $topic,
-            'posts'            => $posts,
-            'postsCountOffset' => $gtData->offset + 1
+            'topic'              => $topic,
+            'posts'              => $postsData['posts'],
+            'postsCountOffset'   => $gtData->offset + 1,
+            'pagination'         => $pagination
         ));
         // set output layout
         \View::setLayout('forum-topic.phtml');

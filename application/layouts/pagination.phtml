@@ -1,18 +1,17 @@
 
 
     <div class="pagination">
-        <a href="#">&laquo;&laquo;</a>
-        <a href="#">&laquo;</a>
-        <a href="#">1</a>
-        <a href="#">2</a>
-        <a href="#">3</a>
-        <span>4</span>
-        <a href="#">5</a>
-        <a href="#">6</a>
-        <a href="#">7</a>
-        <a href="#">8</a>
-        <a href="#">&raquo;</a>
-        <a href="#">&raquo;&raquo;</a>
+        <!-- a href="#">&laquo;&laquo;</a>
+        <a href="#">&laquo;</a -->
+        <?php foreach ($pagination as $item) { ?>
+            <?php if ($item->current) { ?>
+                <span><?=$item->number?></span>
+            <?php } else { ?>
+                <a href="<?=$item->url?>"><?=$item->number?></a>
+            <?php } ?>
+        <?php } ?>
+        <!-- a href="#">&raquo;</a>
+        <a href="#">&raquo;&raquo;</a -->
         <div class="clear"></div>
     </div>
 
