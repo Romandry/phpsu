@@ -1,0 +1,14 @@
+
+
+    <div class="breadcrumbs">
+        <?php $size = \common\BreadCrumbs::getStackSize() - 1; ?>
+        <?php foreach (\common\BreadCrumbs::getItems() as $k => $item) { ?>
+            <?php if ($k < $size) { ?>
+                <a href="<?=$item->url?>"><?=$item->name?></a> &raquo;
+            <?php } else { ?>
+                <span><?=$item->name?></span>
+            <?php } ?>
+        <?php } ?>
+    </div>
+
+

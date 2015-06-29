@@ -1,0 +1,83 @@
+<?php require 'header.phtml'; ?>
+
+
+    <?php require 'top-box.phtml'; ?>
+
+
+    <?php require 'main-menu.phtml'; ?>
+
+
+    <?php require 'breadcrumbs.phtml'; ?>
+
+
+    <div class="box-padding">
+
+
+        <?php require 'pagination.phtml'; ?>
+
+
+        <table class="forum-topic" cellspacing="1">
+            <?php foreach ($posts as $p => $post) { ?>
+                <tr<?= ($p % 2 == 0) ? ' class="even"' : '' ?>>
+                    <td class="post-user">
+                        <a name="post-<?=$post->id?>"></a>
+                        <div class="post-user-name">
+                            <a href="/user?id=<?=$post->author_id?>"><?=$post->author_login?></a>
+                        </div>
+                        <div class="post-user-role"><?=$post->author_group_name?></div>
+                        <div class="post-user-avatar">
+                            <a href="/user?id=<?=$post->author_id?>">
+                                <img src="//<?=$hosts->st?>/images/no-avatar.png">
+                            </a>
+                        </div>
+                        <div class="post-user-messages-counter">
+                            Сообщений: <?=$post->author_posts_count?>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="post-date-time"><?=$post->creation_date?></div>
+                        <div class="post-attributes">
+                            <a href="/forum/to-post?id=<?=$post->id?>">#<?=(1 + $p)?></a>
+                            <?php /*if (!$post['topic_start'] and member::isPermission('forums_post_remove')) { ?>
+                                <a class="action"
+                                    href="<?=forumsHelper::getBaseUrl()?>/post/remove?id=<?=$post['id']?>"
+                                    onclick="return confirm('<?=view::$language->forums_topic_post_delete_confirm?>');">
+                                    <span class="delete"><?=view::$language->forums_topic_delete?></span>
+                                </a>
+                            <?php }*/ ?>
+                            <?php /*if ($_member['id'] == $post['user_id'] or member::isPermission('forums_post_edit')) { ?>
+                                <a class="action" href="<?=forumsHelper::getBaseUrl()?>/post/edit?id=<?=$post['id']?>">
+                                    <span class="edit"><?=view::$language->forums_topic_edit?></span>
+                                </a>
+                            <?php }*/ ?>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="post-body">
+                            <?=$post->post_html?>
+                            <div class="clear"></div>
+                            <div class="post-info">
+                                <?php /*if ($post['is_modified']) { ?>
+                                    <em>(<?=view::$language->forums_topic_post_edited?>:
+                                            <?=$post['last_modified']?>)</em>
+                                <?php }*/ ?>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            <?php } ?>
+        </table>
+
+
+        <?php require 'pagination.phtml'; ?>
+
+
+    </div>
+
+
+    <?php require 'breadcrumbs.phtml'; ?>
+
+
+    <?php require 'bottom-box.phtml'; ?>
+
+
+<?php require 'footer.phtml'; ?>

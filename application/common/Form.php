@@ -46,7 +46,7 @@ class Form
      * List of validation messages
      */
 
-    protected $_messages = null;
+    protected $_messages = array();
 
 
     /**
