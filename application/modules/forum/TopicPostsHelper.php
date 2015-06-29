@@ -38,11 +38,13 @@ class TopicPostsHelper
             "SELECT
 
                     p.id,
+                    p.topic_start,
                     p.authored_by,
                     p.edited_by,
                     p.moderated_by,
                     p.creation_date,
                     p.last_modified,
+                    IF(p.creation_date = p.last_modified, 0, 1) is_modified,
                     p.post_html,
 
                     a.id     author_id,

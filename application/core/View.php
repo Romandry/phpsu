@@ -536,6 +536,8 @@ class View
         if (!self::isAssigned('hosts')) {
             self::assign('hosts', App::getConfig('hosts'));
         }
+        self::assign('_member', Member::getProfile());
+
         $expectedKeys = array(
             'meta_description',
             'meta_keywords',

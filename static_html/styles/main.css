@@ -10,6 +10,10 @@
     color: #202020;
 }
 
+img {
+    border: none;
+}
+
 /* defaults */
 html, body {
     background: #f0f0f0;
@@ -314,27 +318,112 @@ table.forum .target-info .title {
     font-weight: bold;
 }
 
-/* topic table */
-table.forum-topic {
-    /*border-collapse: separate;
-    background: #d2d2d2;
-    border: solid 1px #d2d2d2;*/
-    width: 100%;
-    background: #efefef;
-    border-collapse: separate;
+/* topic */
+.forum-topic {
     border: solid 1px #dadada;
     border-radius: 3px;
 }
 
-table.forum-topic td {
-    vertical-align: top;
+.forum-topic-post {
     border-bottom: solid 1px #dadada;
 }
 
-table.forum-topic td.post-user {
-    padding: 4px 12px 16px 12px;
+.forum-topic-post:last-child {
+    border-bottom: none;
+}
+
+.forum-topic-post-author {
+    float: left;
+    padding: 10px 10px 16px 10px;
     width: 110px;
-    border-right: dashed 1px #d9d9d9;
+    border-right: dashed 1px #dadada;
+}
+
+.forum-topic-post-author-name a {
+    font-weight: bold;
+}
+
+.forum-topic-post-author-role {
+    padding: 5px 0;
+}
+
+.forum-topic-post-author-avatar {
+    padding: 0 0 5px 0;
+}
+
+.forum-topic-post-author-avatar a {
+    display: block;
+    margin: 0 auto;
+    width: 100px;
+    height: 100px;
+    text-decoration: none;
+}
+
+.forum-topic-post-author-avatar a img {
+    width: 100px;
+    height: 100px;
+}
+
+.forum-topic-post-author-counter {
+}
+
+.forum-topic-post-body {
+    margin: 0 0 0 130px;
+}
+
+.forum-topic-post-body-actions {
+    position: relative;
+    height: 30px;
+    line-height: 29px;
+    text-align: right;
+    border-bottom: dashed 1px #dadada;
+}
+
+.forum-topic-post-date-time {
+    position: absolute;
+    padding: 0 0 0 10px;
+    line-height: 29px;
+    font-weight: bold;
+    font-style: italic;
+    color: #bababa;
+}
+
+.forum-topic-post-body-actions a {
+    display: inline-block;
+}
+
+.forum-topic-post-body-actions a.anchor {
+    margin: 0 10px 0 20px;
+}
+
+.forum-topic-post-body-actions a.action {
+    padding: 1px 5px;
+    text-decoration: none;
+    color: #9090b2;
+    border: solid 1px #9090b2;
+    border-radius: 3px;
+}
+
+.forum-topic-post-body-actions a.action:hover {
+    color: #4040b2;
+}
+
+.forum-topic-post-body-content {
+    padding: 10px;
+}
+
+.forum-topic-post-info-wrapper {
+    padding: 0 0 0 130px;
+}
+
+.forum-topic-post-info {
+    padding: 0 0 0 10px;
+    height: 30px;
+    line-height: 29px;
+    font-style: italic;
+    color: #bababa;
+    border-top: dashed 1px #dadada;
+    border-left: dashed 1px #dadada;
 }
 
 /* forms */

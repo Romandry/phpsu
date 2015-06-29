@@ -62,14 +62,14 @@ class Member
 
 
     /**
-     * isPermission
+     * hasPermission
      *
      * Return status of existst permission
      *
      * @return bool Status of existst permission
      */
 
-    public static function isPermission($name)
+    public static function hasPermission($name)
     {
         return property_exists(self::$_permissions, $name);
     }

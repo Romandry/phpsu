@@ -16,56 +16,70 @@
         <?php require 'pagination.phtml'; ?>
 
 
-        <table class="forum-topic" cellspacing="1">
+        <div class="forum-topic">
             <?php foreach ($posts as $p => $post) { ?>
-                <tr<?= ($p % 2 == 0) ? ' class="even"' : '' ?>>
-                    <td class="post-user">
-                        <a name="post-<?=$post->id?>"></a>
-                        <div class="post-user-name">
+
+                <div class="forum-topic-post-anchor">
+                    <a name="post-<?=$post->id?>"></a>
+                </div>
+                <div class="forum-topic-post forum-topic-post-<?= ($p % 2 == 0) ? 'even' : 'odd' ?>">
+                    <div class="forum-topic-post-author">
+                        <div class="forum-topic-post-author-name">
                             <a href="/user?id=<?=$post->author_id?>"><?=$post->author_login?></a>
                         </div>
-                        <div class="post-user-role"><?=$post->author_group_name?></div>
-                        <div class="post-user-avatar">
+                        <div class="forum-topic-post-author-role"><?=$post->author_group_name?></div>
+                        <div class="forum-topic-post-author-avatar">
                             <a href="/user?id=<?=$post->author_id?>">
                                 <img src="//<?=$hosts->st?>/images/no-avatar.png">
                             </a>
                         </div>
-                        <div class="post-user-messages-counter">
+                        <div class="forum-topic-post-author-counter">
                             Сообщений: <?=$post->author_posts_count?>
                         </div>
-                    </td>
-                    <td>
-                        <div class="post-date-time"><?=$post->creation_date?></div>
-                        <div class="post-attributes">
-                            <a href="/forum/to-post?id=<?=$post->id?>">#<?=(1 + $p)?></a>
-                            <?php /*if (!$post['topic_start'] and member::isPermission('forums_post_remove')) { ?>
-                                <a class="action"
-                                    href="<?=forumsHelper::getBaseUrl()?>/post/remove?id=<?=$post['id']?>"
-                                    onclick="return confirm('<?=view::$language->forums_topic_post_delete_confirm?>');">
-                                    <span class="delete"><?=view::$language->forums_topic_delete?></span>
+                    </div>
+                    <div class="forum-topic-post-body">
+                        <div class="forum-topic-post-body-actions">
+
+                            <div class="forum-topic-post-date-time"><?=$post->creation_date?></div>
+
+                            <?php if (!$post->topic_start /*&& Member::hasPermission('forum_post_remove')*/) { ?>
+                                <a class="action forum-topic-post-remove-action"
+                                    href="#remove"
+                                    data-id="<?=$post->id?>"
+                                    onclick="return false;">
+                                    <?=view::$language->forum_topic_remove?>
                                 </a>
-                            <?php }*/ ?>
-                            <?php /*if ($_member['id'] == $post['user_id'] or member::isPermission('forums_post_edit')) { ?>
-                                <a class="action" href="<?=forumsHelper::getBaseUrl()?>/post/edit?id=<?=$post['id']?>">
-                                    <span class="edit"><?=view::$language->forums_topic_edit?></span>
+                            <?php } ?>
+
+                            <?php if (true /*$_member->id == $post->author_id || member::hasPermission('forum_post_edit')*/) { ?>
+                                <a class="action forum-topic-post-edit-action"
+                                    href="#edit"
+                                    data-id="<?=$post->id?>"
+                                    onclick="return false;">
+                                    <?=view::$language->forum_topic_edit?>
                                 </a>
-                            <?php }*/ ?>
-                            <div class="clear"></div>
+                            <?php } ?>
+
+                            <a class="anchor"
+                                href="/forum/to-post?id=<?=$post->id?>">#<?=(1 + $p)?></a>
+
                         </div>
-                        <div class="post-body">
+                        <div class="forum-topic-post-body-content">
                             <?=$post->post_html?>
-                            <div class="clear"></div>
-                            <div class="post-info">
-                                <?php /*if ($post['is_modified']) { ?>
-                                    <em>(<?=view::$language->forums_topic_post_edited?>:
-                                            <?=$post['last_modified']?>)</em>
-                                <?php }*/ ?>
-                            </div>
                         </div>
-                    </td>
-                </tr>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="forum-topic-post-info-wrapper">
+                        <div class="forum-topic-post-info">
+                            <?php if ($post->is_modified) { ?>
+                                Отредактировано: <?=$post->last_modified?>
+                            <?php } ?>
+                        </div>
+                    </div>
+                </div>
+
             <?php } ?>
-        </table>
+        </div>
 
 
         <?php require 'pagination.phtml'; ?>
