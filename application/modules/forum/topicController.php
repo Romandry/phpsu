@@ -54,12 +54,12 @@ class topicController extends \BaseController
         }
 
         // get topic posts
-        $postsData = TopicPostsHelper::getPostsByTopicId(
+        $posts = TopicPostsHelper::getPostsByTopicId(
             $gtData->id,
             $gtData->offset,
             $gtData->limit
         );
-        if (!$postsData['posts']) {
+        if (!$posts) {
             $description = $gtData->page == 1
                 ? \View::$language->forum_topic_first_post_not_found
                 : \View::$language->forum_topic_page_not_found;
@@ -70,12 +70,12 @@ class topicController extends \BaseController
         }
         // get posts pagination
         $pagination = array();
-        if ($postsData['postsCount'] > $gtData->limit) {
+        if ($topic->posts_count > $gtData->limit) {
             $pagination = \common\PaginationHelper::getItems(
                 '/forum/topic?id=' . $topic->id,
                 $gtData->page,
                 $gtData->limit,
-                $postsData['postsCount']
+                $topic->posts_count
             );
         }
 
@@ -100,7 +100,7 @@ class topicController extends \BaseController
         // assign data into view
         \View::assign(array(
             'topic'              => $topic,
-            'posts'              => $postsData['posts'],
+            'posts'              => $posts,
             'postsCountOffset'   => $gtData->offset + 1,
             'pagination'         => $pagination
         ));

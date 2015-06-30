@@ -26,73 +26,40 @@ class TopicPostsHelper
 
     public static function getPostsByTopicId($topicID, $offset, $limit)
     {
-        $conn = \DBI::getConnection('slave');
-
-        // get posts
-        $posts = $conn->sendQuery(
+        return \DBI::getConnection('slave')->sendQuery(
 
             "SELECT
 
-                    SQL_CALC_FOUND_ROWS(p.id),
-                    p.id,
-                    p.topic_start,
-                    p.authored_by,
-                    p.edited_by,
-                    p.moderated_by,
-                    p.creation_date,
-                    p.last_modified,
-                    IF(p.creation_date = p.last_modified, 0, 1) is_modified,
-                    p.post_html,
+                    fp.id,
+                    fp.topic_start,
+                    fp.authored_by,
+                    fp.edited_by,
+                    fp.moderated_by,
+                    fp.creation_date,
+                    fp.last_modified,
+                    IF(fp.creation_date = fp.last_modified, 0, 1) is_modified,
+                    fp.post_html,
 
-                    a.id     author_id,
+                    fm.author_id   author_id,
+                    fm.posts_count author_posts_count,
+
                     a.login  author_login,
                     a.avatar author_avatar,
-                    ag.name  author_group_name,
-                    (0)      author_posts_count
+                    ag.name  author_group_name
 
-                FROM forum_posts p
+                FROM forum_posts fp
+                INNER JOIN forum_members fm
+                    ON fm.author_id = fp.authored_by
                 LEFT JOIN members a
-                    ON a.id = p.authored_by
+                    ON a.id = fm.author_id
                 LEFT JOIN groups ag
                     ON ag.id = a.group_id
-                WHERE p.topic_id = :topic_id
-                ORDER BY p.topic_start DESC, p.creation_date ASC
+                WHERE fp.topic_id = :topic_id
+                ORDER BY fp.topic_start DESC, fp.creation_date ASC
                 LIMIT {$offset}, {$limit}
             ",
             array(':topic_id' => $topicID)
 
         )->fetchAll(\PDO::FETCH_OBJ);
-        // get all posts count
-        $postsCount = $conn->sendQuery('SELECT FOUND_ROWS()')
-            ->fetch(\PDO::FETCH_COLUMN);
-
-        // get authors
-        $authors = array();
-        foreach ($posts as $post) {
-            $authors[] = $post->authored_by;
-        }
-        if ($authors) {
-            $authors = join(',', $authors);
-            $counts  = $conn->sendQuery(
-                "SELECT
-                        authored_by,
-                        COUNT(1) cnt
-                    FROM forum_posts
-                    WHERE authored_by IN({$authors})
-                    GROUP BY authored_by"
-            )->fetchAll(\PDO::FETCH_OBJ);
-            foreach ($posts as $post) {
-                foreach ($counts as $item) {
-                    if ($post->authored_by == $item->authored_by) {
-                        $post->author_posts_count = $item->cnt;
-                    }
-                }
-            }
-        }
-
-        return array(
-            'posts'      =>       $posts,
-            'postsCount' => (int) $postsCount
-        );
     }
 }

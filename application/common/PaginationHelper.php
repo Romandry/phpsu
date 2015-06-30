@@ -33,7 +33,7 @@ class PaginationHelper
     )
     {
         $iCount   = 1;
-        $allPages = floor($itemsTotal / $itemsPerPage);
+        $allPages = ceil($itemsTotal / $itemsPerPage);
         $items    = array();
 
         while ($iCount <= $allPages) {

@@ -26,20 +26,22 @@ class TopicHelper
     {
         return \DBI::getConnection('slave')->sendQuery(
             'SELECT
-                    t.id,
-                    t.subforum_id,
-                    t.title topic_title,
+                    ft.id,
+                    ft.subforum_id,
+                    ft.title topic_title,
+                    ft.posts_count,
+                    ft.views_count,
                     sf.title subforum_title,
                     sf.forum_id,
-                    f.title forum_title
-                FROM forum_topics t
+                    ff.title forum_title
+                FROM forum_topics ft
                 INNER JOIN forum_subforums sf
-                    ON sf.id = t.subforum_id
-                INNER JOIN forum_forums f
-                    ON f.id = sf.forum_id
-                WHERE t.id = :id
+                    ON sf.id = ft.subforum_id
+                INNER JOIN forum_forums ff
+                    ON ff.id = sf.forum_id
+                WHERE ft.id = :topic_id
             ',
-            array(':id' => $topicID)
+            array(':topic_id' => $topicID)
         )->fetch(\PDO::FETCH_OBJ);
     }
 }
