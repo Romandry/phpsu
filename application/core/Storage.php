@@ -50,6 +50,8 @@ class Storage
             array(self::$_handler, 'gc'     )
         );
 
+        // TODO Try fix Viper bug http://s17.postimg.org/ybuxb6opb/phpsu_local.png
+        // Windows7 64, MySQL 5.5.32, PHP 5.5.15 (VC11 X86 32bit thread safe) + PEAR
         if (round(((float) PHP_VERSION), 1) == 5.3) {
             register_shutdown_function('session_write_close');
         } else {
