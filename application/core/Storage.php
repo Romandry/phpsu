@@ -49,7 +49,12 @@ class Storage
             array(self::$_handler, 'destroy'),
             array(self::$_handler, 'gc'     )
         );
-        register_shutdown_function('session_write_close');
+
+        if (round(((float) PHP_VERSION), 1) == 5.3) {
+            register_shutdown_function('session_write_close');
+        } else {
+            session_register_shutdown();
+        }
     }
 
 
