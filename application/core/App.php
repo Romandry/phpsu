@@ -231,7 +231,7 @@ class App
     {
         $types = array('B', 'KiB', 'MiB', 'GiB', 'TiB');
         $size  = $size < 1 ? 1 : (int) $size;
-        $type  = (int)floor(log($size, 1024));
+        $type  = (int) floor(log($size, 1024));
 
         return sprintf('%1.1f', $size / pow(1024, $type)) . ' ' . $types[$type];
     }
