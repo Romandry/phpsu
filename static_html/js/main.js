@@ -57,28 +57,8 @@ $(function() {
     }
 
 
-    // fancybox view images
-    var
-        fancyboxItems = $('.fancybox'),
-        fancyboxHrefs = [];
-
-    fancyboxItems.each(function() {
-        if (this.href) {
-            fancyboxHrefs.push(this.href);
-        }
-    }).on('click', function() {
-        $.fancybox(fancyboxHrefs, {
-            index       : $(this).index(),
-            openEffect  : 'elastic',
-            closeEffect : 'elastic',
-            openSpeed   : 300,
-            closeSpeed  : 300,
-            nextEffect  : 'none',
-            prevEffect  : 'none'
-        });
-
-        return false;
-    });
+    // colorbox view images
+    $('a.colorbox').colorbox({rel:'colorbox'});
 
 
 });
