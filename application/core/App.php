@@ -145,8 +145,7 @@ class App
     public static function run()
     {
         Request::init();
-        $sessionHandler = self::getConfig('main')->system->session_handler;
-        if ($sessionHandler == 'database') {
+        if (self::getConfig('main')->system->session_handler == 'database') {
             Storage::setDatabaseHandler();
         }
         Storage::init();
