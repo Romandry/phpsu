@@ -44,7 +44,7 @@ class mainController extends \BaseController
     public function indexAction()
     {
         // validate request params
-        $gfForm = \App::getInstance('\modules\forum\GetForumForm');
+        $gfForm = new \modules\forum\GetForumForm();
         $gfForm->validate();
         // invalid request params
         if (!$gfForm->isValid()) {
@@ -56,6 +56,27 @@ class mainController extends \BaseController
         // get request data
         $forumID = $gfForm->getData()->id;
 
+        // get forums tree
+        $forumsTree = ForumsTreeHelper::getTree($forumID);
+        if ($forumID) {
+            if (!$forumsTree) {
+                throw new \SystemErrorException(array(
+                    'title'       => \View::$language->forum_main_error,
+                    'description' => \View::$language->forum_main_forum_not_found
+                ));
+            } else {
+                // append breadcrumbs
+                \common\BreadCrumbs::appendItem(
+                    new \common\BreadCrumbsItem(
+                        '/forum/sub-forum?id=' . $forumsTree[0]->id,
+                        $forumsTree[0]->title
+                    )
+                );
+            }
+        }
+
+        // assign data into view
+        \View::assign('forumsTree',$forumsTree);
         // set output layout
         \View::setLayout('forum-main.phtml');
     }

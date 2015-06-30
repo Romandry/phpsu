@@ -13,45 +13,47 @@
     <div class="box-padding">
 
 
-        <table class="forum" cellspacing="1">
-            <tr class="table-heading">
-                <td class="target-info">
-                    <div class="td-wrapper">Название категории/форума</div>
-                </td>
-                <td class="topics-count">
-                    <div class="td-wrapper">Тем</div>
-                </td>
-                <td class="answers-count">
-                    <div class="td-wrapper">Ответов</div>
-                </td>
-                <td class="last-update">
-                    <div class="td-wrapper">Последнее сообщение</div>
-                </td>
-            </tr>
-            <?php foreach (range(0, 10) as $item) { ?>
-                <tr>
+        <?php foreach ($forumsTree as $forum) { ?>
+            <table class="forum" cellspacing="1">
+                <tr class="table-heading">
                     <td class="target-info">
-                        <div class="td-wrapper">
-                            <div class="title"><a href="#">Название категории/форума/топика</a></div>
-                            <div class="description">Описание категории/форума/топика</div>
-                        </div>
+                        <div class="td-wrapper"><a class="forum-title" href="/forum?id=<?=$forum->id?>"><?=$forum->title?></a></div>
                     </td>
                     <td class="topics-count">
-                        <div class="td-wrapper">13</div>
+                        <div class="td-wrapper">Тем</div>
                     </td>
                     <td class="answers-count">
-                        <div class="td-wrapper">2342</div>
+                        <div class="td-wrapper">Ответов</div>
                     </td>
                     <td class="last-update">
-                        <div class="td-wrapper">
-                            <div class="date-time">2014-12-05 13:38:21</div>
-                            <div class="topic"><a href="#">Название топика</a></div>
-                            <div class="author"><a href="#">Логин пользователя</a></div>
-                        </div>
+                        <div class="td-wrapper">Последнее сообщение</div>
                     </td>
                 </tr>
-            <?php } ?>
-        </table>
+                <?php foreach ($forum->subforums as $subForum) { ?>
+                    <tr>
+                        <td class="target-info">
+                            <div class="td-wrapper">
+                                <div class="title"><a href="/forum/sub-forum?id=<?=$subForum->id?>"><?=$subForum->title?></a></div>
+                                <div class="description"><?=$subForum->description?></div>
+                            </div>
+                        </td>
+                        <td class="topics-count">
+                            <div class="td-wrapper"><?=$subForum->topics_count?></div>
+                        </td>
+                        <td class="answers-count">
+                            <div class="td-wrapper"><?=$subForum->posts_count?></div>
+                        </td>
+                        <td class="last-update">
+                            <div class="td-wrapper">
+                                <div class="date-time">2014-12-05 13:38:21</div>
+                                <div class="topic"><a href="#">Название топика</a></div>
+                                <div class="author"><a href="#">Логин пользователя</a></div>
+                            </div>
+                        </td>
+                    </tr>
+                <?php } ?>
+            </table>
+        <?php } ?>
 
 
     </div>

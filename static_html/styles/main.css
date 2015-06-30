@@ -272,6 +272,7 @@ a#forum-link-last:hover {
 
 /* forums */
 table.forum {
+    margin-bottom: 30px;
     width: 100%;
     border-collapse: separate;
     background: #d2d2d2;
@@ -282,6 +283,10 @@ table.forum {
 table.forum tr.table-heading * {
     font-size: 14px;
     font-weight: bold;
+}
+
+table.forum tr.table-heading a.forum-title {
+    font-size: 20px;
 }
 
 table.forum td {
