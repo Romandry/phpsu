@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 30, 2015 at 11:56 PM
+-- Generation Time: Jul 01, 2015 at 01:01 AM
 -- Server version: 5.1.73
 -- PHP Version: 5.3.3-7+squeeze19
 
@@ -54,6 +54,7 @@ DROP TABLE IF EXISTS `forum_members`;
 CREATE TABLE IF NOT EXISTS `forum_members` (
   `author_id` bigint(20) unsigned NOT NULL,
   `posts_count` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `posts_per_page` tinyint(3) unsigned NOT NULL,
   UNIQUE KEY `author_id` (`author_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -61,12 +62,12 @@ CREATE TABLE IF NOT EXISTS `forum_members` (
 -- Dumping data for table `forum_members`
 --
 
-INSERT INTO `forum_members` (`author_id`, `posts_count`) VALUES
-(9, 2),
-(11, 11),
-(14, 14),
-(16, 9),
-(17, 4);
+INSERT INTO `forum_members` (`author_id`, `posts_count`, `posts_per_page`) VALUES
+(9, 2, 10),
+(11, 11, 10),
+(14, 14, 10),
+(16, 9, 10),
+(17, 4, 10);
 
 -- --------------------------------------------------------
 
@@ -146,6 +147,8 @@ CREATE TABLE IF NOT EXISTS `forum_subforums` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `sort` bigint(20) unsigned NOT NULL DEFAULT '0',
   `forum_id` bigint(20) unsigned NOT NULL,
+  `topics_count` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `posts_count` bigint(20) unsigned NOT NULL DEFAULT '0',
   `title` varchar(255) NOT NULL,
   `description` text,
   PRIMARY KEY (`id`)
@@ -155,15 +158,15 @@ CREATE TABLE IF NOT EXISTS `forum_subforums` (
 -- Dumping data for table `forum_subforums`
 --
 
-INSERT INTO `forum_subforums` (`id`, `sort`, `forum_id`, `title`, `description`) VALUES
-(1, 1, 1, 'Экономика', 'Обсуждение экономических событий'),
-(2, 2, 1, 'Политика', 'Обсуждение политических событий'),
-(3, 3, 1, 'Корпоративные вопросы', 'Внутренняя кухня компании '),
-(4, 1, 2, 'Маркетинг', 'Реклама и прочее '),
-(5, 2, 2, 'Продажа', 'Предложения '),
-(6, 3, 2, 'Покупка', 'Спрос '),
-(7, 4, 1, 'Прочее', 'Обсуждение остальных вопросов'),
-(8, 5, 1, 'Новости и события', 'Последние сводки и их обсуждение');
+INSERT INTO `forum_subforums` (`id`, `sort`, `forum_id`, `topics_count`, `posts_count`, `title`, `description`) VALUES
+(1, 1, 1, 2, 9, 'Экономика', 'Обсуждение экономических событий'),
+(2, 2, 1, 1, 2, 'Политика', 'Обсуждение политических событий'),
+(3, 3, 1, 4, 9, 'Корпоративные вопросы', 'Внутренняя кухня компании '),
+(4, 1, 2, 0, 0, 'Маркетинг', 'Реклама и прочее '),
+(5, 2, 2, 0, 0, 'Продажа', 'Предложения '),
+(6, 3, 2, 2, 3, 'Покупка', 'Спрос '),
+(7, 4, 1, 4, 15, 'Прочее', 'Обсуждение остальных вопросов'),
+(8, 5, 1, 1, 2, 'Новости и события', 'Последние сводки и их обсуждение');
 
 -- --------------------------------------------------------
 
@@ -347,7 +350,7 @@ INSERT INTO `session_data` (`id`, `data`, `updated_by`) VALUES
 ('s3ps7404d6f7jbi8fr5j5uego0', 0x587a547671336f77635f4b354b786a454b686e4659774f51736b444f6831624a383747727441364249564f314d446554414c66507250526b4c32507731616f2d696e7a5a656b54535033347033514e4b5f4d746942376e3449545441317065344a755748664379466978673666535a5942513373765157344c716d424d4d5a41335f68447433646b717175304775385a754c517357672e2e, '2015-04-15 00:44:42'),
 ('svapiikott0qmqo5ot7hg8a4m3', '', '2015-06-30 17:02:19'),
 ('t7hdq1fc8jrnpqknq5o719j731', '', '2015-06-30 17:01:56'),
-('u638o4ukl4535htqqavfd7fgi0', 0x696461376e38563946356953514e69744a46416c7a5a3442704933635f6f4f3378535169536f6547684b6f436e50307778576c6b6e4d48626f62635f5a36546373764443443554423961355048464447796a2d7651672e2e, '2015-06-30 23:54:43'),
+('u638o4ukl4535htqqavfd7fgi0', 0x696461376e38563946356953514e69744a46416c7a5a3442704933635f6f4f3378535169536f6547684b6f436e50307778576c6b6e4d48626f62635f5a36546373764443443554423961355048464447796a2d7651672e2e, '2015-07-01 00:56:24'),
 ('ud40k8d252980vfrluhdabk0b5', '', '2015-06-23 10:23:06'),
 ('utq7gm4l0d866jgmfen9u2ecs6', 0x4654457a433856504941426b36715056515476544b6733785937505470494d36744d5371697965596d486330745852534a52697359786562475072654449395158774c49596d694b736679304272765f3776536761672e2e, '2015-04-24 04:32:41'),
 ('v5c2aslfq4chbm0maebk7olhq2', 0x724c374142335665506b68684a39315f7036477948554364776b362d6342456b2d476f594a376c57456d6d7a3476646a6f3554614d4f685a43333147696d6c7a5f454b3061643275763174536977476a624741666850547236796d4b6c714f4347375149756d7643555a6c67554f6b305536483449556555724168324d576a4f, '2015-06-10 22:53:09'),

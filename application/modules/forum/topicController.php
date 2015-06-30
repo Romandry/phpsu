@@ -26,7 +26,7 @@ class topicController extends \BaseController
         \View::addLanguageItem('forumTopicController');
 
         // validate request params
-        $gtForm = \App::getInstance('\modules\forum\GetTopicForm');
+        $gtForm = new \modules\forum\GetTopicForm();
         $gtForm->validate();
         // invalid request params
         if (!$gtForm->isValid()) {
