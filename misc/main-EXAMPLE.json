@@ -15,6 +15,9 @@
         // default language
         "default_language": "ru"
 
+        // default timezone
+        "default_time_zone": "+04:00"
+
     },
 
 
@@ -40,6 +43,16 @@
 
         // default output context
         "default_output_context": "html",
+
+
+        /**
+         * session storage handler types:
+         *
+         * database          - database session storage
+         * all other values  - native PHP core session storage
+         */
+
+        "session_handler": "database",
 
 
         /**
@@ -79,6 +92,7 @@
         "user"    : "phpsu",
         "pass"    : "phpsu",
         "charset" : "utf8"
+
     }
 
 
