@@ -1,50 +1,47 @@
 <?php
 
+
 /**
+ * DBC
+ *
  * Database PDO connection wrapper class
  */
+
 class DBC
 {
+
+
     /**
+     * $_PDO
+     *
      * PDO connection object
      */
+
     private $_PDO = null;
 
-    /**
-     * Statistic connection object
-     */
-    private $_stat = null;
 
     /**
-     * Class constructor
+     * __construct
+     *
+     * Connection constructor
      *
      * @param  StdClass $params Connection parameters
-     *
-     * @throws SystemErrorException
+     * @return null
      */
+
     public function __construct(StdClass $params)
     {
-        // Set some basic values
-        $_params = (object)array(
-            'host'    => (isset($params->host)) ? $params->host : 'localhost',
-            'port'    => (isset($params->port)) ? $params->port : '3306',
-            'dbname'  => (isset($params->dbname)) ? $params->dbname : '',
-            'charset' => (isset($params->charset)) ? strtolower($params->charset) : 'utf8',
-            'user' => (isset($params->user)) ? $params->user : '',
-            'pass' => (isset($params->pass)) ? $params->pass : ''
-        );
-
         $options = array();
         foreach (array('host', 'port', 'dbname', 'charset') as $key) {
-            $options[] = $key . '=' . $_params->{$key};
+            $options[] = $key . '=' . $params->{$key};
         }
 
         try {
 
             $this->_PDO = new PDO(
                 'mysql:' . join(';', $options),
-                $_params->user,
-                $_params->pass,
+                $params->user,
+                $params->pass,
                 // this is not working on Debian squeeze with MySQL 5.1.73-1
                 // PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'blahblah'",
                 array(PDO::ATTR_PERSISTENT => true)
@@ -53,7 +50,7 @@ class DBC
                 PDO::ATTR_ERRMODE,
                 PDO::ERRMODE_EXCEPTION
             );
-            $this->_PDO->exec('SET NAMES \'' . $_params->charset . '\'');
+            $this->_PDO->exec('SET NAMES \'' . $params->charset . '\'');
 
         } catch (PDOException $e) {
             throw new SystemErrorException(array(
@@ -63,9 +60,15 @@ class DBC
         }
     }
 
+
     /**
+     * beginTransaction
+     *
      * Begin transaction
+     *
+     * @return null
      */
+
     public function beginTransaction()
     {
         if (!$this->_PDO->inTransaction()) {
@@ -73,9 +76,15 @@ class DBC
         }
     }
 
+
     /**
+     * commit
+     *
      * Commit transaction
+     *
+     * @return null
      */
+
     public function commit()
     {
         if ($this->_PDO->inTransaction()) {
@@ -83,9 +92,15 @@ class DBC
         }
     }
 
+
     /**
-     * Rollback transaction
+     * rollBack
+     *
+     * Rollback state
+     *
+     * @return null
      */
+
     public function rollBack()
     {
         if ($this->_PDO->inTransaction()) {
@@ -93,15 +108,17 @@ class DBC
         }
     }
 
+
     /**
-     * Execute prepared query and return result
+     * sendQuery
      *
-     * @param  string  $queryString   SQL query string
-     * @param  array   $queryParams   Parameters for placeholders
+     * Return executed PDOStatement result object
      *
-     * @return object  PDOStatement
-     * @throws SystemErrorException
+     * @param  string Query string
+     * @param  array  Parameters for placeholders
+     * @return        PDOStatement Result object
      */
+
     public function sendQuery($queryString, array $queryParams = array())
     {
         try {
@@ -121,29 +138,43 @@ class DBC
         return $stmt;
     }
 
+
     /**
+     * lastInsertId
+     *
      * Return lastInsertId value
      *
-     * @return integer lastInsertId value
+     * @return int lastInsertId value
      */
+
     public function lastInsertId()
     {
         return $this->_PDO->lastInsertId();
     }
 
+
     /**
+     * getStat
+     *
      * Return connection queries statistics
      *
      * @return array Statistics result
      */
+
     public function getStat()
     {
         return $this->_stat;
     }
 
+
     /**
+     * close
+     *
      * Close connection
+     *
+     * @return null
      */
+
     public function close()
     {
         $this->_PDO = null;
