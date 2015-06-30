@@ -41,7 +41,6 @@ class Storage
     public static function setHandler($handlerClassName)
     {
         self::$_handler = new $handlerClassName();
-        session_write_close();
         session_set_save_handler(
             array(self::$_handler, 'open'   ),
             array(self::$_handler, 'close'  ),
@@ -50,6 +49,7 @@ class Storage
             array(self::$_handler, 'destroy'),
             array(self::$_handler, 'gc'     )
         );
+        register_shutdown_function('session_write_close');
     }
 
 

@@ -148,8 +148,6 @@ class App
         $sessionHandler = self::getConfig('main')->system->session_handler;
         if ($sessionHandler == 'database') {
             Storage::setHandler('StorageDatabaseHandler');
-        } else if ($sessionHandler == 'memcache') {
-            Storage::setHandler('StorageMemcacheHandler');
         }
         Storage::init();
         Member::init();
