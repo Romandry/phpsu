@@ -12,6 +12,20 @@ class StorageDatabaseHandler
 
 
     /**
+     * __construct
+     *
+     * Storage handler constructor
+     *
+     * @return null
+     */
+
+    public function __construct()
+    {
+        DBI::getConnection('master')->beginTransaction();
+    }
+
+
+    /**
      * open
      *
      * Open storage resource.
@@ -24,7 +38,6 @@ class StorageDatabaseHandler
 
     public function open($savePath, $sessionName)
     {
-        DBI::getConnection('master')->beginTransaction();
         return true;
     }
 
@@ -40,12 +53,8 @@ class StorageDatabaseHandler
 
     public function read($id)
     {
-        $conn = DBI::getConnection('master');
-        return (string) $conn->sendQuery(
-            'SELECT
-                    `data`
-                FROM session_data
-                WHERE id = :id',
+        return (string) DBI::getConnection('master')->sendQuery(
+            'SELECT `data` FROM session_data WHERE id = :id',
             array(':id' => $id)
         )->fetch(PDO::FETCH_COLUMN);
     }
@@ -63,10 +72,8 @@ class StorageDatabaseHandler
 
     public function write($id, $data)
     {
-        $conn = DBI::getConnection('master');
-        $conn->sendQuery(
-            'REPLACE
-                INTO session_data (id, `data`, updated_by)
+        DBI::getConnection('master')->sendQuery(
+            'REPLACE INTO session_data (id, `data`, updated_by)
                 VALUES (:id, :data, NOW())',
             array(
                 ':id'   => $id,
@@ -89,8 +96,7 @@ class StorageDatabaseHandler
 
     public function destroy($id)
     {
-        $conn = DBI::getConnection('master');
-        $conn->sendQuery(
+        DBI::getConnection('master')->sendQuery(
             'DELETE FROM session_data WHERE id = :id',
             array(':id' => $id)
         );

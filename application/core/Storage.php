@@ -30,17 +30,16 @@ class Storage
 
 
     /**
-     * setHandler
+     * setDatabaseHandler
      *
-     * Set session storage handler
+     * Set database session storage handler
      *
-     * @param  string $handlerClassName Storage handler class name
      * @return null
      */
 
-    public static function setHandler($handlerClassName)
+    public static function setDatabaseHandler()
     {
-        self::$_handler = new $handlerClassName();
+        self::$_handler = new StorageDatabaseHandler();
         session_set_save_handler(
             array(self::$_handler, 'open'   ),
             array(self::$_handler, 'close'  ),
@@ -78,9 +77,6 @@ class Storage
     public static function init()
     {
         if (!App::isCLI()) {
-            if (self::$_handler) {
-                register_shutdown_function('session_write_close');
-            }
             session_name(App::getConfig('main')->system->session_name);
             @ session_start();
             self::_setSessionPointer($_SESSION);

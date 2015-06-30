@@ -147,7 +147,7 @@ class App
         Request::init();
         $sessionHandler = self::getConfig('main')->system->session_handler;
         if ($sessionHandler == 'database') {
-            Storage::setHandler('StorageDatabaseHandler');
+            Storage::setDatabaseHandler();
         }
         Storage::init();
         Member::init();
