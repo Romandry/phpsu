@@ -1,0 +1,40 @@
+/* Box */
+@import "../_config";
+@import "../_mixins";
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+.box {
+	margin: 3px 0;
+	padding: 10px;
+	background: #e7e7e7;
+	border: solid 1px #d2d2d2;
+	border-radius: 3px;
+}
+
+// page boxes
+.box-wrapper {
+	display: table;
+	width: 100%;
+}
+
+.box-padding {
+	padding: 20px 0;
+}
+
+.right-box-300 {
+	width: 300px;
+}
+
+.left-box-pad-320 {
+	margin: 0 320px 0 0;
+}
+
+// page boxes extends
+.announce-items {
+	padding: 10px 0;
+}
+
+.announce-items a {
+	display: block;
+	padding: 0 0 10px 0;
+}

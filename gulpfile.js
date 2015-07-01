@@ -13,4 +13,4 @@ var cache = require('gulp-check-hash');
 cache.root = __dirname;
 
 var requireDir = require('require-dir');
-requireDir('./gulp/tasks', { recurse: true });
+requireDir('./misc/gulp/tasks', { recurse: true });

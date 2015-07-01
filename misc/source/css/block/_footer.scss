@@ -1,0 +1,23 @@
+/* Footer */
+@import "../_config";
+@import "../_mixins";
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+#footer {
+}
+
+#footer .small-logo {
+	float: left;
+	width: 75px;
+	height: 40px;
+	background: url(../images/php-logo-small.png) no-repeat center center;
+}
+
+#footer .footer-group {
+	float: right;
+	padding: 0 30px 0 0;
+}
+
+#footer .footer-group .item {
+	padding: 0 0 3px 0;
+}

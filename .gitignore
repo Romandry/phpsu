@@ -8,6 +8,6 @@ application/logs/*.log
 docs_html/
 node_modules/
 bower_components/
-gulp/config.js
+misc/gulp/config.js
 static_html/js/*.min.js
 static_html/styles/*.min.css

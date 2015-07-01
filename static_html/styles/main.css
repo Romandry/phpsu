@@ -524,203 +524,103 @@ table.forum .td-wrapper {
 table.forum .target-info .title {
   font-weight: bold; }
 
-/* Vendor styles */
-#colorbox, #cboxOverlay, #cboxWrapper {
-  position: absolute;
-  overflow: hidden;
-  z-index: 9999;
-  top: 0;
-  left: 0; }
+/* Forum topic */
+.forum-topic {
+  border: solid 1px #dadada;
+  border-radius: 3px; }
 
-#cboxWrapper {
-  max-width: none; }
+.forum-topic-post {
+  position: relative;
+  border-bottom: solid 1px #dadada; }
 
-#cboxOverlay {
-  position: fixed;
-  width: 100%;
-  height: 100%; }
+.forum-topic-post:last-child {
+  border-bottom: none; }
 
-#cboxMiddleLeft, #cboxBottomLeft {
-  clear: left; }
-
-#cboxContent {
-  position: relative; }
-
-#cboxLoadedContent {
-  overflow: auto;
-  -webkit-overflow-scrolling: touch; }
-
-#cboxTitle {
-  margin: 0; }
-
-#cboxLoadingOverlay, #cboxLoadingGraphic {
+.forum-topic-post-context-separator {
   position: absolute;
   top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%; }
-
-#cboxPrevious, #cboxNext, #cboxClose, #cboxSlideshow {
-  cursor: pointer; }
-
-.cboxPhoto {
-  display: block;
-  float: left;
-  margin: auto;
-  max-width: none;
-  border: none;
-  -ms-interpolation-mode: bicubic; }
-
-.cboxIframe {
-  display: block;
-  margin: 0;
-  padding: 0;
-  width: 100%;
+  left: 130px;
   height: 100%;
-  border: none; }
+  border-right: dashed 1px #dadada; }
 
-#colorbox, #cboxContent, #cboxLoadedContent {
-  box-sizing: content-box;
-  -moz-box-sizing: content-box;
-  -webkit-box-sizing: content-box; }
+.forum-topic-post-author {
+  float: left;
+  padding: 10px 10px 16px 10px;
+  width: 110px; }
 
-#cboxOverlay {
-  background: url(/images/colorbox/overlay.png) repeat 0 0;
-  opacity: 0.9;
-  filter: alpha(opacity=90); }
+.forum-topic-post-author-name a {
+  font-weight: bold; }
 
-#colorbox {
-  outline: none; }
+.forum-topic-post-author-role {
+  padding: 5px 0; }
 
-#cboxTopLeft {
-  width: 21px;
-  height: 21px;
-  background: url(/images/colorbox/controls.png) no-repeat -101px 0; }
+.forum-topic-post-author-avatar {
+  padding: 0 0 5px 0; }
 
-#cboxTopRight {
-  width: 21px;
-  height: 21px;
-  background: url(/images/colorbox/controls.png) no-repeat -130px 0; }
+.forum-topic-post-author-avatar a {
+  display: block;
+  margin: 0 auto;
+  width: 100px;
+  height: 100px;
+  text-decoration: none; }
 
-#cboxBottomLeft {
-  width: 21px;
-  height: 21px;
-  background: url(/images/colorbox/controls.png) no-repeat -101px -29px; }
+.forum-topic-post-author-avatar a img {
+  width: 100px;
+  height: 100px; }
 
-#cboxBottomRight {
-  width: 21px;
-  height: 21px;
-  background: url(/images/colorbox/controls.png) no-repeat -130px -29px; }
+.forum-topic-post-body {
+  margin: 0 0 0 130px; }
 
-#cboxMiddleLeft {
-  width: 21px;
-  background: url(/images/colorbox/controls.png) left top repeat-y; }
+.forum-topic-post-body-actions {
+  position: relative;
+  height: 30px;
+  line-height: 29px;
+  text-align: right;
+  border-bottom: dashed 1px #dadada; }
 
-#cboxMiddleRight {
-  width: 21px;
-  background: url(/images/colorbox/controls.png) right top repeat-y; }
-
-#cboxTopCenter {
-  height: 21px;
-  background: url(/images/colorbox/border.png) 0 0 repeat-x; }
-
-#cboxBottomCenter {
-  height: 21px;
-  background: url(/images/colorbox/border.png) 0 -29px repeat-x; }
-
-#cboxContent {
-  overflow: hidden;
-  background: #ffffff; }
-
-.cboxIframe {
-  background: #ffffff; }
-
-#cboxError {
-  padding: 50px;
-  border: solid 1px #cccccc; }
-
-#cboxLoadedContent {
-  margin-bottom: 28px; }
-
-#cboxTitle {
+.forum-topic-post-date-time {
   position: absolute;
-  bottom: 4px;
-  left: 0;
-  width: 100%;
-  text-align: center;
-  color: #949494; }
+  padding: 0 0 0 10px;
+  line-height: 29px;
+  font-weight: bold;
+  font-style: italic;
+  color: #bababa; }
 
-#cboxCurrent {
-  position: absolute;
-  bottom: 4px;
-  left: 58px;
-  color: #949494; }
+.forum-topic-post-body-actions a {
+  display: inline-block; }
 
-#cboxLoadingOverlay {
-  background: url(/images/colorbox/loading_background.png) no-repeat center center; }
+.forum-topic-post-body-actions a.anchor {
+  margin: 0 10px 0 20px; }
 
-#cboxLoadingGraphic {
-  background: url(/images/ajax-loader.gif) no-repeat center center; }
+.forum-topic-post-body-actions a.action {
+  padding: 1px 5px;
+  text-decoration: none;
+  color: #9090b2;
+  border: solid 1px #9090b2;
+  border-radius: 3px; }
 
-#cboxPrevious, #cboxNext, #cboxSlideshow, #cboxClose {
-  overflow: visible;
-  margin: 0;
-  padding: 0;
-  width: auto;
-  background: none;
-  border: none; }
+.forum-topic-post-body-actions a.action:hover {
+  color: #4040b2; }
 
-#cboxPrevious:active, #cboxNext:active, #cboxSlideshow:active, #cboxClose:active {
-  outline: none; }
+.forum-topic-post-body-content {
+  position: relative;
+  padding: 10px; }
 
-#cboxSlideshow {
-  position: absolute;
-  bottom: 4px;
-  right: 30px;
-  color: #0092ef; }
+.forum-topic-post-body-content img {
+  margin: 10px 0;
+  padding: 5px;
+  max-width: 50%;
+  max-height: 300px;
+  border: solid 1px #dadada;
+  border-radius: 3px; }
 
-#cboxPrevious {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 25px;
-  height: 25px;
-  text-indent: -9999px;
-  background: url(/images/colorbox/controls.png) no-repeat -75px 0; }
+.forum-topic-post-info-wrapper {
+  padding: 0 0 0 130px; }
 
-#cboxPrevious:hover {
-  background-position: -75px -25px; }
-
-#cboxNext {
-  position: absolute;
-  bottom: 0;
-  left: 27px;
-  width: 25px;
-  height: 25px;
-  text-indent: -9999px;
-  background: url(/images/colorbox/controls.png) no-repeat -50px 0; }
-
-#cboxNext:hover {
-  background-position: -50px -25px; }
-
-#cboxClose {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 25px;
-  height: 25px;
-  text-indent: -9999px;
-  background: url(/images/colorbox/controls.png) no-repeat -25px 0; }
-
-#cboxClose:hover {
-  background-position: -25px -25px; }
-
-.cboxIE #cboxTopLeft,
-.cboxIE #cboxTopCenter,
-.cboxIE #cboxTopRight,
-.cboxIE #cboxBottomLeft,
-.cboxIE #cboxBottomCenter,
-.cboxIE #cboxBottomRight,
-.cboxIE #cboxMiddleLeft,
-.cboxIE #cboxMiddleRight {
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#00ffffff, endColorstr=#00ffffff); }
+.forum-topic-post-info {
+  padding: 0 0 0 10px;
+  height: 30px;
+  line-height: 29px;
+  font-style: italic;
+  color: #bababa;
+  border-top: dashed 1px #dadada; }
