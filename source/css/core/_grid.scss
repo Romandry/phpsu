@@ -1,0 +1,19 @@
+/* Grid system */
+@import "../config";
+@import "../mixins";
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+#container {
+	margin: 0 auto;
+	padding: 0 20px;
+	min-width: 800px;
+	max-width: 1060px;
+}
+
+.right-box {
+	float: right;
+}
+
+.left-box {
+	float: left;
+}

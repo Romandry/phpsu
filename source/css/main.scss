@@ -1,0 +1,37 @@
+
+// Настройки и миксины
+@import "config";
+@import "mixins";
+
+// Нормализация и стилия для печати
+@import "core/normalize";
+@import "core/print";
+
+// Основные стили
+@import "core/init";
+@import "core/grid";
+@import "core/typography";
+@import "core/tables";
+@import "core/helpers";
+
+// Формы
+@import "forms/forms";    // Прочие элементы форм
+@import "forms/controls"; // input, textarea
+@import "forms/buttons";  // Кнопки
+
+// Остальные стили для блоков сайта (по файлу на блок)
+@import "block/header";
+@import "block/box";
+@import "block/main-logo";
+@import "block/member-box";
+@import "block/main-menu";
+@import "block/footer";
+@import "block/main-statistic";
+@import "block/breadcrumbs";
+@import "block/pagination";
+@import "block/forum";
+
+/* Vendor styles */
+@import "vendor/colorbox";
+
+

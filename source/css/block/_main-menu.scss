@@ -1,0 +1,53 @@
+/* Main menu horizontal */
+@import "../config";
+@import "../mixins";
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+#main-menu {
+	margin: 3px 0;
+	height: 36px;
+	background: #e7e7e7;
+	border: solid 1px #d2d2d2;
+	border-radius: 3px;
+}
+
+#main-menu a {
+	display: block;
+	float: left;
+	padding: 0 10px;
+	height: 36px;
+	line-height: 36px;
+	text-decoration: none;
+	font-weight: bold;
+	color: #000000;
+	transition: line-height 0.06s;
+}
+
+#main-menu > a:first-child {
+	border-top-left-radius: 3px;
+	border-bottom-left-radius: 3px;
+}
+
+// main menu forum extends
+
+a#forum-link {
+	padding: 0 10px 0 3px;
+}
+
+a#forum-link-last {
+	margin: 0 0 0 10px;
+	padding: 0;
+	width: 25px;
+	background-repeat: no-repeat;
+	background-image: url(../images/forum-new-sprite.png);
+	background-position: center 0px;
+}
+
+#main-menu a:hover {
+	line-height: 33px;
+	text-shadow: 0 1px 5px #2020b2;
+}
+
+a#forum-link-last:hover {
+	background-position: center -36px;
+}

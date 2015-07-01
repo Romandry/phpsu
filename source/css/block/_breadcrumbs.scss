@@ -1,0 +1,16 @@
+/* Breadcrumbs */
+@import "../config";
+@import "../mixins";
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+.breadcrumbs {
+	padding: 5px 0;
+}
+
+.breadcrumbs a, .breadcrumbs span {
+	font-size: 11px;
+}
+
+.breadcrumbs span {
+	color: #828282;
+}

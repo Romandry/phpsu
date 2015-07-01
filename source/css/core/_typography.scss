@@ -1,0 +1,53 @@
+/* Typography */
+@import "../config";
+@import "../mixins";
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+// Link
+a {
+	color: #2020b2;
+	outline: none;
+
+	&:hover {
+		color: #828282;
+	}
+}
+
+// Paragraph
+p {
+	padding: 0 0 rem(16) 0;
+}
+
+// List
+ul, ol {
+	padding: rem(10) 0 rem(26) rem(36);
+
+	&.no-style {
+		list-style: none;
+		padding: 0;
+	}
+
+}
+
+li {
+	padding: 1px 0;
+}
+
+// Heading
+h1 {
+	padding: 0 0 10px 0;
+	line-height: 38px;
+	font-size: 33px;
+}
+
+h2 {
+	padding: 0 0 6px 0;
+	line-height: 26px;
+	font-size: 21px;
+}
+
+h3 {
+	padding: 0 0 4px 0;
+	line-height: 21px;
+	font-size: 17px;
+}

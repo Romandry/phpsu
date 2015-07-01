@@ -1,0 +1,12 @@
+/* Main-logo */
+@import "../config";
+@import "../mixins";
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+#main-logo {
+	display: block;
+	float: left;
+	width: 170px;
+	height: 90px;
+	background: url(../images/php-logo.png) no-repeat center center;
+}

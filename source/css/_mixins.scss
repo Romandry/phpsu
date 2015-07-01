@@ -1,0 +1,16 @@
+//
+@import "./config";
+
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+// IMPORTANT:
+// IE 8 not supported rem units.
+// IE 9 & IE 10 do not support rem units when used in the font shorthand property
+// (the entire declaration is ignored) or when used on pseudo elements.
+@function rem($px) {
+	@if IE8 {
+		@return $px + px; // Для старого осла возвращаем пиксели.
+	} @else {
+		@return ($px / $base-font-size) + rem;
+	}
+}
