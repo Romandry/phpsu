@@ -1,0 +1,34 @@
+/* Buttons */
+@import "../_config";
+@import "../_mixins";
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+input[type="submit"], input[type="button"], input[type="reset"], button {
+	zoom: 1;
+	display: inline-block;
+	padding: 0 23px;
+	height: 28px;
+	line-height: 28px;
+	font-weight: bold;
+	color: #fde9d1;
+	background: #2d32de;
+	border: solid 1px #4b55e3;
+	border-radius: 4px;
+	box-shadow: 0 -10px 20px -10px #444444 inset;
+	-webkit-box-shadow: 0 -10px 20px -10px #444444 inset;
+}
+
+input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner, input[type="reset"]::-moz-focus-inner, button::-moz-focus-inner {
+	border: 0;
+}
+
+input[type="submit"]:hover, input[type="button"]:hover, input[type="reset"]:hover, button:hover {
+	cursor: pointer;
+	box-shadow: 0 -10px 20px -10px #000000 inset;
+	-webkit-box-shadow: 0 -10px 20px -10px #000000 inset;
+}
+
+form.loading input[type="submit"] {
+	color: transparent;
+	background: url(/images/ajax-loader.gif) no-repeat center center #f0f0f0;
+}

@@ -5,3 +5,9 @@ application/config/hosts.json
 application/logs/*.log
 .idea
 
+docs_html/
+node_modules/
+bower_components/
+misc/gulp/config.js
+static_html/js/*.min.js
+static_html/styles/*.min.css

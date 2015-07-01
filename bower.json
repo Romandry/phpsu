@@ -1,0 +1,15 @@
+{
+  "name": "PHP.SU",
+  "version": "0.1.0",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~1.*",
+    "colorbox": "~1.6.1"
+  }
+}
