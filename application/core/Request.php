@@ -323,10 +323,6 @@ class Request
      * _preValidateRequest
      *
      * Basic client request validation
-     * TODO maybe this need
-     * Content-Length bug fix on php 5.4
-     * see more information:
-     * http://www.exploit-db.com/exploits/18665/
      *
      * @return null
      */
