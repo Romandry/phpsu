@@ -61,6 +61,7 @@
          */
 
         "session_name" : "phpsu",
+        "session_handler" : "database",
         "cookie_name"  : "phpsumember",
 
         "cookie_expires_time": 94608000 // 3 years
