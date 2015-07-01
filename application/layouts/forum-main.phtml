@@ -45,9 +45,13 @@
                         </td>
                         <td class="last-update">
                             <div class="td-wrapper">
-                                <div class="date-time">2014-12-05 13:38:21</div>
-                                <div class="topic"><a href="#">Название топика</a></div>
-                                <div class="author"><a href="#">Логин пользователя</a></div>
+                                <?php if ($subForum->last_post_id) { ?>
+                                    <div class="date-time"><?=$subForum->last_post_modified?></div>
+                                    <div class="topic"><a href="forum/to-post?id=<?=$subForum->last_post_id?>"><?=$subForum->last_topic_title?></a></div>
+                                    <div class="author"><a href="/user?id=<?=$subForum->last_post_author_id?>"><?=$subForum->last_post_author_login?></a></div>
+                                <?php } else { ?>
+                                    <div class="topic">нет</div>
+                                <?php } ?>
                             </div>
                         </td>
                     </tr>
