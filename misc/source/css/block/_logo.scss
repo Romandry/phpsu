@@ -15,7 +15,7 @@
 	&__object {
 		background: url(/images/php-logo.png) no-repeat center center;
 		background-size: cover;
-		border-radius: 90px/45px;
+		border-radius: 90px 90px 20px 90px / 45px 45px 20px 45px;
 		display: block;
 		height: $logo-height;
 		overflow: hidden;
