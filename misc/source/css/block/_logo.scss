@@ -1,0 +1,59 @@
+/* Main-logo */
+@import "../_config";
+@import "../_mixins";
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+.logo {
+	float: left;
+	height: $logo-height;
+	width: $logo-width;
+
+	&__wrapper {
+		position: relative;
+	}
+
+	&__object {
+		background: url(/images/php-logo.png) no-repeat center center;
+		background-size: cover;
+		border-radius: 90px 90px 20px 90px / 45px 45px 20px 45px;
+		display: block;
+		height: $logo-height;
+		overflow: hidden;
+		position: absolute;
+		top: -120%;
+		transition: top 0.25s cubic-bezier(0, 0.3, 1, 0.7);
+		width: $logo-width;
+
+		&:before {
+			background-image: linear-gradient(180deg,
+					rgba(255, 255, 255, 0),
+					#ffffff 40%,
+					rgba(255, 255, 255, 0.6)
+					60%, rgba(255, 255, 255, 0)
+			);
+			content: '';
+			display: block;
+			height: 100%;
+			left: -20%;
+			opacity: 0.6;
+			position: absolute;
+			top: inherit;
+			transform: rotate(-20deg);
+			width: 140%;
+		}
+
+		&:hover {
+			top: 120%;
+		}
+	}
+
+	&_small {
+		height: $logo_small-height;
+		width: $logo_small-width;
+
+		.logo__object {
+			height: $logo_small-height;
+			width: $logo_small-width;
+		}
+	}
+}

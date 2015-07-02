@@ -9,7 +9,30 @@ $base-font-stack: Verdana, Tahoma, Arial, sans-serif;
 $base-font-size: 10;
 
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+// Sizes
+
+$gutter-width: 20px;
+$site-max-width: 1100px;
+
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 // Colors
 
 $site-bg: #f0f0f0;
 $base-text-color: #202020;
+
+$link-color: #2020b2;
+$link-hover-color: #828282;
+
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+// Modules
+
+// logo
+$logo-width: 170px;
+$logo-height: 90px;
+$logo_small-width: 75px;
+$logo_small-height: 40px;
+
+// box
+$box-bg: #e7e7e7;
+$box-border-color: #d2d2d2;
+$box-radius: 3px;

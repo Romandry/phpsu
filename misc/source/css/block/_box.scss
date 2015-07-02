@@ -4,11 +4,11 @@
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 .box {
-	margin: 3px 0;
+	@include box();
 	padding: 10px;
-	background: #e7e7e7;
-	border: solid 1px #d2d2d2;
-	border-radius: 3px;
+
+	&__title {
+	}
 }
 
 // page boxes

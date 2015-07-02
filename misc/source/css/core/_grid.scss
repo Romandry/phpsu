@@ -5,9 +5,8 @@
 
 #container {
 	margin: 0 auto;
-	padding: 0 20px;
-	min-width: 800px;
-	max-width: 1060px;
+	padding: 0 $gutter-width;
+	max-width: $site-max-width;
 }
 
 .right-box {
