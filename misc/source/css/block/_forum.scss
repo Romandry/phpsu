@@ -11,6 +11,10 @@ table.forum {
 	background: #d2d2d2;
 	border: solid 1px #d2d2d2;
 	border-radius: 3px;
+
+	&:last-child {
+		margin-bottom: 0;
+	}
 }
 
 table.forum tr.table-heading * {

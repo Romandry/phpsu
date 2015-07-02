@@ -3,11 +3,20 @@
 @import "../_mixins";
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+* {
+	box-sizing: border-box;
+
+	&:before,
+	&:after {
+		box-sizing: border-box;
+	}
+}
+
 html {
 	background: $site-bg;
 	font-family: $base-font-stack;
 	font-size: percentage($base-font-size / 16); // ~10px для удобства вычислений
-	line-height: 1.2; // Единицу измерения не задаем!!!
+	line-height: 1.231; // Единицу измерения не задаем!!!
 	color: $base-text-color;
 }
 

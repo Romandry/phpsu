@@ -8,9 +8,37 @@
 // IE 9 & IE 10 do not support rem units when used in the font shorthand property
 // (the entire declaration is ignored) or when used on pseudo elements.
 @function rem($px) {
-	@if IE8 {
+	@if $IE8 {
 		@return $px + px; // Для старого осла возвращаем пиксели.
 	} @else {
 		@return ($px / $base-font-size) + rem;
 	}
+}
+
+@mixin clearfix() {
+	&:before,
+	&:after {
+		content: '';
+		display: table;
+	}
+	&:after {
+		clear: both;
+	}
+}
+
+@mixin box() {
+	margin: 3px 0;
+	background: $box-bg;
+	border: solid 1px $box-border-color;
+	border-radius: $box-radius;
+}
+
+$bIncludedPlaceholders: false !default;
+@if $bIncludedPlaceholders == false {
+	/* clearfix */
+	%clearfix {
+		@include clearfix();
+	}
+	/* END clearfix */
+	$bIncludedPlaceholders: true;
 }
