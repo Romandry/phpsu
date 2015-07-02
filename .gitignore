@@ -1,9 +1,8 @@
-
-
 application/config/main.json
 application/config/hosts.json
 application/logs/*.log
 .idea
+README.md
 
 docs_html/
 node_modules/
