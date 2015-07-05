@@ -538,30 +538,30 @@ form.loading input[type="submit"] {
   @media (min-width: 641px) {
     .main-menu-compact-button {
       display: none; } }
-  .main-menu-compact-button_hamburger {
+  .main-menu-compact-button__hamburger {
     position: absolute;
     left: 10px;
     top: 50%;
     margin-top: -2.5px; }
-    .main-menu-compact-button_hamburger,
-    .main-menu-compact-button_hamburger:before,
-    .main-menu-compact-button_hamburger:after {
+    .main-menu-compact-button__hamburger,
+    .main-menu-compact-button__hamburger:before,
+    .main-menu-compact-button__hamburger:after {
       width: 25px;
       height: 5px;
       background: #D2D2D2; }
-    .main-menu-compact-button_hamburger:before,
-    .main-menu-compact-button_hamburger:after {
+    .main-menu-compact-button__hamburger:before,
+    .main-menu-compact-button__hamburger:after {
       content: '';
       display: block;
       position: absolute;
       left: 0; }
-    .main-menu-compact-button_hamburger:before {
+    .main-menu-compact-button__hamburger:before {
       top: -8px; }
-    .main-menu-compact-button_hamburger:after {
+    .main-menu-compact-button__hamburger:after {
       bottom: -8px; }
-  .main-menu-compact-button:hover .main-menu-compact-button_hamburger,
-  .main-menu-compact-button:hover .main-menu-compact-button_hamburger:before,
-  .main-menu-compact-button:hover .main-menu-compact-button_hamburger:after {
+  .main-menu-compact-button:hover .main-menu-compact-button__hamburger,
+  .main-menu-compact-button:hover .main-menu-compact-button__hamburger:before,
+  .main-menu-compact-button:hover .main-menu-compact-button__hamburger:after {
     background: #c5c5c5; }
 
 @media (max-width: 640px) {

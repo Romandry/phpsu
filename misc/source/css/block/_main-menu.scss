@@ -103,7 +103,7 @@
 		display: none;
 	}
 
-	&_hamburger {
+	&__hamburger {
 		position: absolute;
 		left: $main-menu-compact-button-lines-h-space;
 		top: 50%;
@@ -135,7 +135,7 @@
 	}
 
 	&:hover {
-		.main-menu-compact-button_hamburger {
+		.main-menu-compact-button__hamburger {
 			&,
 			&:before,
 			&:after {
