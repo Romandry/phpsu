@@ -34,12 +34,14 @@ class SubForumsHelper
 
         return \DBI::getConnection('slave')->sendQuery(
             "SELECT
+
                     sf.id,
                     sf.forum_id,
-                    sf.topics_count,
-                    sf.posts_count,
                     sf.title,
                     sf.description,
+
+                    sfs.topics_count,
+                    sfs.posts_count,
 
                     fp.id            last_post_id,
                     fp.authored_by   last_post_author_id,
@@ -48,10 +50,12 @@ class SubForumsHelper
                     a.login          last_post_author_login
 
                 FROM forum_subforums sf
+                INNER JOIN forum_subforums_stat sfs
+                    ON sfs.subforum_id = sf.id
                 INNER JOIN forum_forums ff
                     ON ff.id = sf.forum_id
                 LEFT JOIN forum_posts fp
-                    ON fp.id = sf.last_post_id
+                    ON fp.id = sfs.last_post_id
                 LEFT JOIN forum_topics ft
                     ON ft.id = fp.topic_id
                 LEFT JOIN members a

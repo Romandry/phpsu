@@ -26,15 +26,22 @@ class TopicHelper
     {
         return \DBI::getConnection('slave')->sendQuery(
             'SELECT
+
                     ft.id,
                     ft.subforum_id,
                     ft.title topic_title,
-                    ft.posts_count,
-                    ft.views_count,
+
+                    fts.posts_count,
+                    fts.views_count,
+
                     sf.title subforum_title,
                     sf.forum_id,
+
                     ff.title forum_title
+
                 FROM forum_topics ft
+                INNER JOIN forum_topics_stat fts
+                    ON fts.topic_id = ft.id
                 INNER JOIN forum_subforums sf
                     ON sf.id = ft.subforum_id
                 INNER JOIN forum_forums ff
