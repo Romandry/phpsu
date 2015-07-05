@@ -7,7 +7,7 @@
  * Readonly forums tree helper
  */
 
-namespace modules\forum;
+namespace modules\forum\helpers;
 
 class ForumsTreeHelper
 {

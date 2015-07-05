@@ -7,7 +7,7 @@
  * Readonly sub forums helper
  */
 
-namespace modules\forum;
+namespace modules\forum\helpers;
 
 class SubForumsHelper
 {

@@ -44,7 +44,7 @@ class mainController extends \BaseController
     public function indexAction()
     {
         // validate request params
-        $gfForm = new \modules\forum\GetForumForm();
+        $gfForm = new \modules\forum\forms\GetForum();
         $gfForm->validate();
         // invalid request params
         if (!$gfForm->isValid()) {
@@ -57,7 +57,7 @@ class mainController extends \BaseController
         $forumID = $gfForm->getData()->id;
 
         // get forums tree
-        $forumsTree = ForumsTreeHelper::getTree($forumID);
+        $forumsTree = helpers\ForumsTreeHelper::getTree($forumID);
         if ($forumID) {
             if (!$forumsTree) {
                 throw new \SystemErrorException(array(

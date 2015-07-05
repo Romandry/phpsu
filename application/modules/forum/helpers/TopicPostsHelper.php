@@ -7,7 +7,7 @@
  * Readonly topic posts helper
  */
 
-namespace modules\forum;
+namespace modules\forum\helpers;
 
 class TopicPostsHelper
 {

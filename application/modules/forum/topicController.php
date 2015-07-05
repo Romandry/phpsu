@@ -26,7 +26,7 @@ class topicController extends \BaseController
         \View::addLanguageItem('forumTopicController');
 
         // validate request params
-        $gtForm = new \modules\forum\GetTopicForm();
+        $gtForm = new \modules\forum\forms\GetTopic();
         $gtForm->validate();
         // invalid request params
         if (!$gtForm->isValid()) {
@@ -44,7 +44,7 @@ class topicController extends \BaseController
         $gtData->offset = ($gtData->page - 1) * $gtData->limit;
 
         // get topic
-        $topic = TopicHelper::getTopicById($gtData->id);
+        $topic = helpers\TopicHelper::getTopicById($gtData->id);
         if (!$topic) {
             throw new \MemberErrorException(array(
                 'code'        => 404,
@@ -54,7 +54,7 @@ class topicController extends \BaseController
         }
 
         // get topic posts
-        $posts = TopicPostsHelper::getPostsByTopicId(
+        $posts = helpers\TopicPostsHelper::getPostsByTopicId(
             $gtData->id,
             $gtData->offset,
             $gtData->limit

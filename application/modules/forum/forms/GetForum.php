@@ -2,14 +2,14 @@
 
 
 /**
- * GetTopicForm
+ * GetForum
  *
- * Topic request process validation form
+ * Forum request process validation form
  */
 
-namespace modules\forum;
+namespace modules\forum\forms;
 
-class GetTopicForm extends \common\Form
+class GetForum extends \common\Form
 {
 
 
@@ -35,23 +35,15 @@ class GetTopicForm extends \common\Form
     {
         parent::__construct();
 
-        $this->_rules = array(
-            'id' => array(
-                array('negation', 'IsNaturalNumber', null),
-                array('filter',   'ToInt'),
-                array('negation', 'GreatThanZero', null)
-            )
-        );
-
-        // append unrequired page number
-        if (\Request::getParam('page') !== null) {
-            $this->_rules['page'] = array(
+        // forum id is unrequired
+        if (\Request::getParam('id') !== null) {
+            $this->_rules['id'] = array(
                 array('negation', 'IsNaturalNumber', null),
                 array('filter',   'ToInt'),
                 array('negation', 'GreatThanZero', null)
             );
         } else {
-            $this->_data->page = 1;
+            $this->_data->id = null;
         }
     }
 }
