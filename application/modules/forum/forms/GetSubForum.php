@@ -2,14 +2,14 @@
 
 
 /**
- * GetForum
+ * GetSubForum
  *
- * Forum request process validation form
+ * Subforum request process validation form
  */
 
 namespace modules\forum\forms;
 
-class GetForum extends \common\Form
+class GetSubForum extends \common\Form
 {
 
 
@@ -35,10 +35,12 @@ class GetForum extends \common\Form
     {
         parent::__construct();
 
-        $this->_rules['id'] = array(
-            array('negation', 'IsNaturalNumber', null),
-            array('filter',   'ToInt'),
-            array('negation', 'GreatThanZero', null)
+        $this->_rules = array(
+            'id' => array(
+                array('negation', 'IsNaturalNumber', null),
+                array('filter',   'ToInt'),
+                array('negation', 'GreatThanZero', null)
+            )
         );
     }
 }

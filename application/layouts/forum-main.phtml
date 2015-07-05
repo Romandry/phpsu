@@ -13,11 +13,18 @@
     <div class="box-padding">
 
 
+        <h1><?=$h1?></h1>
+        <p>&nbsp;</p>
+
+
         <?php foreach ($forumsTree as $forum) { ?>
             <table class="forum" cellspacing="1">
                 <tr class="table-heading">
                     <td class="target-info">
-                        <div class="td-wrapper"><a class="forum-title" href="/forum?id=<?=$forum->id?>"><?=$forum->title?></a></div>
+                        <div class="td-wrapper">
+                            <a class="forum-title" href="/forum/forum?id=<?=$forum->id?>"><?=$forum->title?></a>
+                            <i>(<?=$forum->description?>)</i>
+                        </div>
                     </td>
                     <td class="topics-count">
                         <div class="td-wrapper">Тем</div>

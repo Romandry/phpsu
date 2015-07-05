@@ -43,40 +43,14 @@ class mainController extends \BaseController
 
     public function indexAction()
     {
-        // validate request params
-        $gfForm = new \modules\forum\forms\GetForum();
-        $gfForm->validate();
-        // invalid request params
-        if (!$gfForm->isValid()) {
-            throw new \SystemErrorException(array(
-                'title'       => \View::$language->forum_main_error,
-                'description' => \View::$language->forum_main_request_invalid
-            ));
-        }
-        // get request data
-        $forumID = $gfForm->getData()->id;
-
-        // get forums tree
-        $forumsTree = helpers\ForumsTreeHelper::getTree($forumID);
-        if ($forumID) {
-            if (!$forumsTree) {
-                throw new \SystemErrorException(array(
-                    'title'       => \View::$language->forum_main_error,
-                    'description' => \View::$language->forum_main_forum_not_found
-                ));
-            } else {
-                // append breadcrumbs
-                \common\BreadCrumbs::appendItem(
-                    new \common\BreadCrumbsItem(
-                        '/forum/sub-forum?id=' . $forumsTree[0]->id,
-                        $forumsTree[0]->title
-                    )
-                );
-            }
-        }
-
         // assign data into view
-        \View::assign('forumsTree',$forumsTree);
+        \View::assign(
+            array(
+                'title'      => \View::$language->forum_main_breadcrumbs_name,
+                'h1'         => \View::$language->forum_main_breadcrumbs_name,
+                'forumsTree' => helpers\ForumsTreeHelper::getTree()
+            )
+        );
         // set output layout
         \View::setLayout('forum-main.phtml');
     }

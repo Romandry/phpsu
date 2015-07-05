@@ -22,7 +22,7 @@ class ForumsTreeHelper
      * @return array          Forums tree data
      */
 
-    public static function getTree($forumID = null)
+    public static function getTree($forumID)
     {
         $params = array();
         $filter = '';
@@ -39,16 +39,14 @@ class ForumsTreeHelper
                     ff.description,
                     (NULL) subforums
                 FROM forum_forums ff
-                INNER JOIN forum_forums_stat ffs
-                    ON ffs.forum_id = ff.id
-                        AND ffs.subforums_count > 0
                 {$filter}
                 ORDER BY ff.sort ASC",
             $params
         )->fetchAll(\PDO::FETCH_OBJ);
+
         // get subforums
         if ($forums) {
-            $subForums = SubForumsHelper::getSubForums($forumID);
+            $subForums = SubForumsHelper::getSubForumsByForumId($forumID);
             foreach ($forums as $forum) {
                 $forum->subforums = array();
                 foreach ($subForums as $subForum) {

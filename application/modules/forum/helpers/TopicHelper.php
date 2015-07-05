@@ -29,7 +29,8 @@ class TopicHelper
 
                     ft.id,
                     ft.subforum_id,
-                    ft.title topic_title,
+                    ft.title       topic_title,
+                    ft.description topic_description,
 
                     fts.posts_count,
                     fts.views_count,

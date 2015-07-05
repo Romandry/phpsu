@@ -14,15 +14,15 @@ class SubForumsHelper
 
 
     /**
-     * getSubForumsByForumId
+     * getSubForums
      *
-     * Will return array of subforums by identification number of forum
+     * Will return array of subforums
      *
      * @param  int   $forumID Identification number of forum
      * @return array          Subforums data
      */
 
-    public static function getSubForumsByForumId($forumID)
+    public static function getSubForums($forumID = null)
     {
         $params = array();
         $filter = '';
