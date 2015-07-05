@@ -10,9 +10,28 @@
 }
 
 .right-box {
-	float: right;
+	flex-basis: $grid-right-width;
+	min-width:250px;
 }
 
+.left-box-pad-320,
 .left-box {
-	float: left;
+	flex-basis: $grid-left-width;
+	padding-right: $gutter-width;
+}
+
+.flex-container {
+	display: flex;
+	flex-direction: row-reverse;
+
+	@media screen and (max-width: $screen-sm-min) {
+		flex-direction: column-reverse;
+	}
+}
+
+.pre-wrapper {
+	max-width:100%;
+	width:100%;
+	display: table;
+	table-layout: fixed;
 }
