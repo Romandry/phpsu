@@ -22,66 +22,63 @@
         <div class="forum-topic">
             <?php foreach ($posts as $p => $post) { ?>
 
-                <div class="forum-topic-post-anchor">
-                    <a name="post-<?=$post->id?>"></a>
-                </div>
-                <div class="forum-topic-post forum-topic-post-<?= ($p % 2 == 0) ? 'even' : 'odd' ?>">
-                    <div class="forum-topic-post-context-separator"></div>
-                    <div class="forum-topic-post-author">
-                        <div class="forum-topic-post-author-name">
-                            <a href="/user?id=<?=$post->author_id?>"><?=$post->author_login?></a>
+                <div class="topic-post-anchor"><a name="post-<?=$post->id?>"></a></div>
+                <div class="topic-post topic-post_<?= ($p % 2 == 0) ? 'even' : 'odd' ?>">
+                    <div class="topic-post-author">
+                        <div class="topic-post-author__user">
+                            <div class="topic-post-author__name">
+                                <a href="/user?id=<?=$post->author_id?>"><?=$post->author_login?></a>
+                            </div>
+                            <div class="topic-post-author__role"><?=$post->author_group_name?></div>
                         </div>
-                        <div class="forum-topic-post-author-role"><?=$post->author_group_name?></div>
-                        <div class="forum-topic-post-author-avatar">
+                        <div class="topic-post-author__avatar">
                             <a href="/user?id=<?=$post->author_id?>">
                                 <img src="//<?=$hosts->st?>/images/no-avatar.png">
                             </a>
                         </div>
-                        <div class="forum-topic-post-author-counter">
+                        <div class="topic-post-author__counter">
                             Сообщений: <?=$post->author_posts_count?>
+                            <div class="topic-post-date-time"><?=$post->creation_date?></div>
                         </div>
                     </div>
-                    <div class="forum-topic-post-body">
-                        <div class="forum-topic-post-body-actions">
+                    <div class="topic-post-body">
+                        <div class="topic-post-body__panel topic-post-body__panel_top">
+                            <div class="topic-post-date-time"><?=$post->creation_date?></div>
 
-                            <div class="forum-topic-post-date-time"><?=$post->creation_date?></div>
+                            <div class="topic-post-actions">
+                                <?php if (!$post->topic_start /*&& Member::hasPermission('forum_post_remove')*/) { ?>
+                                    <a class="topic-post-action topic-post-action_button"
+                                           href="#remove"
+                                           data-id="<?=$post->id?>"
+                                           onclick="return false;">
+                                            <?=view::$language->forum_topic_remove?>
+                                        </a>
+                                    <?php } ?>
 
-                            <?php if (!$post->topic_start /*&& Member::hasPermission('forum_post_remove')*/) { ?>
-                                <a class="action forum-topic-post-remove-action"
-                                    href="#remove"
-                                    data-id="<?=$post->id?>"
-                                    onclick="return false;">
-                                    <?=view::$language->forum_topic_remove?>
-                                </a>
-                            <?php } ?>
+                                    <?php if (true /*$_member->id == $post->author_id || member::hasPermission('forum_post_edit')*/) { ?>
+                                        <a class="topic-post-action topic-post-action_button"
+                                           href="#edit"
+                                           data-id="<?=$post->id?>"
+                                           onclick="return false;">
+                                            <?=view::$language->forum_topic_edit?>
+                                        </a>
+                                    <?php } ?>
 
-                            <?php if (true /*$_member->id == $post->author_id || member::hasPermission('forum_post_edit')*/) { ?>
-                                <a class="action forum-topic-post-edit-action"
-                                    href="#edit"
-                                    data-id="<?=$post->id?>"
-                                    onclick="return false;">
-                                    <?=view::$language->forum_topic_edit?>
-                                </a>
-                            <?php } ?>
-
-                            <a class="anchor"
-                                href="/forum/to-post?id=<?=$post->id?>">#<?=($postsCountOffset + $p)?></a>
-
+                                    <a class="topic-post-action topic-post-action_link" href="/forum/to-post?id=<?=$post->id?>">#<?=($postsCountOffset + $p)?></a>
+                                </div>
                         </div>
-                        <div class="forum-topic-post-body-content">
+                        <div class="topic-post-content">
                             <?=$post->post_html?>
                         </div>
-                    </div>
-                    <div class="clear"></div>
-                    <div class="forum-topic-post-info-wrapper">
-                        <div class="forum-topic-post-info">
-                            <?php if ($post->is_modified) { ?>
-                                Отредактировано: <?=$post->last_modified?>
-                            <?php } ?>
+                        <div class="topic-post-body__panel topic-post-body__panel_bottom">
+                            <div class="topic-post-info">
+                                <?php if ($post->is_modified) { ?>
+                                    Отредактировано: <?=$post->last_modified?>
+                                <?php } ?>
+                            </div>
                         </div>
                     </div>
                 </div>
-
             <?php } ?>
         </div>
 
