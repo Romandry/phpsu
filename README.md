@@ -34,7 +34,7 @@ Official repository of php.su
    </VirtualHost>
    ```
 
-   * Add hosts into `/etc/hosts` (`Windows\System32\drivers\etc\hosts` on Windows platform)
+   * Add hosts into "/etc/hosts" ("%WINDIR%\System32\drivers\etc\hosts" on Windows platform)
 
    ```batchfile
    127.0.0.1 domain
