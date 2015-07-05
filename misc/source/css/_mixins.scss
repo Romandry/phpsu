@@ -10,9 +10,9 @@
 @function rem($px) {
 	@if $IE8 {
 		@return $px + px; // Для старого осла возвращаем пиксели.
-	} @else {
-		@return ($px / $base-font-size) + rem;
 	}
+
+	@return ($px / $base-font-size) + rem;
 }
 
 @mixin clearfix() {

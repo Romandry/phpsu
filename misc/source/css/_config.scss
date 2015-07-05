@@ -14,6 +14,24 @@ $base-font-size: 10;
 $gutter-width: 20px;
 $site-max-width: 1100px;
 
+$grid-real-site-max-width: ($site-max-width - $gutter-width * 2) / 1px;
+$grid-right-width: percentage(300 / $grid-real-site-max-width);
+$grid-left-width: percentage(($grid-real-site-max-width - 300) / $grid-real-site-max-width);
+
+$topic-post-side-width: 130px;
+
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+// Media queries breakpoints
+
+$screen-xs:     480px;
+$screen-sm-min: 768px;
+$screen-md-min: 992px;
+$screen-lg-min: 1200px;
+
+$screen-xs-max: ($screen-sm-min - 1);
+$screen-sm-max: ($screen-md-min - 1);
+$screen-md-max: ($screen-lg-min - 1);
+
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 // Colors
 
@@ -36,3 +54,12 @@ $logo_small-height: 40px;
 $box-bg: #e7e7e7;
 $box-border-color: #d2d2d2;
 $box-radius: 3px;
+
+
+// main menu
+$main-menu-item-h-space: 20px;
+$main-menu-compact-button-color: #D2D2D2;
+$main-menu-compact-button-lines-width: 25px;
+$main-menu-compact-button-lines-height: 5px;
+$main-menu-compact-button-lines-space: 3px;
+$main-menu-compact-button-lines-h-space: 10px;
