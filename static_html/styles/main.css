@@ -566,7 +566,9 @@ form.loading input[type="submit"] {
 
 @media (max-width: 640px) {
   .main-menu-compact {
-    display: none; } }
+    display: none; }
+    .main-menu-compact_open {
+      display: block; } }
 
 /* Footer */
 #footer .small-logo {

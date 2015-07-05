@@ -148,5 +148,9 @@
 .main-menu-compact {
 	@media (max-width: 640px) {
 		display: none;
+
+		&_open {
+			display: block;
+		}
 	}
 }

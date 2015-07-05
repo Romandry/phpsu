@@ -62,8 +62,8 @@ $(function() {
     $('a.colorbox').colorbox({rel:'colorbox'});
 
 
-	$('.main-menu-compact-button').on('click', function(){
-		$('.main-menu-compact').slideToggle();
-	});
+    $('.main-menu-compact-button').on('click', function(){
+        $('.main-menu-compact').toggleClass('main-menu-compact_open');
+    });
 
 });
