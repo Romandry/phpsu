@@ -1,0 +1,13 @@
+
+
+{
+
+    // default value of topics per page on subforum page
+    "topics_per_page": 20,
+
+    // default value of posts per page on topic page
+    "posts_per_page": 10
+
+}
+
+

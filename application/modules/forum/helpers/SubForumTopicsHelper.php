@@ -14,20 +14,24 @@ class SubForumTopicsHelper
 
 
     /**
-     * getTopicById
+     * getTopics
      *
-     * Will return topic data
+     * Will return topics data
      *
      * @param  int      $subForumID Identification number of subforum
+     * @param  int      $offset     Offset number of first topic
+     * @param  int      $limit      Number of topics per page
      * @return StdClass             Topics data
      */
 
-    public static function getTopicsBySubForumId($subForumID)
+    public static function getTopics($subForumID, $offset, $limit)
     {
         return \DBI::getConnection('slave')->sendQuery(
-            'SELECT
+            "SELECT
 
                     ft.id,
+                    ft.is_locked,
+                    ft.is_important,
                     ft.title,
                     ft.description,
 
@@ -35,21 +39,27 @@ class SubForumTopicsHelper
                     fts.views_count,
                     fts.last_post_id,
 
+                    ft.authored_by,
+                    ta.login author_login,
+
                     fp.authored_by   last_post_author_id,
                     fp.last_modified last_post_modified
 ,
-                    a.login          last_post_author_login
+                    pa.login         last_post_author_login
 
                 FROM forum_topics ft
                 INNER JOIN forum_topics_stat fts
                     ON fts.topic_id = ft.id
                 LEFT JOIN forum_posts fp
                     ON fp.id = fts.last_post_id
-                LEFT JOIN members a
-                    ON a.id = fp.authored_by
+                LEFT JOIN members ta
+                    ON ta.id = ft.authored_by
+                LEFT JOIN members pa
+                    ON pa.id = fp.authored_by
                 WHERE ft.subforum_id = :subforum_id
-                ORDER BY ft.creation_date
-            ',
+                ORDER BY ft.is_locked DESC, ft.creation_date DESC
+                LIMIT {$offset}, {$limit}
+            ",
             array(':subforum_id' => $subForumID)
         )->fetchAll(\PDO::FETCH_OBJ);
     }

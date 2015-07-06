@@ -42,5 +42,16 @@ class GetSubForum extends \common\Form
                 array('negation', 'GreatThanZero', null)
             )
         );
+
+        // append unrequired page number
+        if (\Request::getParam('page') !== null) {
+            $this->_rules['page'] = array(
+                array('negation', 'IsNaturalNumber', null),
+                array('filter',   'ToInt'),
+                array('negation', 'GreatThanZero', null)
+            );
+        } else {
+            $this->_data->page = 1;
+        }
     }
 }

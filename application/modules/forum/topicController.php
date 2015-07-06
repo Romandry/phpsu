@@ -39,7 +39,7 @@ class topicController extends \BaseController
         $gtData = $gtForm->getData();
 
         // get limit settings
-        $gtData->limit = 10; // TODO posts per page from forum(default)/member(custom) settings
+        $gtData->limit = \App::getConfig('forum')->posts_per_page; // TODO posts per page from member custom settings
         // calculate offset
         $gtData->offset = ($gtData->page - 1) * $gtData->limit;
 
@@ -84,7 +84,7 @@ class topicController extends \BaseController
             array(
                 // add forum item
                 new \common\BreadCrumbsItem(
-                    '/forum?id=' . $topic->forum_id,
+                    '/forum/forum?id=' . $topic->forum_id,
                     $topic->forum_title
                 ),
                 // add subforum item

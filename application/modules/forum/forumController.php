@@ -47,6 +47,7 @@ class forumController extends \BaseController
 
         // append breadcrumbs
         \common\BreadCrumbs::appendItem(
+            // add forum (current) item
             new \common\BreadCrumbsItem(null, $forum[0]->title)
         );
         // assign data into view

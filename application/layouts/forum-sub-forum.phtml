@@ -13,8 +13,11 @@
     <div class="box-padding">
 
 
-        <h1><?=$subForumTree->title?></h1>
-        <p><?=$subForumTree->description?></p>
+        <h1><?=$subForum->title?></h1>
+        <p><?=$subForum->description?></p>
+
+
+        <?php require 'pagination.phtml'; ?>
 
 
         <table class="forum" cellspacing="1">
@@ -22,18 +25,46 @@
                 <td class="target-info">
                     <div class="td-wrapper">Название топика</div>
                 </td>
+                <td>Автор</td>
                 <td>Ответов</td>
                 <td class="last-update">
                     <div class="td-wrapper">Последнее сообщение</div>
                 </td>
             </tr>
-            <?php foreach ($subForumTree->topics as $topic) { ?>
+            <?php foreach ($topics as $topic) { ?>
                 <tr>
                     <td class="target-info">
                         <div class="td-wrapper">
-                            <div class="title"><a href="/forum/topic?id=<?=$topic->id?>"><?=$topic->title?></a></div>
+                            <div class="title">
+
+                                <?php if (true /*Member::hasPermission('forum_topic_remove')*/) { ?>
+                                    <a href="#remove"
+                                        data-id="<?=$topic->id?>"
+                                        onclick="return false;"
+                                        title=" Удалить ">[remove img]</a>
+                                <?php } ?>
+                                <?php if (true /*Member::hasPermission('forum_topic_edit')*/) { ?>
+                                    <a href="#edit"
+                                        data-id="<?=$topic->id?>"
+                                        onclick="return false;"
+                                        title=" Правка ">[edit img]</a>
+                                <?php } ?>
+
+                                <?php if ($topic->is_locked) { ?>
+                                    [locked img]
+                                <?php } ?>
+                                <?php if ($topic->is_important) { ?>
+                                    [important img]
+                                <?php } ?>
+
+                                <a href="/forum/topic?id=<?=$topic->id?>"><?=$topic->title?></a>
+
+                            </div>
                             <div class="description"><?=$topic->description?></div>
                         </div>
+                    </td>
+                    <td class="author-info" width="140">
+                            <div class="author"><a href="/user?id=<?=$topic->authored_by?>"><?=$topic->author_login?></a></div>
                     </td>
                     <td class="answers-count">
                         <div class="td-wrapper"><?=$topic->posts_count?></div>
@@ -51,6 +82,9 @@
                 </tr>
             <?php } ?>
         </table>
+
+
+        <?php require 'pagination.phtml'; ?>
 
 
     </div>

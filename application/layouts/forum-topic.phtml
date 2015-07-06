@@ -47,26 +47,27 @@
                             <div class="topic-post-date-time"><?=$post->creation_date?></div>
 
                             <div class="topic-post-actions">
+
                                 <?php if (!$post->topic_start /*&& Member::hasPermission('forum_post_remove')*/) { ?>
                                     <a class="topic-post-action topic-post-action_button"
-                                           href="#remove"
-                                           data-id="<?=$post->id?>"
-                                           onclick="return false;">
-                                            <?=view::$language->forum_topic_remove?>
-                                        </a>
-                                    <?php } ?>
+                                        href="#remove"
+                                        data-id="<?=$post->id?>"
+                                        onclick="return false;">
+                                        <?=view::$language->forum_topic_remove?>
+                                    </a>
+                                <?php } ?>
+                                <?php if (true /*$_member->id == $post->author_id || member::hasPermission('forum_post_edit')*/) { ?>
+                                    <a class="topic-post-action topic-post-action_button"
+                                        href="#edit"
+                                        data-id="<?=$post->id?>"
+                                        onclick="return false;">
+                                        <?=view::$language->forum_topic_edit?>
+                                    </a>
+                                <?php } ?>
 
-                                    <?php if (true /*$_member->id == $post->author_id || member::hasPermission('forum_post_edit')*/) { ?>
-                                        <a class="topic-post-action topic-post-action_button"
-                                           href="#edit"
-                                           data-id="<?=$post->id?>"
-                                           onclick="return false;">
-                                            <?=view::$language->forum_topic_edit?>
-                                        </a>
-                                    <?php } ?>
+                                <a class="topic-post-action topic-post-action_link" href="/forum/to-post?id=<?=$post->id?>">#<?=($postsCountOffset + $p)?></a>
 
-                                    <a class="topic-post-action topic-post-action_link" href="/forum/to-post?id=<?=$post->id?>">#<?=($postsCountOffset + $p)?></a>
-                                </div>
+                            </div>
                         </div>
                         <div class="topic-post-content">
                             <?=$post->post_html?>
