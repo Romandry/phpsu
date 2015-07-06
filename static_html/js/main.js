@@ -66,4 +66,10 @@ $(function() {
         $('.main-menu-compact').toggleClass('main-menu-compact_open');
     });
 
+
+    var hlPostId = document.location.hash.match(/^#topic-post-(\d+)$/);
+    if (hlPostId && hlPostId[1]) {
+        $('#topic-post-' + hlPostId[1]).addClass('topic-post-current');
+    }
+
 });

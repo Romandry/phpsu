@@ -23,8 +23,9 @@
         <div class="forum-topic">
             <?php foreach ($posts as $p => $post) { ?>
 
-                <div class="topic-post-anchor"><a name="post-<?=$post->id?>"></a></div>
-                <div class="topic-post topic-post_<?= ($p % 2 == 0) ? 'even' : 'odd' ?>">
+                <div class="topic-post-anchor"><a name="topic-post-<?=$post->id?>"></a></div>
+                <div id="topic-post-<?=$post->id?>"
+                        class="topic-post topic-post_<?= ($p % 2 == 0) ? 'even' : 'odd' ?>">
                     <div class="topic-post-author">
                         <div class="topic-post-author__user">
                             <div class="topic-post-author__name">

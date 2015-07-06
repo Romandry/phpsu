@@ -678,6 +678,10 @@ table.forum .target-info .title {
   .topic-post:last-child {
     border-bottom: none; }
 
+.topic-post-current {
+    box-shadow: 0 0 10px #000000 inset;
+}
+
 .topic-post-author {
   border-right: dashed 1px #dadada;
   max-width: 130px;

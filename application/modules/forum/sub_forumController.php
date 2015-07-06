@@ -4,7 +4,7 @@
 /**
  * sub_forumController
  *
- * Subfum controller of forum module
+ * Subforum controller of forum module
  */
 
 namespace modules\forum;
