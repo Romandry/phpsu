@@ -44,13 +44,14 @@ class trackerController extends \BaseController
         $gtfData->offset = ($gtfData->page - 1) * $gtfData->limit;
 
         // get subforum topics
-        $topics = array();/*helpers\SubForumTopicsHelper::getTopics(
-            $gsfData->id,
-            $gsfData->offset,
-            $gsfData->limit
+        // TODO modify helper or create special tracker helper
+        $topics = helpers\SubForumTopicsHelper::getTopics(
+            7,
+            $gtfData->offset,
+            $gtfData->limit
         );
 
-        if ($gsfData->page > 1 && !$topics) {
+        /*if ($gsfData->page > 1 && !$topics) {
             throw new \SystemErrorException(array(
                 'title'       => \View::$language->forum_sub_forum_error,
                 'description' => \View::$language->forum_sub_forum_page_not_found
