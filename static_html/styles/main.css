@@ -645,8 +645,13 @@ table.forum td {
 table.forum td.last-update {
   width: 260px; }
 
-table.forum td.topics-count, table.forum td.answers-count {
+table.forum td.topics-count,
+table.forum td.answers-count {
   text-align: center; }
+  @media (max-width: 640px) {
+    table.forum td.topics-count,
+    table.forum td.answers-count {
+      display: none; } }
 
 table.forum td.answers-count {
   width: 80px; }
@@ -677,10 +682,8 @@ table.forum .target-info .title {
   position: relative; }
   .topic-post:last-child {
     border-bottom: none; }
-
-.topic-post-current {
-    box-shadow: 0 0 10px #000000 inset;
-}
+  .topic-post_current {
+    box-shadow: 0 0 15px -5px rgba(0, 0, 0, 0.2) inset; }
 
 .topic-post-author {
   border-right: dashed 1px #dadada;

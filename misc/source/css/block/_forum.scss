@@ -36,8 +36,13 @@ table.forum td.last-update {
 	width: 260px;
 }
 
-table.forum td.topics-count, table.forum td.answers-count {
+table.forum td.topics-count,
+table.forum td.answers-count {
 	text-align: center;
+
+    @media (max-width: 640px) {
+        display: none;
+    }
 }
 
 table.forum td.answers-count {
