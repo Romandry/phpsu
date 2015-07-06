@@ -6,5 +6,5 @@
  */
 
 return array(
-    'forum_main_breadcrumbs_name' => 'Форум'
+    'forum_main_title' => 'Форум'
 );

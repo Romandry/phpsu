@@ -23,6 +23,8 @@ class mainController extends \BaseController
 
     public function indexAction()
     {
+        \View::addLanguageItem('mainMainController');
+        \View::assign('title', \View::$language->main_main_title);
         \View::setLayout('main.phtml');
     }
 }

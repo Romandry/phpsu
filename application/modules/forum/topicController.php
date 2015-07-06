@@ -99,6 +99,7 @@ class topicController extends \BaseController
 
         // assign data into view
         \View::assign(array(
+            'title'              => $topic->topic_title,
             'topic'              => $topic,
             'posts'              => $posts,
             'postsCountOffset'   => $gtData->offset + 1,

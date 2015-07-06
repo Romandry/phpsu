@@ -27,7 +27,7 @@ class mainController extends \BaseController
         \common\BreadCrumbs::appendItem(
             new \common\BreadCrumbsItem(
                 '/forum',
-                \View::$language->forum_main_breadcrumbs_name
+                \View::$language->forum_main_title
             )
         );
     }
@@ -46,8 +46,8 @@ class mainController extends \BaseController
         // assign data into view
         \View::assign(
             array(
-                'title'      => \View::$language->forum_main_breadcrumbs_name,
-                'h1'         => \View::$language->forum_main_breadcrumbs_name,
+                'title'      => \View::$language->forum_main_title,
+                'h1'         => \View::$language->forum_main_title,
                 'forumsTree' => helpers\ForumsTreeHelper::getTree()
             )
         );
