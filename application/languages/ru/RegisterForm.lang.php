@@ -2,7 +2,7 @@
 
 
 /**
- * RegosterForm language file
+ * RegisterForm language file
  */
 
 return array(
