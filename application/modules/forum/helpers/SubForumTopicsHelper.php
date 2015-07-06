@@ -35,7 +35,7 @@ class SubForumTopicsHelper
                     ft.title,
                     ft.description,
 
-                    fts.posts_count,
+                    IF(fts.posts_count > 1, fts.posts_count - 1, 0) posts_count,
                     fts.views_count,
                     fts.last_post_id,
 

@@ -72,7 +72,7 @@
                     <td class="last-update">
                         <div class="td-wrapper">
                             <?php if ($topic->last_post_id) { ?>
-                                <div class="topic"><a href="forum/to-post?id=<?=$topic->last_post_id?>"><?=$topic->last_post_modified?></a></div>
+                                <div class="topic"><a href="/forum/to-post?id=<?=$topic->last_post_id?>"><?=$topic->last_post_modified?></a></div>
                                 <div class="author"><a href="/user?id=<?=$topic->last_post_author_id?>"><?=$topic->last_post_author_login?></a></div>
                             <?php } else { ?>
                                 <div class="topic">нет</div>

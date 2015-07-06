@@ -41,7 +41,7 @@ class SubForumsHelper
                     sf.description,
 
                     sfs.topics_count,
-                    sfs.posts_count,
+                    (sfs.posts_count - sfs.topics_count) posts_count,
 
                     fp.id            last_post_id,
                     fp.authored_by   last_post_author_id,
