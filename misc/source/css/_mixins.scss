@@ -42,3 +42,11 @@ $bIncludedPlaceholders: false !default;
 	/* END clearfix */
 	$bIncludedPlaceholders: true;
 }
+
+/// Alert component. Color theme.
+/// @param {color} $base-color
+@mixin alert($base-color) {
+    background: rgba($base-color, 0.3);
+    border-color: $base-color;
+    color: darken($base-color, 25%);
+}

@@ -845,3 +845,28 @@ table.forum .target-info .title {
         text-align: right; }
       .topic-post-body__panel .topic-post-date-time {
         display: none; } }
+
+/* Alerts */
+.alert {
+  background: rgba(210, 210, 210, 0.3);
+  border-radius: 0.2em;
+  border: 1px solid #d2d2d2;
+  color: #929292;
+  margin: 0.5em 0;
+  padding: 0.5em 1em; }
+  .alert_info {
+    background: rgba(79, 193, 242, 0.3);
+    border-color: #4fc1f2;
+    color: #0d82b4; }
+  .alert_success {
+    background: rgba(74, 221, 62, 0.3);
+    border-color: #4add3e;
+    color: #208417; }
+  .alert_warning {
+    background: rgba(240, 198, 40, 0.3);
+    border-color: #f0c628;
+    color: #8f730a; }
+  .alert_danger {
+    background: rgba(242, 130, 106, 0.3);
+    border-color: #f2826a;
+    color: #cb3212; }

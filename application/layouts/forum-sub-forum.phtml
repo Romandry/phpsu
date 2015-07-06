@@ -20,6 +20,7 @@
         <?php require 'pagination.phtml'; ?>
 
 
+        <?php if ($topics) { ?>
         <table class="forum" cellspacing="1">
             <tr class="table-heading">
                 <td class="target-info">
@@ -82,6 +83,9 @@
                 </tr>
             <?php } ?>
         </table>
+        <?php } else { ?>
+            <div class="alert alert_info">Нет топиков</div>
+        <?php } ?>
 
 
         <?php require 'pagination.phtml'; ?>
