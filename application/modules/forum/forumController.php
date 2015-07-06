@@ -39,7 +39,8 @@ class forumController extends \BaseController
         // get forum tree
         $forum = helpers\ForumsTreeHelper::getTree($gfForm->getData()->id);
         if (!$forum) {
-            throw new \SystemErrorException(array(
+            throw new \MemberErrorException(array(
+                'code'        => 404,
                 'title'       => \View::$language->forum_forum_error,
                 'description' => \View::$language->forum_forum_forum_not_found
             ));

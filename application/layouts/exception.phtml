@@ -1,8 +1,19 @@
 <?php require 'header.phtml'; ?>
 
 
-    <h1><?=$title?></h1>
-    <h3><?=$description?></h3>
+    <?php require 'top-box.phtml'; ?>
+
+
+    <?php require 'main-menu.phtml'; ?>
+
+
+    <div class="box-padding">
+        <h1><?=$title?></h1>
+        <h3><?=$description?></h3>
+    </div>
+
+
+    <?php require 'bottom-box.phtml'; ?>
 
 
 <?php require 'footer.phtml'; ?>
