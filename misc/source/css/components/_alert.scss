@@ -1,0 +1,30 @@
+/*  */
+@import "../config";
+@import "../mixins";
+
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+.alert {
+    background: rgba($alert-default-color, 0.3);
+    border-radius: 0.2em;
+    border: 1px solid $alert-default-color;
+    color: darken($alert-default-color, 25%);
+    margin: 0.5em 0;
+    padding: 0.5em 1em;
+
+    &_info {
+        @include alert($alert-info-color);
+    }
+
+    &_success {
+        @include alert($alert-success-color);
+    }
+
+    &_warning {
+        @include alert($alert-warning-color);
+    }
+
+    &_danger {
+        @include alert($alert-danger-color);
+    }
+}
