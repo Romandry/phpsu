@@ -13,8 +13,18 @@
     <div class="box-padding">
 
 
-        <h1><?=$subForum->title?></h1>
-        <p><?=$subForum->description?></p>
+        <h1><?=$h1?></h1>
+        <p>
+            <?php foreach ($filters as $k => $filter) { ?>
+                <?php
+
+                    $separator = $k ? ' | ' : '';
+                    $className = $filter->current ? ' class="current-filter"' : '';
+
+                ?>
+                <?=$separator?><a<?=$className?> href="<?=$filter->url?>"><?=$filter->title?></a>
+            <?php } ?>
+        </p>
 
 
         <?php require 'pagination.phtml'; ?>
@@ -41,13 +51,13 @@
                                     <a href="#remove"
                                         data-id="<?=$topic->id?>"
                                         onclick="return false;"
-                                        title="Удалить">[remove img]</a>
+                                        title=" Удалить ">[remove img]</a>
                                 <?php } ?>
                                 <?php if (true /*Member::hasPermission('forum_topic_edit')*/) { ?>
                                     <a href="#edit"
                                         data-id="<?=$topic->id?>"
                                         onclick="return false;"
-                                        title="Правка">[edit img]</a>
+                                        title=" Правка ">[edit img]</a>
                                 <?php } ?>
 
                                 <?php if ($topic->is_locked) { ?>

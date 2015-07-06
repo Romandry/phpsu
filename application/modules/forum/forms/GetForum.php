@@ -25,7 +25,7 @@ class GetForum extends \common\Form
     /**
      * __construct
      *
-     * Topic request process validation class constructor.
+     * Forum request process validation class constructor.
      * Definition of validation rules
      *
      * @return null
