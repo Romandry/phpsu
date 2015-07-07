@@ -28,6 +28,7 @@
                 </td>
                 <td>Автор</td>
                 <td>Ответов</td>
+                <td>Просмотров</td>
                 <td class="last-update">
                     <div class="td-wrapper">Последнее сообщение</div>
                 </td>
@@ -51,6 +52,9 @@
                                         title="Правка">[edit img]</a>
                                 <?php } ?>
 
+                                <?php if ($topic->is_closed) { ?>
+                                    [closed img]
+                                <?php } ?>
                                 <?php if ($topic->is_locked) { ?>
                                     [locked img]
                                 <?php } ?>
@@ -69,6 +73,9 @@
                     </td>
                     <td class="answers-count">
                         <div class="td-wrapper"><?=$topic->posts_count?></div>
+                    </td>
+                    <td class="answers-count">
+                        <div class="td-wrapper"><?=$topic->views_count?></div>
                     </td>
                     <td class="last-update">
                         <div class="td-wrapper">

@@ -2,15 +2,28 @@
 
 
 /**
- * SubForumTopicsHelper
+ * TrackerTopicsHelper
  *
- * Readonly subforum topics helper
+ * Readonly tracker topics helper
  */
 
 namespace modules\forum\helpers;
 
-class SubForumTopicsHelper
+class TrackerTopicsHelper
 {
+
+
+    /**
+     * $_filters
+     *
+     * Definition of available tracker filters
+     */
+
+    private static $_filters = array(
+        'last'  => 'ORDER BY ft.last_modified DESC',
+        'posts' => 'ORDER BY fts.posts_count DESC',
+        'views' => 'ORDER BY fts.views_count DESC'
+    );
 
 
     /**
@@ -18,19 +31,20 @@ class SubForumTopicsHelper
      *
      * Will return topics data
      *
-     * @param  int      $subForumID Identification number of subforum
+     * @param  string   $filterType Type of filter
      * @param  int      $offset     Offset number of first topic
      * @param  int      $limit      Number of topics per page
      * @return array                Topics data
      */
 
-    public static function getTopics($subForumID, $offset, $limit)
+    public static function getTopics($filterType, $offset, $limit)
     {
+        $filter = self::$_filters[$filterType];
+
         return \DBI::getConnection('slave')->sendQuery(
             "SELECT
 
                     ft.id,
-                    ft.is_locked,
                     ft.is_important,
                     ft.is_closed,
                     ft.title,
@@ -57,11 +71,24 @@ class SubForumTopicsHelper
                     ON ta.id = ft.authored_by
                 LEFT JOIN members pa
                     ON pa.id = fp.authored_by
-                WHERE ft.subforum_id = :subforum_id
-                ORDER BY ft.is_locked DESC, ft.creation_date DESC
-                LIMIT {$offset}, {$limit}
-            ",
-            array(':subforum_id' => $subForumID)
+                {$filter}
+                LIMIT {$offset}, {$limit}"
         )->fetchAll(\PDO::FETCH_OBJ);
+    }
+
+
+    /**
+     * getAllTopicsCount
+     *
+     * Will return number of all available topics
+     *
+     * @return int Number of all available topics
+     */
+
+    public static function getAllTopicsCount()
+    {
+        return (int) \DBI::getConnection('slave')->sendQuery(
+            'SELECT SUM(topics_count) cnt FROM forum_subforums_stat'
+        )->fetch(\PDO::FETCH_COLUMN);
     }
 }

@@ -28,6 +28,7 @@ class TopicHelper
             'SELECT
 
                     ft.id,
+                    ft.is_closed,
                     ft.subforum_id,
                     ft.title       topic_title,
                     ft.description topic_description,

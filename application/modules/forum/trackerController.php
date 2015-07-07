@@ -43,20 +43,19 @@ class trackerController extends \BaseController
         // calculate offset
         $gtfData->offset = ($gtfData->page - 1) * $gtfData->limit;
 
-        // get subforum topics
-        // TODO modify helper or create special tracker helper
-        $topics = helpers\SubForumTopicsHelper::getTopics(
-            7,
+        // get tracker topics by filter type
+        $topics = helpers\TrackerTopicsHelper::getTopics(
+            $gtfData->by,
             $gtfData->offset,
             $gtfData->limit
         );
-
-        /*if ($gsfData->page > 1 && !$topics) {
-            throw new \SystemErrorException(array(
-                'title'       => \View::$language->forum_sub_forum_error,
-                'description' => \View::$language->forum_sub_forum_page_not_found
+        if ($gtfData->page > 1 && !$topics) {
+            throw new \MemberErrorException(array(
+                'code'        => 404,
+                'title'       => \View::$language->forum_tracker_error,
+                'description' => \View::$language->forum_tracker_page_not_found
             ));
-        }*/
+        }
 
         // normalize tracker filter url
         $filterUrl = '/forum/tracker';
@@ -64,13 +63,14 @@ class trackerController extends \BaseController
             $filterUrl = '/forum/tracker?by=' . $gtfData->by;
         }
         // get posts pagination
-        $pagination = array();
-        if (!$topics) {
+        $pagination   = array();
+        $allTopicsCnt = helpers\TrackerTopicsHelper::getAllTopicsCount();
+        if ($allTopicsCnt > $gtfData->limit) {
             $pagination = \common\PaginationHelper::getItems(
                 $filterUrl,
                 $gtfData->page,
                 $gtfData->limit,
-                100
+                $allTopicsCnt
             );
         }
         // normalize tracker filter title

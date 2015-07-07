@@ -32,14 +32,24 @@ class PaginationHelper
         $itemsTotal
     )
     {
+        $parts    = explode('?', $baseUrlPrefix);
         $iCount   = 1;
         $allPages = ceil($itemsTotal / $itemsPerPage);
         $items    = array();
 
+        if (sizeof($parts) < 2) {
+            $parts[1] = '';
+        }
+        parse_str($parts[1], $params);
+
         while ($iCount <= $allPages) {
-            $url = $baseUrlPrefix . ($iCount > 1 ? '&page=' . $iCount : '');
+            $par = array();
+            if ($iCount > 1) {
+                $par['page'] = $iCount;
+            }
+            $url = http_build_query(array_merge($params, $par));
             $items[] = (object) array(
-                'url'     => $url,
+                'url'     => $parts[0] . ($url ? '?' . $url : ''),
                 'number'  => $iCount,
                 'current' => $iCount == $currentPage
             );
