@@ -1,9 +1,7 @@
-
-
 Options All -Indexes
 AddDefaultCharset utf-8
 
-
+# See https://github.com/cdnjs/cdnjs/issues/755#issuecomment-12249558
 <FilesMatch ".(eot|svg|ttf|woff|woff2)$">
- Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Origin "*"
 </FilesMatch>
