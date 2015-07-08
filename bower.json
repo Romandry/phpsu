@@ -10,6 +10,7 @@
   ],
   "dependencies": {
     "jquery": "~1.*",
-    "colorbox": "~1.6.1"
+    "colorbox": "~1.6.1",
+    "font-awesome": "~4.3.0"
   }
 }

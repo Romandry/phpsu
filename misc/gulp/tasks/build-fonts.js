@@ -19,4 +19,11 @@ gulp.task('build-fonts', function () {
 		}))
 		.pipe(gulp.dest(config.fonts.buildPath));
 
+	gulp.src(['bower_components/font-awesome/fonts/*.*'])
+		.pipe(cache({
+			src      : 'bower_components/font-awesome/fonts/',
+			build    : config.fonts.buildPath + 'awesome/'
+		}))
+		.pipe(gulp.dest(config.fonts.buildPath + 'awesome/'));
+
 });
