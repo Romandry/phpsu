@@ -7,6 +7,10 @@
 @import "core/_normalize";
 @import "core/_print";
 
+// External fonts and icon-fonts
+@import "vendor/font-awesome/variables";
+@import "../../../bower_components/font-awesome/scss/font-awesome";
+
 // Основные стили
 @import "core/_init";
 @import "core/_grid";
