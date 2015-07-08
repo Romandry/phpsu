@@ -20,9 +20,10 @@ class TrackerTopicsHelper
      */
 
     private static $_filters = array(
-        'last'  => 'ORDER BY ft.last_modified DESC',
-        'posts' => 'ORDER BY fts.posts_count DESC',
-        'views' => 'ORDER BY fts.views_count DESC'
+        'last'        => 'ORDER BY ft.last_modified DESC',
+        'unanswered'  => 'ORDER BY fts.posts_count ASC, ft.last_modified DESC',
+        'posts'       => 'ORDER BY fts.posts_count DESC',
+        'views'       => 'ORDER BY fts.views_count DESC'
     );
 
 

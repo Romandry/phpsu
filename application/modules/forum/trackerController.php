@@ -58,7 +58,8 @@ class trackerController extends \BaseController
         }
 
         // normalize tracker filter url
-        $filterUrl = '/forum/tracker';
+        $trackerUrl = '/forum/tracker';
+        $filterUrl  = $trackerUrl;
         if ($gtfData->by != 'last') {
             $filterUrl = '/forum/tracker?by=' . $gtfData->by;
         }
@@ -77,8 +78,14 @@ class trackerController extends \BaseController
         $filterTitle = 'forum_tracker_by_' . $gtfData->by . '_title';
         $filterTitle = \View::$language->{$filterTitle};
         // append breadcrumbs
-        \common\BreadCrumbs::appendItem(
-            new \common\BreadCrumbsItem(null, $filterTitle)
+        \common\BreadCrumbs::appendItems(
+            array(
+                new \common\BreadCrumbsItem(
+                    $trackerUrl,
+                    \View::$language->forum_tracker_breadcrumbs_name
+                ),
+                new \common\BreadCrumbsItem(null, $filterTitle)
+            )
         );
         // assign data into view
         $filters = helpers\TrackerFilterLinksHelper::getLinks($gtfData->by);

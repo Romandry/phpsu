@@ -19,9 +19,10 @@
      */
 
     "tracker_filters": [
-        "last",  // by last posts
-        "posts", // by posts count
-        "views"  // by views count
+        "last",       // by last posts
+        "unanswered", // by last posts and unanswered
+        "posts",      // by posts count
+        "views"       // by views count
     ]
 
 
