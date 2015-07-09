@@ -1,8 +1,6 @@
 Options All -Indexes
 AddDefaultCharset utf-8
 
-# See https://github.com/cdnjs/cdnjs/issues/755#issuecomment-12249558
-# This directive requires mod_headers.
 <IfModule headers_module>
     <FilesMatch ".(eot|svg|ttf|woff|woff2)$">
         Header set Access-Control-Allow-Origin "*"
