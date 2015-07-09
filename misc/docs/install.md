@@ -76,7 +76,7 @@ To advanced install you just need to setup VirtualHost for each host(see example
 *NB!* If you see square icons instead of normal icons([Firefox](https://github.com/cdnjs/cdnjs/issues/755#issuecomment-12249558))
       you need to add some directives into you .htaccess file in `static_html` folder. mod_headers need to be activated.
 
-      ```apacheconf
+      ```
       <IfModule headers_module>
           <FilesMatch ".(eot|svg|ttf|woff|woff2)$">
               Header set Access-Control-Allow-Origin "*"
