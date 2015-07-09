@@ -61,6 +61,9 @@ Latest development demo available at https://phpsu.libra.ms
 
 For advanced install see [Advanced install](misc/docs/install.md#advanced-install) section.
 
+## Development
+1. [Frontend development](misc/docs/frontend-devel.md)
+
 ## License
 
 Project is released under the GPL v3 (or later) license, see [misc/gpl-3.0.txt](misc/gpl-3.0.txt)

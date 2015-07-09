@@ -47,6 +47,7 @@
    * Customize other parameters in these files according to you settings.
 
 ## Advanced install
+
 To advanced install you just need to setup VirtualHost for each host(see examples below).
 
    ```apacheconf
