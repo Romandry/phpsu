@@ -12,6 +12,24 @@ class Router
 
 
     /**
+     * CLEAN_SHIFT
+     *
+     * Enable normalization flag
+     */
+
+    const CLEAN_SHIFT = 0;
+
+
+    /**
+     * DIRTY_SHIFT
+     *
+     * Disable normalization flag
+     */
+
+    const DIRTY_SHIFT = 1;
+
+
+    /**
      * $_params
      *
      * Route parameters
@@ -60,55 +78,73 @@ class Router
         $moduleBoot = App::getInstance($bootNs);
         $moduleBoot->runBefore();
 
-        // boot action or controller
-        $ctrlName = self::shiftParam();
-        if ($ctrlName === null) {
+        // internal custom routes
+        if ($moduleBoot->hasInternalRoutes()) {
             $moduleBoot->indexAction();
+        // default behaviour, boot action or controller
         } else {
 
-            // action of module boot controller
-            $bootAction = $ctrlName;
-            if ($bootAction == 'index') {
-                throw new SystemErrorException(array(
-                    'title'       => 'Execute action error',
-                    'description' => 'Custom access is denied for indexAction'
-                ));
-            }
-            $bootAction .= 'Action';
-
-            if (method_exists($moduleBoot, $bootAction)) {
-                // run action of module boot controller
-                $moduleBoot->$bootAction();
+            $ctrlName = self::shiftParam();
+            if ($ctrlName === null) {
+                $moduleBoot->indexAction();
             } else {
 
-                // no, load controller of module
-                $ctrlNs = $nsPrefix . '\\' . $ctrlName . 'Controller';
-                $moduleCtrl = App::getInstance($ctrlNs);
-                $moduleCtrl->runBefore();
-                $ctrlAction = self::shiftParam();
-                if ($ctrlAction == 'index') {
+                // action of module boot controller
+                $bootAction = $ctrlName;
+                if ($bootAction == 'index') {
                     throw new SystemErrorException(array(
                         'title'       => 'Execute action error',
                         'description' => 'Custom access is denied for indexAction'
                     ));
-                } else if ($ctrlAction === null) {
-                    $ctrlAction = 'index';
                 }
-                $ctrlAction .= 'Action';
+                $bootAction .= 'Action';
 
-                // run action of controller
-                if (!method_exists($moduleCtrl, $ctrlAction)) {
-                    throw new SystemErrorException(array(
-                        'title'       => 'Execute action error',
-                        'description' => 'Action ' . $ctrlAction . ' not found'
-                    ));
+                // run action of module boot controller
+                if (method_exists($moduleBoot, $bootAction)) {
+                    $moduleBoot->$bootAction();
+                // try load controller of module
+                } else {
+
+                    $ctrlNs = $nsPrefix . '\\' . $ctrlName . 'Controller';
+                    $moduleCtrl = App::getInstance($ctrlNs);
+                    $moduleCtrl->runBefore();
+
+                    // internal custom routes
+                    if ($moduleCtrl->hasInternalRoutes()) {
+                        $moduleCtrl->indexAction();
+                    // default behaviour, run action
+                    } else {
+
+                        $ctrlAction = self::shiftParam();
+                        if ($ctrlAction == 'index') {
+                            throw new SystemErrorException(array(
+                                'title'       => 'Execute action error',
+                                'description' => 'Custom access is denied for indexAction'
+                            ));
+                        } else if ($ctrlAction === null) {
+                            $ctrlAction = 'index';
+                        }
+                        $ctrlAction .= 'Action';
+
+                        // run action of controller
+                        if (!method_exists($moduleCtrl, $ctrlAction)) {
+                            throw new SystemErrorException(array(
+                                'title'       => 'Execute action error',
+                                'description' => 'Action ' . $ctrlAction . ' not found'
+                            ));
+                        }
+                        $moduleCtrl->$ctrlAction();
+
+                    }
+
+                    $moduleCtrl->runAfter();
+
                 }
-                $moduleCtrl->$ctrlAction();
-                $moduleCtrl->runAfter();
 
             }
 
         }
+
         $moduleBoot->runAfter();
     }
 
@@ -118,14 +154,18 @@ class Router
      *
      * Return first normalized parameter (or null) with remove inside
      *
-     * @return mixed Route parameter
+     * @param  bool  $shiftType Enable or disable parameter normalization
+     * @return mixed            Route parameter
      */
 
-    public static function shiftParam()
+    public static function shiftParam($shiftType = Router::CLEAN_SHIFT)
     {
         $param = null;
         if (self::$_params) {
-            $param = self::_normalizeParam(array_shift(self::$_params));
+            $param = array_shift(self::$_params);
+            if ($shiftType === Router::CLEAN_SHIFT) {
+                $param = self::_normalizeParam($param);
+            }
         }
 
         return $param;

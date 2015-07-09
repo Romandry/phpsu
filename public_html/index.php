@@ -35,16 +35,13 @@ set_include_path(APPLICATION . join(PATH_SEPARATOR . APPLICATION, $pathes));
 
 
 /**
- * mainAutoloader
+ * Autoload function
  *
- * Autoload classes function
- *
- * @param  string $name  Name of loaded target with(out) namespace
+ * @param  string $name Name of loaded target with(out) namespace
  * @return null
  */
 
-function mainAutoloader($name)
-{
+spl_autoload_register(function($name) {
     $name = ltrim($name, '\\');
     if (strpos($name, '\\', 1)) {
         $name = str_replace('\\', '/', $name);
@@ -59,8 +56,7 @@ function mainAutoloader($name)
         $path = $name . '.php';
     }
     require $path;
-}
-spl_autoload_register('mainAutoloader', false);
+}, false);
 
 
 // run application
