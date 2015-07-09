@@ -36,7 +36,7 @@ Latest development demo available at https://phpsu.libra.ms
    ```
    > Note! You need to activate mod_alias in you Apache config.
 
-   * If you run project on you local environment, e.g. localhost, and want to use domain name you need to add some changes in you `/etc/hosts` (`%WINDIR%\System32\drivers\etc\hosts` on Windows platform) file
+   * If you run project in you local environment, e.g. localhost, and want to use domain name you need to add some changes in you `/etc/hosts` (`%WINDIR%\System32\drivers\etc\hosts` on Windows platform) file
 
    ```batchfile
    127.0.0.1 domain.tld.localhost
@@ -52,9 +52,10 @@ Latest development demo available at https://phpsu.libra.ms
    * Create an empty file at `application/config/main.json` and copy content from `misc/main-EXAMPLE.json` into newly created.
    * Create an empty file at `application/config/hosts.json` and copy content from `misc/hosts-EXAMPLE.json` into newly created.
      In this file change:
-     `main` to `domain.tld.localhost`
-     `st`   to `domain.tld.localhost/static`
-     `img`  to `domain.tld.localhost/uploads`
+
+     * `main` to `domain.tld.localhost`
+     * `st`   to `domain.tld.localhost/static`
+     * `img`  to `domain.tld.localhost/uploads`
 
    * Customize other parameters in these files according to you settings.
 
