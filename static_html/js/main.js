@@ -59,7 +59,11 @@ $(function() {
 
 
     // colorbox view images
-    $('a.colorbox').colorbox({rel:'colorbox'});
+    $('a.colorbox').colorbox({
+        rel:'colorbox',
+        maxHeight: '95%',
+        maxWidth: '95%'
+    });
 
 
     $('.main-menu-compact-button').on('click', function(){
