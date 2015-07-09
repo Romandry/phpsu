@@ -1,5 +1,5 @@
 /**
- * Конфигурация gulp-задач.
+ * Gulp-tasks config.
  *
  * @since        30.06.2015 9:21
  * @author       DelphinPRO delphinpro@yandex.ru
@@ -8,15 +8,15 @@
 
 var pkg = require('../../package.json');
 
-/* Локальный домен, на котором вы запускаете сайт */
+/* Local domain on which you run the site */
 
 var _localDomain = 'phpsu.project';
 
-/* Ваши любымые браузеры для разработки */
+/* Your favorite browsers for devel */
 
 var _browsers = ['firefox'];
 
-/* Настройка путей */
+/* Path */
 
 var _src = 'misc/source/';
 var _build = 'static_html/';
@@ -36,15 +36,15 @@ var _buildHtml = 'not used...';
 
 module.exports = {
 
-	// Список задач, выполняемых при билде
+	// The list of tasks performed ar the build
 	buildTaskList  : [/*'build-html',*/ 'build-js', 'build-css', 'build-images', 'build-fonts'],
 
-	// Опции для BrowserSync http://www.browsersync.io/docs/options/
+	// BrowserSync options: http://www.browsersync.io/docs/options/
 	browserSyncOpts: {
-		browser  : _browsers, // Браузер(ы), в котором будет открыта страница
+		browser  : _browsers, // Browsers
 		notify   : false,
 		startPath: '/',
-		proxy    : _localDomain // Локальный домен, на котором у вас крутится сайт
+		proxy    : _localDomain // Local domain
 	},
 
 	docHeader      : '/*! ' + pkg.name + ' v' + pkg.version + ' */\n',
@@ -53,15 +53,15 @@ module.exports = {
 		srcPath         : _src + _css,
 		srcPathWatch    : [_src + _css + '**/*.scss'],
 		srcFilters      : [
-			_src + _css + '**/*.scss', // Все scss-файлы
-			'!' + _src + _css + '**/_*.scss' // Исключая файлы с именами, начинающимися с подчеркивания
+			_src + _css + '**/*.scss', // All scss-files
+			'!' + _src + _css + '**/_*.scss' // Excluding files with names starting with an underscore
 		],
 		buildPath       : _buildCss,
 		autoprefixerOpts: {
-			// Какие префиксы будем ставить.
-			// Для браузеров, имеющих долю более 1%
-			// И для последних двух версий браузеров.
-			// Информация берется с сайта caniuse.com
+			// Which prefixes will be put.
+			// For browsers having a share of more than 1%
+			// And for the last two versions of browsers.
+			// Information taken from caniuse.com
 			browsers: ['> 1%', 'last 2 versions']
 		}
 	},
@@ -69,7 +69,7 @@ module.exports = {
 	js: {
 		srcPath     : _src + _js,
 		srcPathWatch: [_src + _js + '**/*.js'],
-		srcFilters  : [_src + _js + '*.js'], // Все js-файлы
+		srcFilters  : [_src + _js + '*.js'], // All js-files
 		buildPath   : _buildJs
 	},
 
