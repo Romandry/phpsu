@@ -3,10 +3,15 @@
 
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-// IMPORTANT:
-// IE 8 not supported rem units.
-// IE 9 & IE 10 do not support rem units when used in the font shorthand property
-// (the entire declaration is ignored) or when used on pseudo elements.
+/// Convert pixel to rem-value.
+///
+/// IMPORTANT:
+/// IE 8 not supported rem units.
+/// IE 9 & IE 10 do not support rem units when used in the font shorthand property
+/// (the entire declaration is ignored) or when used on pseudo elements.
+/// @param {px} $px Value of pixel
+/// @require $IE8
+/// @return {rem} Value of rem.
 @function rem($px) {
 	@if $IE8 {
 		@return $px + px; // Для старого осла возвращаем пиксели.
