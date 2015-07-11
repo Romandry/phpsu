@@ -1,37 +1,41 @@
 /* Grid system */
 @import "../_config";
 @import "../_mixins";
+
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 #container {
-	margin: 0 auto;
-	padding: 0 $gutter-width;
-	max-width: $site-max-width;
+    margin: 0 auto;
+    padding: 1px $gutter-width 0;  // 1px fix margin-collapsing
+    max-width: $site-max-width;
+    background: #fff;
+    box-shadow: 0 0 50px rgba(#000, 0.1);
+    min-height: 100vh;
 }
 
 .right-box {
-	flex-basis: $grid-right-width;
-	min-width:250px;
+    flex-basis: $grid-right-width;
+    min-width: 250px;
 }
 
 .left-box-pad-320,
 .left-box {
-	flex-basis: $grid-left-width;
-	padding-right: $gutter-width;
+    flex-basis: $grid-left-width;
+    padding-right: $gutter-width;
 }
 
 .flex-container {
-	display: flex;
-	flex-direction: row-reverse;
+    display: flex;
+    flex-direction: row-reverse;
 
-	@media screen and (max-width: $screen-sm-min) {
-		flex-direction: column-reverse;
-	}
+    @media screen and (max-width: $screen-sm-min) {
+        flex-direction: column-reverse;
+    }
 }
 
 .pre-wrapper {
-	max-width:100%;
-	width:100%;
-	display: table;
-	table-layout: fixed;
+    max-width: 100%;
+    width: 100%;
+    display: table;
+    table-layout: fixed;
 }
