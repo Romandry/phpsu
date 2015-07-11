@@ -14,12 +14,13 @@
 
 
         <h1><?=$h1?></h1>
+        <p>&nbsp;</p>
 
 
         <style type="text/css">
 
             .test__forum-item {
-                padding: 10px 0 40px 0;
+                padding: 0 0 40px 0;
             }
 
             .test__sub-forum-item {
@@ -81,14 +82,10 @@
 
 
         <?php foreach ($forumsTree as $forum) { ?>
-
             <div class="test__forum-item">
-
                 <h2><a href="/forum/forum?id=<?=$forum->id?>"><?=$forum->title?></a></h2>
                 <p><?=$forum->description?></p>
-
                 <?php foreach ($forum->subforums as $subForum) { ?>
-
                     <div class="test__sub-forum-item">
                         <div class="test__sub-forum-item-info<?= $subForum->last_post_id ? ' test__sub-forum-item-info-extensive' : '' ?>">
                             <h3><a href="/forum/sub-forum?id=<?=$subForum->id?>"><?=$subForum->title?></a></h3>
@@ -115,11 +112,8 @@
                             </div>
                         </div>
                     </div>
-
                 <?php } ?>
-
             </div>
-
         <?php } ?>
 
 
