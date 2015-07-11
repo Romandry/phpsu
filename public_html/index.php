@@ -37,7 +37,7 @@ set_include_path(APPLICATION . join(PATH_SEPARATOR . APPLICATION, $pathes));
 /**
  * Autoload function
  *
- * @param  string $name Name of loaded target with(out) namespace
+ * @param  string $name Name of loaded target with or without namespace
  * @return null
  */
 
