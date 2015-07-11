@@ -1,11 +1,14 @@
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-$IE8: false !default; // Флаг компиляции стилей для IE8
+/// Compilation styles for IE8 if true.
+$IE8: false !default;
 
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 // Fonts
 
+/// Base font stack
 $base-font-stack: Verdana, Tahoma, Arial, sans-serif;
+/// Base font size
 $base-font-size: 10;
 
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -51,8 +54,8 @@ $logo_small-width: 75px;
 $logo_small-height: 40px;
 
 // box
-$box-bg: #e7e7e7;
-$box-border-color: #d2d2d2;
+$box-bg: #f0f5fa;
+$box-border-color: #C2CFDF;
 $box-radius: 3px;
 
 
@@ -63,6 +66,7 @@ $main-menu-compact-button-lines-width: 25px;
 $main-menu-compact-button-lines-height: 5px;
 $main-menu-compact-button-lines-space: 3px;
 $main-menu-compact-button-lines-h-space: 10px;
+$main-menu-compact-breakpoint: $screen-xs;
 
 // alerts
 

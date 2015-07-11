@@ -184,6 +184,9 @@ th {
   padding: 0; }
 
 /* Print styles */
+.icon {
+  text-decoration: none; }
+
 /*!
  *  Font Awesome 4.3.0 by @davegandy - http://fontawesome.io - @fontawesome
  *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
@@ -193,7 +196,7 @@ th {
 @font-face {
   font-family: 'FontAwesome';
   src: url("../fonts/awesome/fontawesome-webfont.eot?v=4.3.0");
-  src: url("../fonts/awesome/fontawesome-webfont.eot?#iefix&v=4.3.0") format("embedded-opentype"), url("../fonts/awesome/fontawesome-webfont.woff2?v=4.3.0") format("woff2"), url("../fonts/awesome/fontawesome-webfont.woff?v=4.3.0") format("woff"), url("../fonts/awesome/fontawesome-webfont.ttf?v=4.3.0") format("truetype");
+  src: url("../fonts/awesome/fontawesome-webfont.eot?#iefix&v=4.3.0") format("embedded-opentype"), url("../fonts/awesome/fontawesome-webfont.woff2?v=4.3.0") format("woff2"), url("../fonts/awesome/fontawesome-webfont.woff?v=4.3.0") format("woff"), url("../fonts/awesome/fontawesome-webfont.ttf?v=4.3.0") format("truetype"), url("../fonts/awesome/fontawesome-webfont.svg?v=4.3.0#fontawesomeregular") format("svg");
   font-weight: normal;
   font-style: normal; }
 
@@ -2002,8 +2005,11 @@ body {
 /* Grid system */
 #container {
   margin: 0 auto;
-  padding: 0 20px;
-  max-width: 1100px; }
+  padding: 1px 20px 0;
+  max-width: 1100px;
+  background: #fff;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+  min-height: 100vh; }
 
 .right-box {
   -webkit-flex-basis: 28.30189%;
@@ -2083,6 +2089,9 @@ h3 {
 /* Helper classes */
 .clear {
   clear: both; }
+
+.text-right {
+  text-align: right; }
 
 /* Forms */
 form {
@@ -2176,11 +2185,15 @@ form.loading input[type="submit"] {
   color: transparent; }
 
 /* Header */
+#header {
+  background: -webkit-linear-gradient(top, #E0EEF9, #B9DAF0);
+  background: linear-gradient(to bottom, #E0EEF9, #B9DAF0); }
+
 /* Box */
 .box {
   margin: 3px 0;
-  background: #e7e7e7;
-  border: solid 1px #d2d2d2;
+  background: #f0f5fa;
+  border: solid 1px #C2CFDF;
   border-radius: 3px;
   padding: 10px; }
 
@@ -2256,8 +2269,8 @@ form.loading input[type="submit"] {
 /* Main menu horizontal */
 .main-menu {
   margin: 3px 0;
-  background: #e7e7e7;
-  border: solid 1px #d2d2d2;
+  background: #f0f5fa;
+  border: solid 1px #C2CFDF;
   border-radius: 3px;
   font-size: 0; }
   .main-menu a {
@@ -2283,7 +2296,7 @@ form.loading input[type="submit"] {
       -webkit-transform: translateY(-3px);
           -ms-transform: translateY(-3px);
               transform: translateY(-3px); }
-    @media (max-width: 640px) {
+    @media (max-width: 479px) {
       .main-menu__item {
         display: block;
         border-bottom: solid 1px #D2D2D2; }
@@ -2333,7 +2346,7 @@ form.loading input[type="submit"] {
   cursor: pointer;
   position: relative;
   padding-left: 45px; }
-  @media (min-width: 641px) {
+  @media (min-width: 480px) {
     .main-menu-compact-button {
       display: none; } }
   .main-menu-compact-button__hamburger {
@@ -2362,22 +2375,26 @@ form.loading input[type="submit"] {
   .main-menu-compact-button:hover .main-menu-compact-button__hamburger:after {
     background: #c5c5c5; }
 
-@media (max-width: 640px) {
+@media (max-width: 479px) {
   .main-menu-compact {
     display: none; }
     .main-menu-compact_open {
       display: block; } }
 
 /* Footer */
-#footer .small-logo {
-  float: left;
-  width: 75px;
-  height: 40px;
-  background: url(../images/php-logo-small.png) no-repeat center center; }
+#footer .logo {
+  float: left; }
+  @media (max-width: 480px) {
+    #footer .logo {
+      float: none;
+      margin-bottom: 20px; } }
 
 #footer .footer-group {
   float: right;
   padding: 0 30px 0 0; }
+  @media (max-width: 480px) {
+    #footer .footer-group {
+      float: none; } }
 
 #footer .footer-group .item {
   padding: 0 0 3px 0; }
@@ -2422,11 +2439,19 @@ table.forum {
   width: 100%;
   border-collapse: separate;
   border-spacing: 1px;
-  background: #d2d2d2;
-  border: solid 1px #d2d2d2;
+  border: solid 1px #C2CFDF;
+  background: #fff;
   border-radius: 3px; }
   table.forum:last-child {
     margin-bottom: 0; }
+  table.forum td {
+    padding: 5px 7px;
+    vertical-align: middle;
+    background: #f0f5fa;
+    border-color: #C2CFDF; }
+  table.forum .table-heading td {
+    background: -webkit-linear-gradient(top, #88A9DA, #BFD3EE);
+    background: linear-gradient(to bottom, #88A9DA, #BFD3EE); }
 
 table.forum tr.table-heading * {
   font-size: 14px;
@@ -2435,18 +2460,13 @@ table.forum tr.table-heading * {
 table.forum tr.table-heading a.forum-title {
   font-size: 20px; }
 
-table.forum td {
-  padding: 5px 7px;
-  vertical-align: middle;
-  background: #f0f0f0; }
-
 table.forum td.last-update {
   width: 260px; }
 
 table.forum td.topics-count,
 table.forum td.answers-count {
   text-align: center; }
-  @media (max-width: 640px) {
+  @media (max-width: 767px) {
     table.forum td.topics-count,
     table.forum td.answers-count {
       display: none; } }
@@ -2553,7 +2573,7 @@ table.forum .target-info .title {
     max-height: 300px;
     max-width: 100%;
     padding: 5px; }
-    @media (max-width: 640px) {
+    @media (max-width: 767px) {
       .topic-post-body img {
         max-width: 100%; } }
 
@@ -2588,7 +2608,30 @@ table.forum .target-info .title {
 .topic-post-info {
   font-style: italic; }
 
-@media (max-width: 640px) {
+.topic-icon {
+  color: #fff;
+  font-size: 1.4em;
+  width: 1.2em;
+  height: 1.2em;
+  text-align: center;
+  display: inline-block;
+  vertical-align: middle;
+  border-radius: 0.2em;
+  line-height: 1.2em;
+  background: #D2D2D2;
+  margin-bottom: 0.2em; }
+  .topic-icon_important {
+    color: #c80000; }
+
+.topic-actions {
+  font-size: 1.1rem;
+  margin: 0.5em 0 0; }
+  .topic-actions a {
+    color: #999; }
+    .topic-actions a:hover {
+      text-decoration: underline; }
+
+@media (max-width: 767px) {
   .forum-topic {
     border: none; }
   .topic-post {

@@ -6,6 +6,7 @@
 .main-menu {
 	@extend %clearfix;
 	@include box();
+
 	font-size: 0;
 
 	a {
@@ -39,7 +40,7 @@
 		&_composite {
 		}
 
-		@media (max-width:640px) {
+		@media (max-width: $main-menu-compact-breakpoint - 1px) {
 			display: block;
 			border-bottom: solid 1px #D2D2D2;
 
@@ -48,10 +49,6 @@
 				transform: none;
 			}
 		}
-	}
-
-	@media (max-width:640px) {
-
 	}
 }
 
@@ -99,7 +96,7 @@
 	position: relative;
 	padding-left: $main-menu-compact-button-lines-width + $main-menu-compact-button-lines-h-space * 2;
 
-	@media (min-width: 640px + 1px) {
+	@media (min-width: $main-menu-compact-breakpoint) {
 		display: none;
 	}
 
@@ -146,7 +143,7 @@
 }
 
 .main-menu-compact {
-	@media (max-width: 640px) {
+	@media (max-width: $main-menu-compact-breakpoint - 1px) {
 		display: none;
 
 		&_open {
