@@ -1993,7 +1993,7 @@ th {
 
 html {
   background: #f0f0f0;
-  font-family: Verdana, Tahoma, Arial, sans-serif;
+  font-family: Arial, "Helvetica CY", "Nimbus Sans L", sans-serif;
   font-size: 62.5%;
   line-height: 1.231;
   color: #202020; }
@@ -2434,57 +2434,50 @@ form.loading input[type="submit"] {
   border-bottom: solid 1px #f0f0f0; }
 
 /* Forum */
-table.forum {
-  margin-bottom: 30px;
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 1px;
-  border: solid 1px #C2CFDF;
-  background: #fff;
-  border-radius: 3px; }
-  table.forum:last-child {
-    margin-bottom: 0; }
-  table.forum td {
-    padding: 5px 7px;
-    vertical-align: middle;
-    background: #f0f5fa;
-    border-color: #C2CFDF; }
-  table.forum .table-heading td {
-    background: -webkit-linear-gradient(top, #88A9DA, #BFD3EE);
-    background: linear-gradient(to bottom, #88A9DA, #BFD3EE); }
+.forum {
+  margin: 0 0 40px; }
 
-table.forum tr.table-heading * {
-  font-size: 14px;
-  font-weight: bold; }
-
-table.forum tr.table-heading a.forum-title {
-  font-size: 20px; }
-
-table.forum td.last-update {
-  width: 260px; }
-
-table.forum td.topics-count,
-table.forum td.answers-count {
-  text-align: center; }
+.sub-forum {
+  background: #fbfdfe;
+  border: 1px solid #C2CFDF;
+  border-bottom-width: 0;
+  display: table;
+  position: relative;
+  width: 100%; }
+  .sub-forum:last-child {
+    border-bottom-width: 1px; }
+  .sub-forum__title {
+    font-size: 15px; }
+  .sub-forum__info,
+  .sub-forum__stat {
+    display: table-cell;
+    padding: 10px;
+    vertical-align: top; }
+  .sub-forum__stat {
+    background: #f8fafd;
+    font-size: 1.3rem;
+    width: 280px; }
   @media (max-width: 767px) {
-    table.forum td.topics-count,
-    table.forum td.answers-count {
-      display: none; } }
+    .sub-forum {
+      display: block; }
+      .sub-forum__info {
+        padding-bottom: 0; }
+      .sub-forum__info,
+      .sub-forum__stat {
+        display: block;
+        width: auto; } }
 
-table.forum td.answers-count {
-  width: 80px; }
-
-table.forum td.topics-count {
-  width: 70px; }
-
-table.forum td.target-info {
-  vertical-align: top; }
-
-table.forum .td-wrapper {
-  position: relative; }
-
-table.forum .target-info .title {
-  font-weight: bold; }
+.sub-forum-stat__entry {
+  display: inline-block;
+  width: 49%; }
+  .sub-forum-stat__entry_post-title,
+  .sub-forum-stat__entry_post-author {
+    display: block;
+    width: 98%; }
+  .sub-forum-stat__entry_post-title {
+    padding: 5px 0; }
+  .sub-forum-stat__entry_post-author {
+    padding: 5px 10px 5px 0; }
 
 /* Forum topic */
 .forum-topic {

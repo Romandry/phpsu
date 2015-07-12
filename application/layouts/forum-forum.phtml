@@ -17,145 +17,35 @@
         <p><?=$forum->description?></p>
 
 
-        <style type="text/css">
-
-            .test__forum-item {
-                padding: 0 0 40px 0;
-            }
-
-            .test__sub-forum-item {
-                padding: 10px;
-                border: solid 1px #d2d2d2;
-                border-bottom: none;
-            }
-
-            .test__sub-forum-item:last-child {
-                border-bottom: solid 1px #d2d2d2;
-            }
-
-            .test__sub-forum-item-info {
-                position: relative;
-                padding: 0 280px 0 0;
-            }
-
-            .test__sub-forum-item-info-extensive {
-                min-height: 95px;
-            }
-
-            .test__sub-forum-item-info h3 {
-                font-size: 15px;
-            }
-
-            .test__sub-forum-item-stat {
-                position: absolute;
-                top: 0;
-                right: 0;
-                width: 260px;
-            }
-
-            .test__sub-forum-item-stat-entry {
-                float: left;
-                width: 130px;
-            }
-
-            .test__sub-forum-item-stat-last-post {
-                padding: 5px 10px 5px 0;
-            }
-
-            .test__sub-forum-item-stat-last-post-author {
-            }
-
-            @media (max-width: 640px) {
-
-                .test__sub-forum-item-info {
-                    padding: 0;
-                }
-
-                .test__sub-forum-item-stat {
-                    position: static;
-                    width: auto;
-                }
-
-            }
-
-        </style>
-
-
         <div class="test__forum-item">
             <?php foreach ($forum->subforums as $subForum) { ?>
-                <div class="test__sub-forum-item">
-                    <div class="test__sub-forum-item-info<?= $subForum->last_post_id ? ' test__sub-forum-item-info-extensive' : '' ?>">
-                        <h3><a href="/forum/sub-forum?id=<?=$subForum->id?>"><?=$subForum->title?></a></h3>
-                        <p><?=$subForum->description?></p>
-                        <div class="test__sub-forum-item-stat">
-                            <div class="test__sub-forum-item-stat-entry">Количество тем:</div>
-                            <div class="test__sub-forum-item-stat-entry"><?=$subForum->topics_count?></div>
-                            <div class="clear"></div>
-                            <div class="test__sub-forum-item-stat-entry">Количество ответов:</div>
-                            <div class="test__sub-forum-item-stat-entry"><?=$subForum->posts_count?></div>
-                            <div class="clear"></div>
-                            <?php if ($subForum->last_post_id) { ?>
-                                <div class="test__sub-forum-item-stat-entry">Последний ответ:</div>
-                                <div class="test__sub-forum-item-stat-entry"><?=$subForum->last_post_modified?></div>
-                                <div class="clear"></div>
-                                <div class="test__sub-forum-item-stat-last-post">
-                                    <a href="/forum/to-post?id=<?=$subForum->last_post_id?>"><?=$subForum->last_topic_title?></a>
-                                </div>
-                                <div class="test__sub-forum-item-stat-last-post-author">
-                                    Автор:
-                                    <a href="/user?id=<?=$subForum->last_post_author_id?>"><?=$subForum->last_post_author_login?></a>
-                                </div>
-                            <?php } ?>
-                        </div>
+                <div class="sub-forum">
+                    <div class="sub-forum__info">
+                        <h3 class="sub-forum__title"><a href="/forum/sub-forum?id=<?=$subForum->id?>"><?=$subForum->title?></a></h3>
+                        <p class="sub-forum__description"><?=$subForum->description?></p>
+                    </div>
+                    <div class="sub-forum__stat sub-forum-stat">
+                        <div class="sub-forum-stat__entry">Количество тем:</div>
+                        <div class="sub-forum-stat__entry"><?=$subForum->topics_count?></div>
+                        <div class="sub-forum-stat__entry">Количество ответов:</div>
+                        <div class="sub-forum-stat__entry"><?=$subForum->posts_count?></div>
+
+                        <?php if ($subForum->last_post_id) { ?>
+                            <div class="sub-forum-stat__entry">Последний ответ:</div>
+                            <div class="sub-forum-stat__entry"><?=$subForum->last_post_modified?></div>
+
+                            <div class="sub-forum-stat__entry sub-forum-stat__entry_post-title">
+                                <a href="/forum/to-post?id=<?=$subForum->last_post_id?>"><?=$subForum->last_topic_title?></a>
+                            </div>
+                            <div class="sub-forum-stat__entry sub-forum-stat__entry_post-author">
+                                Автор:
+                                <a href="/user?id=<?=$subForum->last_post_author_id?>"><?=$subForum->last_post_author_login?></a>
+                            </div>
+                        <?php } ?>
                     </div>
                 </div>
             <?php } ?>
         </div>
-
-
-        <!-- table class="forum" cellspacing="1">
-            <tr class="table-heading">
-                <td class="target-info">
-                    <div class="td-wrapper">Название подраздела</div>
-                </td>
-                <td class="topics-count">
-                    <div class="td-wrapper">Тем</div>
-                </td>
-                <td class="answers-count">
-                    <div class="td-wrapper">Ответов</div>
-                </td>
-                <td class="last-update">
-                    <div class="td-wrapper">Последнее сообщение</div>
-                </td>
-            </tr>
-            <?php foreach ($forum->subforums as $subForum) { ?>
-                <tr>
-                    <td class="target-info">
-                        <div class="td-wrapper">
-                            <div class="title"><a href="/forum/sub-forum?id=<?=$subForum->id?>"><?=$subForum->title?></a></div>
-                            <div class="description"><?=$subForum->description?></div>
-                        </div>
-                    </td>
-                    <td class="topics-count">
-                        <div class="td-wrapper"><?=$subForum->topics_count?></div>
-                    </td>
-                    <td class="answers-count">
-                        <div class="td-wrapper"><?=$subForum->posts_count?></div>
-                    </td>
-                    <td class="last-update">
-                        <div class="td-wrapper">
-                            <?php if ($subForum->last_post_id) { ?>
-                                <div class="date-time"><?=$subForum->last_post_modified?></div>
-                                <div class="topic"><a href="/forum/to-post?id=<?=$subForum->last_post_id?>"><?=$subForum->last_topic_title?></a></div>
-                                <div class="author"><a href="/user?id=<?=$subForum->last_post_author_id?>"><?=$subForum->last_post_author_login?></a></div>
-                            <?php } else { ?>
-                                <div class="topic">нет</div>
-                            <?php } ?>
-                        </div>
-                    </td>
-                </tr>
-            <?php } ?>
-        </table -->
 
 
     </div>
