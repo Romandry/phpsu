@@ -30,6 +30,8 @@ class SubForumTopicsHelper
             "SELECT
 
                     ft.id,
+                    ft.creation_date,
+                    ft.last_modified,
                     ft.is_locked,
                     ft.is_important,
                     ft.is_closed,
