@@ -30,7 +30,172 @@
         <?php require 'pagination.phtml'; ?>
 
 
-        <table class="forum" cellspacing="1">
+        <style type="text/css">
+
+           .test__sub-forum-box {
+                padding: 0 0 40px 0;
+            }
+
+            .test__sub-forum-topic {
+                display: flex;
+                padding: 5px 5px 10px 5px;
+                border: solid 1px #d2d2d2;
+                border-bottom: none;
+            }
+
+            .test__sub-forum-topic:last-child {
+                border-bottom: solid 1px #d2d2d2;
+            }
+
+            .test__sub-forum-topic-icons {
+                width: 30px;
+            }
+
+            .test__sub-forum-topic-icons .icon {
+                cursor: help;
+                margin: 2px 0;
+            }
+
+            .test__sub-forum-topic-info {
+                flex: 1;
+            }
+
+            .test__sub-forum-topic-stat {
+                padding: 0 0 0 10px;
+                width: 230px;
+            }
+
+            .test__sub-forum-topic-stat-name,
+            .test__sub-forum-topic-stat-value {
+                float: left;
+            }
+
+            .test__sub-forum-topic-stat-name {
+                width: 90px;
+            }
+
+            .test__sub-forum-topic-stat-value {
+                max-width: 140px;
+            }
+
+            .test__sub-forum-topic-actions {
+                width: 30px;
+                text-align: right;
+            }
+
+            .test__sub-forum-topic-actions a {
+                margin: 2px 0;
+            }
+
+            @media (max-width: 640px) {
+
+                .test__sub-forum-topic {
+                    position: relative;
+                    display: block;
+                }
+
+                .test__sub-forum-topic-icons {
+                    float: left;
+                }
+
+                .test__sub-forum-topic-info,
+                .test__sub-forum-topic-stat {
+                    margin: 0 0 0 30px;
+                    width: auto;
+                }
+
+                .test__sub-forum-topic-info {
+                    padding: 0 30px 0 0;
+                }
+
+                .test__sub-forum-topic-info-stat {
+                    padding: 0 0 10px 0;
+                }
+
+                .test__sub-forum-topic-stat {
+                    padding: 0;
+                }
+
+                .test__sub-forum-topic-actions {
+                    position: absolute;
+                    top: 5px;
+                    right: 5px;
+                }
+
+            }
+
+        </style>
+
+
+        <div class="test__sub-forum-box">
+            <?php foreach ($topics as $topic) { ?>
+                <div class="test__sub-forum-topic">
+                    <div class="test__sub-forum-topic-icons">
+                        <?php if ($topic->is_closed) { ?>
+                            <span class="icon icon-border icon-lock"
+                                    title="Тема закрыта"></span>
+                        <?php } ?>
+                        <?php if ($topic->is_important) { ?>
+                            <span class="icon icon-border icon icon-warning"
+                                    title="Тема помечена важной"></span>
+                        <?php } ?>
+                    </div>
+                    <div class="test__sub-forum-topic-info">
+                        <h3>
+                            <a href="/forum/topic?id=<?=$topic->id?>"><?=$topic->title?></a>
+                            <?php if ($topic->posts_count) { ?>
+                                <a href="/forum/to-post?id=<?=$topic->last_post_id?>"
+                                    title="Перейти к последнему ответу">&raquo;</a>
+                            <?php } ?>
+                        </h3>
+                        <p><?=$topic->description?></p>
+                        <div class="test__sub-forum-topic-info-stat">
+                            <?=$topic->creation_date?>,
+                            <a href="/user?id=<?=$topic->authored_by?>"><?=$topic->author_login?></a>
+                        </div>
+                    </div>
+                    <div class="test__sub-forum-topic-stat">
+                        <div class="test__sub-forum-topic-stat-name">Просмотров:</div>
+                        <div class="test__sub-forum-topic-stat-value"><?=$topic->views_count?></div>
+                        <div class="clear"></div>
+                        <div class="test__sub-forum-topic-stat-name">Ответов:</div>
+                        <div class="test__sub-forum-topic-stat-value"><?=$topic->posts_count?></div>
+                        <div class="clear"></div>
+                        <?php if ($topic->posts_count) { ?>
+                            <div class="test__sub-forum-topic-stat-name">Обновление:</div>
+                            <div class="test__sub-forum-topic-stat-value">
+                                <a href="/forum/to-post?id=<?=$topic->last_post_id?>"><?=$topic->last_modified?></a>
+                            </div>
+                            <div class="clear"></div>
+                            <div class="test__sub-forum-topic-stat-name">Автор ответа:</div>
+                            <div class="test__sub-forum-topic-stat-value">
+                                <a href="/user?id=<?=$topic->last_post_author_id?>"><?=$topic->last_post_author_login?></a>
+                            </div>
+                            <div class="clear"></div>
+                        <?php } ?>
+                    </div>
+                    <div class="test__sub-forum-topic-actions">
+                        <?php if (true /*Member::hasPermission('forum_topic_remove')*/) { ?>
+                            <a class="icon icon-border icon-remove"
+                                href="#remove"
+                                data-id="<?=$topic->id?>"
+                                onclick="return false;"
+                                title="Удалить"></a>
+                        <?php } ?>
+                        <?php if (true /*Member::hasPermission('forum_topic_edit')*/) { ?>
+                            <a class="icon icon-border icon-pencil"
+                                href="#edit"
+                                data-id="<?=$topic->id?>"
+                                onclick="return false;"
+                                title="Правка"></a>
+                        <?php } ?>
+                    </div>
+                </div>
+            <?php } ?>
+        </div>
+
+
+        <!-- table class="forum" cellspacing="1">
             <tr class="table-heading">
                 <td class="target-info">
                     <div class="td-wrapper">Название топика</div>
@@ -95,7 +260,7 @@
                     </td>
                 </tr>
             <?php } ?>
-        </table>
+        </table -->
 
 
         <?php require 'pagination.phtml'; ?>

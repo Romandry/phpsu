@@ -46,8 +46,10 @@ class TrackerTopicsHelper
             "SELECT
 
                     ft.id,
-                    ft.is_important,
+                    ft.creation_date,
+                    ft.last_modified,
                     ft.is_closed,
+                    ft.is_important,
                     ft.title,
                     ft.description,
 
