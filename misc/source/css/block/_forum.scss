@@ -1,74 +1,86 @@
 /* Forum */
 @import "../_config";
 @import "../_mixins";
+
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-table.forum {
-	margin-bottom: 30px;
-	width: 100%;
-	border-collapse: separate;
-	border-spacing: 1px;
-	border: solid 1px #C2CFDF;
-    background: #fff;
+.forum {
+    margin: 0 0 $gutter-width * 2;
 
-    border-radius: 3px;
-
-	&:last-child {
-		margin-bottom: 0;
-	}
-
-    td {
-        padding: 5px 7px;
-        vertical-align: middle;
-        background: #f0f5fa;
-        border-color: #C2CFDF;
+    &__title {
     }
 
-    .table-heading {
-        td {
-            background:linear-gradient(to bottom, #88A9DA, #BFD3EE);
+    &__description {
+    }
+}
+
+.sub-forum {
+    background: lighten(#f0f5fa, 3%);
+    border: 1px solid $box-border-color;
+    border-bottom-width: 0;
+    display: table;
+    position: relative;
+    width: 100%;
+
+    &:last-child {
+        border-bottom-width: 1px;
+    }
+
+    &__title {
+        font-size: 15px;
+    }
+
+    &__description {
+    }
+
+    &__info,
+    &__stat {
+        display: table-cell;
+        padding: 10px;
+        vertical-align: top;
+    }
+
+    &__info {
+    }
+
+    &__stat {
+        background: lighten(#f0f5fa, 2%);
+        font-size: rem(13);
+        width: 280px;
+    }
+
+    @media (max-width: $screen-xs-max) {
+        display: block;
+
+        &__info {
+            padding-bottom: 0;
+        }
+
+        &__info,
+        &__stat {
+            display: block;
+            width: auto;
         }
     }
 }
 
-table.forum tr.table-heading * {
-	font-size: 14px;
-	font-weight: bold;
-}
+.sub-forum-stat {
+    &__entry {
+        display: inline-block;
+        width: 49%;
 
-table.forum tr.table-heading a.forum-title {
-	font-size: 20px;
-}
+        &_post-title,
+        &_post-author {
+            display: block;
+            width: 98%;
+        }
 
-table.forum td.last-update {
-	width: 260px;
-}
+        &_post-title {
+            padding: 5px 0;
+        }
 
-table.forum td.topics-count,
-table.forum td.answers-count {
-	text-align: center;
-
-    @media (max-width: $screen-xs-max) {
-        display: none;
+        &_post-author {
+            padding: 5px 10px 5px 0;
+        }
     }
-}
-
-table.forum td.answers-count {
-	width: 80px;
-}
-
-table.forum td.topics-count {
-	width: 70px;
-}
-
-table.forum td.target-info {
-	vertical-align: top;
-}
-
-table.forum .td-wrapper {
-	position: relative;
-}
-
-table.forum .target-info .title {
-	font-weight: bold;
 }
