@@ -1,0 +1,72 @@
+/* Topics list item */
+@import "../../config";
+@import "../../mixins";
+
+//===================================================================
+
+.topics-item {
+    background: #f0f5fa;
+
+    &__title { }
+
+    &__icons {
+        float: left;
+        padding: 0.3em;
+        width: 50%;
+    }
+
+    &__info {
+        background: lighten(#f0f5fa, 3%);
+        clear: left;
+        padding: 0.3em;
+    }
+
+    &__stat {
+        background: lighten(#f0f5fa, 3%);
+        padding: 0.3em;
+    }
+
+    &__actions {
+        margin-left: 50%;
+        padding: 0.3em;
+        text-align: right;
+        width: 50%;
+    }
+
+    @media (min-width: $screen-float-breakpoint) {
+        background: lighten(#f0f5fa, 3%);
+        display: flex;
+
+        &__icons {
+            float: none;
+            order: 1;
+            padding-top: 10px;
+            text-align: center;
+            width: $topics-item-icons-width;
+        }
+
+        &__info {
+            clear: left;
+            flex: 1;
+            order: 2;
+            padding-bottom: 10px;
+            padding-top: 10px;
+        }
+
+        &__stat {
+            background: #F8FAFD;
+            flex: 0;
+            min-width: 240px;
+            order: 3;
+            padding: 10px 0.3em 10px 0.5em;
+        }
+
+        &__actions {
+            background: #F8FAFD;
+            margin-left: 0;
+            order: 4;
+            text-align: center;
+            width: $topics-item-icons-width;
+        }
+    }
+}

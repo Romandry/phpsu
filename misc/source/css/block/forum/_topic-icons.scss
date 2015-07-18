@@ -1,0 +1,31 @@
+/* Topic icons */
+@import "../../config";
+@import "../../mixins";
+
+//===================================================================
+
+.topic-icons {
+    &__icon {
+        color: #000;
+        cursor: help;
+        font-size: rem(18);
+        line-height: $topic-icon-size;
+        text-align: center;
+        width: 1em;
+
+        &_closed { }
+
+        &_pinned { }
+
+        &_important {
+            color: #db0214;
+        }
+    }
+
+    @media (min-width: $screen-float-breakpoint) {
+        &__icon {
+            display: inline-block;
+            line-height: 21px; // Todo: Magic number. Equal with topic title line-height. For tablet & desktop
+        }
+    }
+}

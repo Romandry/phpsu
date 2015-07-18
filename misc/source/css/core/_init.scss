@@ -24,3 +24,11 @@ body {
 	background: $site-bg;
 	font-size: rem(13); // ~13px
 }
+
+[title] {
+    cursor: help;
+}
+
+a[title] {
+    cursor: pointer;
+}

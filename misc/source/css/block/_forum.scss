@@ -4,6 +4,15 @@
 
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+$topics-item-icons-width: 38px;
+$topic-icon-size: 30px;
+
+@import "forum/forum-stat";
+@import "forum/topics";
+@import "forum/topics-item";
+@import "forum/topic-icons";
+@import "forum/topic-actions";
+
 .forum {
     margin: 0 0 $gutter-width * 2;
 
@@ -49,7 +58,7 @@
         width: 280px;
     }
 
-    @media (max-width: $screen-xs-max) {
+    @media (max-width: $screen-float-breakpoint - 1) {
         display: block;
 
         &__info {
