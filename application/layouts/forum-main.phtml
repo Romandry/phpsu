@@ -26,22 +26,27 @@
                             <h3 class="sub-forum__title"><a href="/forum/sub-forum?id=<?= $subForum->id ?>"><?= $subForum->title ?></a></h3>
                             <p class="sub-forum__description"><?= $subForum->description ?></p>
                         </div>
-                        <div class="sub-forum__stat sub-forum-stat">
-                            <div class="sub-forum-stat__entry">Количество тем:</div>
-                            <div class="sub-forum-stat__entry"><?= $subForum->topics_count ?></div>
-                            <div class="sub-forum-stat__entry">Количество ответов:</div>
-                            <div class="sub-forum-stat__entry"><?= $subForum->posts_count ?></div>
+                        <div class="sub-forum__stat forum-stat">
+                            <div class="forum-stat__item forum-stat__item_iconic">
+                                <i class="icon icon-file-text-o" title="Количество тем"></i>
+                                <?=$subForum->topics_count?>
+                            </div>
+                            <div class="forum-stat__item forum-stat__item_iconic">
+                                <i class="icon icon-comment-o" title="Количество ответов"></i>
+                                <?= $subForum->posts_count ?>
+                            </div>
 
                             <?php if ($subForum->last_post_id) { ?>
-                                <div class="sub-forum-stat__entry">Последний ответ:</div>
-                                <div class="sub-forum-stat__entry"><?= $subForum->last_post_modified ?></div>
-
-                                <div class="sub-forum-stat__entry sub-forum-stat__entry_post-title">
-                                    <a href="/forum/to-post?id=<?= $subForum->last_post_id ?>"><?= $subForum->last_topic_title ?></a>
+                                <div class="forum-stat__item">
+                                    <div class="forum-stat__name">Последний ответ:</div>
+                                    <div class="forum-stat__value"><?=$subForum->last_post_modified?></div>
                                 </div>
-                                <div class="sub-forum-stat__entry sub-forum-stat__entry_post-author">
+                                <div class="forum-stat__item forum-stat__item_post-title">
+                                    <a href="/forum/to-post?id=<?=$subForum->last_post_id?>"><?=$subForum->last_topic_title?></a>
+                                </div>
+                                <div class="forum-stat__item forum-stat__item_post-author">
                                     Автор:
-                                    <a href="/user?id=<?= $subForum->last_post_author_id ?>"><?= $subForum->last_post_author_login ?></a>
+                                    <a href="/user?id=<?=$subForum->last_post_author_id?>"><?=$subForum->last_post_author_login?></a>
                                 </div>
                             <?php } ?>
                         </div>

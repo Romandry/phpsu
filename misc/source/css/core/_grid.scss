@@ -7,7 +7,8 @@
 #container {
     margin: 0 auto;
     padding: 1px $gutter-width 0;  // 1px fix margin-collapsing
-    max-width: $site-max-width;
+    max-width: $screen-max;
+    min-width: $screen-min;
     background: #fff;
     box-shadow: 0 0 50px rgba(#000, 0.1);
     min-height: 100vh;

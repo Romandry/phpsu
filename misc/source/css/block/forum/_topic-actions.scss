@@ -1,0 +1,34 @@
+/* Topic actions */
+@import "../../config";
+@import "../../mixins";
+
+//===================================================================
+
+.topic-actions {
+    &__action {
+        background: #fff;
+        border-radius: 0.2em;
+        border: 0.08em solid #EEE;
+        font-size: rem(18);
+        line-height: $topic-icon-size;
+        text-align: center;
+        width: $topic-icon-size;
+    }
+
+    @media (min-width: $screen-float-breakpoint) {
+        text-align: right;
+        width: 2em;
+
+        &__action {
+            display: inline-block;
+            font-size: rem(14);
+            line-height: 1.4em;
+            margin: 0 auto 0.2em;
+            width: 1.4em;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+}

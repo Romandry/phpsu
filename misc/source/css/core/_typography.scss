@@ -41,10 +41,15 @@ li {
 
 // Heading
 h1 {
-	font-size: rem(33);
+    font-size: rem(26);
 	line-height: (38 / 33) + em;
 	margin: 0 0 rem(10);
 	padding: 0;
+    word-break: break-all;
+
+    @media (min-width: $screen-xs) {
+        font-size: rem(33);
+    }
 }
 
 h2 {

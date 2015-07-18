@@ -166,16 +166,6 @@
     &_important { color: #c80000; }
 }
 
-.topic-actions {
-    font-size: rem(11);
-    margin: 0.5em 0 0;
-    a {
-        color: #999;
-        &:hover {
-            text-decoration: underline;
-        }
-    }
-}
 
 @media (max-width: $screen-xs-max) {
 	.forum-topic {
