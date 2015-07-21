@@ -1,0 +1,23 @@
+/* Topics list */
+@import "../../_config";
+@import "../../_mixins";
+
+//===================================================================
+
+.topics {
+    &__item {
+        border: 1px solid #C2CFDF;
+        margin-bottom: $gutter-width;
+    }
+
+    @media (min-width: $screen-float-breakpoint) {
+        &__item {
+            border-bottom-width: 0;
+            margin-bottom: 0;
+
+            &:last-child {
+                border-bottom-width: 1px;
+            }
+        }
+    }
+}

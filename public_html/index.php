@@ -16,7 +16,7 @@ ini_set('display_errors', 'On');
 ini_set('html_errors', 'On');
 error_reporting(E_ALL | E_STRICT);
 
-// define application pathes
+// define application paths
 define('PUBLIC_HTML', dirname(__FILE__) . '/');
 define('APPLICATION', realpath(PUBLIC_HTML . '../application') . '/');
 define('UPLOADS',     realpath(PUBLIC_HTML . '../uploads_html') . '/');
@@ -26,12 +26,12 @@ mb_internal_encoding('UTF-8');
 
 
 /**
- * set main environment pathes,
- * WARNING! now set pathes without default value of get_include_path()
+ * Set main environment paths,
+ * WARNING! now set paths without default value of get_include_path()
  */
 
-$pathes = array('core/', 'layouts/');
-set_include_path(APPLICATION . join(PATH_SEPARATOR . APPLICATION, $pathes));
+$paths = array('core/', 'layouts/');
+set_include_path(APPLICATION . join(PATH_SEPARATOR . APPLICATION, $paths));
 
 
 /**
@@ -59,7 +59,7 @@ spl_autoload_register(function($name) {
 }, false);
 
 
-// run application
+// Run application
 try {
 
     $isCLI = PHP_SAPI == 'cli';

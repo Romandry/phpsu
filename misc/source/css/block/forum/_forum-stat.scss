@@ -1,0 +1,37 @@
+/* Forum stat */
+@import "../../config";
+@import "../../mixins";
+
+//===================================================================
+
+.forum-stat {
+    &__item {
+        &_iconic {
+            display: inline-block;
+            line-height: 21px; // Todo: Magic number. Equal with topic title line-height. For tablet & desktop
+            margin: 0.2em 0.6em 0.4em 0;
+            min-width: 3.5em;
+
+            .icon {
+                color: rgba($base-text-color, 0.6);
+                font-size: 1.2em;
+                vertical-align: baseline;
+            }
+        }
+
+        &_post-title,
+        &_post-author {
+            margin: 5px 0;
+        }
+    }
+
+    &__name {
+        display: inline-block;
+        min-width: 6.5em;
+        vertical-align: baseline;
+    }
+
+    &__value {
+        display: inline;
+    }
+}
