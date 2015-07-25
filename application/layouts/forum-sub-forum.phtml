@@ -69,7 +69,11 @@
                             <p><?=$topic->description?></p>
                             <div class="">
                                 <?=$topic->creation_date?>,
-                                <a href="/user?id=<?=$topic->authored_by?>"><?=$topic->author_login?></a>
+                                <?php if ($topic->author_id) { ?>
+                                    <a href="/user?id=<?=$topic->author_id?>"><?=$topic->author_login?></a>
+                                <?php } else { ?>
+                                    [ <?=View::$language->forum_sub_forum_topic_author_has_removed?> ]
+                                <?php } ?>
                             </div>
                         </div>
                         <div class="topics-item__stat forum-stat">
@@ -89,7 +93,11 @@
                                 <div class="forum-stat__item">
                                     <div class="forum-stat__name">Автор ответа:</div>
                                     <div class="forum-stat__value">
-                                        <a href="/user?id=<?= $topic->last_post_author_id ?>"><?= $topic->last_post_author_login ?></a>
+                                        <?php if ($topic->last_post_author_id) { ?>
+                                            <a href="/user?id=<?= $topic->last_post_author_id ?>"><?= $topic->last_post_author_login ?></a>
+                                        <?php } else { ?>
+                                            [ <?=View::$language->forum_sub_forum_last_post_author_has_removed?> ]
+                                        <?php } ?>
                                     </div>
                                 </div>
                             <?php } ?>

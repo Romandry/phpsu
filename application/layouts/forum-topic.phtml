@@ -29,13 +29,27 @@
                     <div class="topic-post-author">
                         <div class="topic-post-author__user">
                             <div class="topic-post-author__name">
-                                <a href="/user?id=<?=$post->author_id?>"><?=$post->author_login?></a>
+                                <?php if ($post->author_id) { ?>
+                                    <a href="/user?id=<?=$post->author_id?>"><?=$post->author_login?></a>
+                                <?php } else { ?>
+                                    <a name="topic-post-<?=$post->id?>-no-author-login"><?=View::$language->forum_topic_post_author_has_removed?></a>
+                                <?php } ?>
                             </div>
-                            <div class="topic-post-author__role"><?=$post->author_group_name?></div>
+                            <div class="topic-post-author__role">
+                                <?php if ($post->author_group_name) { ?>
+                                    <?=$post->author_group_name?>
+                                <?php } else { ?>
+                                    <?=View::$language->forum_topic_post_removed_author_group?>
+                                <?php } ?>
+                            </div>
                         </div>
                         <div class="topic-post-author__avatar">
-                            <a href="/user?id=<?=$post->author_id?>">
-                                <img src="//<?=$hosts->st?>/images/no-avatar.png">
+                            <?php if ($post->author_id) { ?>
+                                <a href="/user?id=<?=$post->author_id?>">
+                            <?php } else { ?>
+                                <a name="topic-post-<?=$post->id?>-no-author-avatar">
+                            <?php } ?>
+                                <img src="<?=$post->author_avatar?>">
                             </a>
                         </div>
                         <div class="topic-post-author__counter">

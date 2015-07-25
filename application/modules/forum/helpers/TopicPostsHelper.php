@@ -26,13 +26,12 @@ class TopicPostsHelper
 
     public static function getPostsByTopicId($topicID, $offset, $limit)
     {
-        return \DBI::getConnection('slave')->sendQuery(
+        $topicPosts = \DBI::getConnection('slave')->sendQuery(
 
             "SELECT
 
                     fp.id,
                     fp.topic_start,
-                    fp.authored_by,
                     fp.edited_by,
                     fp.moderated_by,
                     fp.creation_date,
@@ -40,9 +39,9 @@ class TopicPostsHelper
                     IF(fp.creation_date = fp.last_modified, 0, 1) is_modified,
                     fp.post_html,
 
-                    fm.author_id   author_id,
                     fm.posts_count author_posts_count,
 
+                    a.id     author_id,
                     a.login  author_login,
                     a.avatar author_avatar,
                     ag.name  author_group_name
@@ -61,5 +60,15 @@ class TopicPostsHelper
             array(':topic_id' => $topicID)
 
         )->fetchAll(\PDO::FETCH_OBJ);
+
+        $hCnf = \App::getConfig('hosts');
+        $mCnf = \App::getConfig('member-defaults');
+        foreach ($topicPosts as $item) {
+            if (!$item->author_avatar) {
+                $item->author_avatar = '//' . $hCnf->st . $mCnf->avatar;
+            }
+        }
+
+        return $topicPosts;
     }
 }

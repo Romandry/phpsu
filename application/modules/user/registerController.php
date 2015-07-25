@@ -59,7 +59,6 @@ class registerController extends \BaseController
         // validate form
         $registerForm = \App::getInstance('\modules\user\RegisterForm');
         $registerForm->validate();
-        // invalid form data
         if (!$registerForm->isValid()) {
             throw new \MemberErrorException(array(
                 'title'         => \View::$language->register_error,
@@ -67,16 +66,21 @@ class registerController extends \BaseController
                 'form_messages' => $registerForm->getMessages()
             ));
         }
-        // create a new user
         $userData = $registerForm->getData();
-        // set new user defaults
-        $userData->group_id        = 0;                   // TODO get default user group ID
-        $userData->password        = $userData->password; // TODO need hash password algorythm
-        $userData->time_zone       = '+00:00';            // TODO get default user time zone
-        $userData->status          = 0;                   // TODO get default new registered user status
-        $userData->activation_hash = 'xxx';               // TODO need algorythm for generation of activation hash
-        $userData->avatar          = 'no-avatar.png';     // TODO get default user avatar
 
+        // set new user defaults
+        $hCnf = \App::getConfig('hosts');
+        $mCnf = \App::getConfig('member-defaults');
+        $pass = \common\CryptHelper::generateHash($userData->password);
+
+        $userData->group_id        = $mCnf->group_id;
+        $userData->password        = $pass;
+        $userData->time_zone       = $mCnf->time_zone;
+        $userData->status          = $mCnf->status;
+        $userData->activation_hash = \common\HashHelper::getUniqueKey();
+        $userData->avatar          = '//' . $hCnf->st . $mCnf->avatar;
+
+        // create a new user
         $UserModel = \App::getInstance('common\UserModel');
         $UserModel->createUser($userData);
 

@@ -44,10 +44,12 @@ class SubForumsHelper
                     (sfs.posts_count - sfs.topics_count) posts_count,
 
                     fp.id            last_post_id,
-                    fp.authored_by   last_post_author_id,
                     fp.last_modified last_post_modified,
+
                     ft.title         last_topic_title,
-                    a.login          last_post_author_login
+
+                    a.id    last_post_author_id,
+                    a.login last_post_author_login
 
                 FROM forum_subforums sf
                 INNER JOIN forum_subforums_stat sfs

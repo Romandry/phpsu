@@ -100,7 +100,7 @@ class Member
     public static function beforeInit()
     {
         $isCLI = App::isCLI();
-        $prf = App::getConfig($isCLI ? 'member_cli' : 'member_guest');
+        $prf = App::getConfig($isCLI ? 'member-cli' : 'member-guest');
         $prf->avatar = '//' . App::getConfig('hosts')->st . $prf->avatar;
 
         self::$_permissions = new StdClass();

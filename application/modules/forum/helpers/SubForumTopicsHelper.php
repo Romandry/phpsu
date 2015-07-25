@@ -42,13 +42,13 @@ class SubForumTopicsHelper
                     fts.views_count,
                     fts.last_post_id,
 
-                    ft.authored_by,
-                    ta.login author_login,
-
-                    fp.authored_by   last_post_author_id,
                     fp.last_modified last_post_modified
 ,
-                    pa.login         last_post_author_login
+                    ta.id    author_id,
+                    ta.login author_login,
+
+                    pa.id    last_post_author_id,
+                    pa.login last_post_author_login
 
                 FROM forum_topics ft
                 INNER JOIN forum_topics_stat fts

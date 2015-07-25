@@ -1,0 +1,33 @@
+
+
+{
+
+
+    // Default member group (role) ID
+    "group_id": 2,
+
+
+    /**
+     * Default member status:
+     *
+     * 0 - Free
+     * 1 - Readonly
+     * 2 - Banned
+     * 3 - Not confirm from email (not exists, like deleted)
+     */
+
+    "status": 3,
+
+    // Default member language
+    "language": "ru",
+
+    // Default member time zone
+    "time_zone": "+00:00",
+
+    // Default member avatar
+    "avatar": "/images/no-avatar.png"
+
+
+}
+
+

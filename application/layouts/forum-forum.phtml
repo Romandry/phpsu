@@ -43,7 +43,11 @@
                             </div>
                             <div class="forum-stat__item forum-stat__item_post-author">
                                 Автор:
-                                <a href="/user?id=<?=$subForum->last_post_author_id?>"><?=$subForum->last_post_author_login?></a>
+                                <?php if ($subForum->last_post_author_id) { ?>
+                                    <a href="/user?id=<?=$subForum->last_post_author_id?>"><?=$subForum->last_post_author_login?></a>
+                                <?php } else { ?>
+                                    [ <?=View::$language->forum_forum_last_post_author_has_removed?> ]
+                                <?php } ?>
                             </div>
                         <?php } ?>
                     </div>
