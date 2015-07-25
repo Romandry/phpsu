@@ -7,7 +7,7 @@
  * User registration form validation
  */
 
-namespace modules\user;
+namespace modules\user\forms;
 
 class RegisterForm extends \common\Form
 {

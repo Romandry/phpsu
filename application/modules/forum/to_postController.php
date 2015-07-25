@@ -26,7 +26,7 @@ class to_postController extends \BaseController
         \View::addLanguageItem('forumToPostController');
 
         // validate request params
-        $gtpForm = new \modules\forum\forms\GetToPost();
+        $gtpForm = new forms\GetToPost();
         $gtpForm->validate();
         // invalid request params
         if (!$gtpForm->isValid()) {

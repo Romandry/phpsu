@@ -2,76 +2,72 @@
 
 
     <?php require 'top-box.phtml'; ?>
+
+
     <?php require 'main-menu.phtml'; ?>
 
 
-    <div class="breadcrumbs">
-        <a href="#">Какие-то</a> &raquo;
-        <a href="#">Хлебные</a> &raquo;
-        <a href="#">Крошки</a> &raquo;
-        <span>Рассыпались по сайту</span>
-    </div>
+    <?php require 'breadcrumbs.phtml'; ?>
 
 
     <div class="flex-container">
-    <?php require 'right-box.phtml'; ?>
 
 
-    <div class="left-box-pad-320">
-        <div class="box-wrapper">
-            <div class="box-padding">
+        <?php require 'right-box.phtml'; ?>
 
-                <h1><?=$h1?></h1>
 
-                <form action="/user/sign-in/try" method="post">
-                    <div class="label">Логин или E-mail</div>
-                    <div class="elem">
-                        <input type="text"
-                                name="login"
-                                value=""
-                                autocomplete="off">
-                    </div>
-                    <div class="label">Пароль</div>
-                    <div class="elem">
-                        <input type="password" name="password" value="">
-                    </div>
-                    <div class="protection-box">
-                        <div class="half-box">
-                            <div class="label">Защитный код</div>
-                            <div class="elem">
-                                <input class="short"
-                                        type="text"
-                                        name="protection"
-                                        value=""
-                                        autocomplete="off">
+        <div class="left-box-pad-320">
+            <div class="box-wrapper">
+                <div class="box-padding">
+
+                    <h1><?=$h1?></h1>
+
+                    <form action="/user/sign-in/process" method="post">
+                        <div class="label">Логин или E-mail</div>
+                        <div class="elem">
+                            <input type="text"
+                                    name="login"
+                                    value=""
+                                    autocomplete="off">
+                        </div>
+                        <div class="label">Пароль</div>
+                        <div class="elem">
+                            <input type="password" name="password" value="">
+                        </div>
+                        <div class="protection-box">
+                            <div class="half-box">
+                                <div class="label">Защитный код</div>
+                                <div class="elem">
+                                    <input class="short"
+                                            type="text"
+                                            name="protection"
+                                            value=""
+                                            autocomplete="off">
+                                </div>
                             </div>
+                            <div class="half-box">
+                                <img title="Кликни чтобы обновить"
+                                        alt=""
+                                        src="/protection-image.jpg?action=sign-in&_=<?=md5(microtime(true))?>"
+                                        onclick="this.src = '/protection-image.jpg?action=sign-in&_' + Math.random();">
+                            </div>
+                            <div class="clear"></div>
                         </div>
-                        <div class="half-box">
-                            <img title="Кликни чтобы обновить"
-                                    alt=""
-                                    src="/protection-image.jpg?action=sign-in&_=<?=md5(microtime(true))?>"
-                                    onclick="this.src = '/protection-image.jpg?action=sign-in&_' + Math.random();">
+                        <div class="label">&nbsp;</div>
+                        <div class="elem">
+                            <input type="submit" value="Вход">
                         </div>
-                        <div class="clear"></div>
-                    </div>
-                    <div class="label">&nbsp;</div>
-                    <div class="elem">
-                        <input type="submit" value="Вход">
-                    </div>
-                </form>
+                    </form>
 
+                </div>
             </div>
         </div>
-    </div>
+
+
     </div>
 
 
-    <div class="breadcrumbs">
-        <a href="#">Какие-то</a> &raquo;
-        <a href="#">Хлебные</a> &raquo;
-        <a href="#">Крошки</a> &raquo;
-        <span>Рассыпались по сайту</span>
-    </div>
+    <?php require 'breadcrumbs.phtml'; ?>
 
 
     <?php require 'bottom-box.phtml'; ?>

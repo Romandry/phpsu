@@ -26,7 +26,7 @@ class forumController extends \BaseController
         \View::addLanguageItem('forumForumController');
 
         // validate request params
-        $gfForm = new \modules\forum\forms\GetForum();
+        $gfForm = new forms\GetForum();
         $gfForm->validate();
         // invalid request params
         if (!$gfForm->isValid()) {

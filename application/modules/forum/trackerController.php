@@ -26,7 +26,7 @@ class trackerController extends \BaseController
         \View::addLanguageItem('forumTrackerController');
 
         // validate request params
-        $gtfFilter = new \modules\forum\forms\GetTrackerFilter();
+        $gtfFilter = new forms\GetTrackerFilter();
         $gtfFilter->validate();
         // invalid request params
         if (!$gtfFilter->isValid()) {

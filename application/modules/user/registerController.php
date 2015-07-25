@@ -57,7 +57,7 @@ class registerController extends \BaseController
         \View::lockOutputContext();
 
         // validate form
-        $registerForm = \App::getInstance('\modules\user\RegisterForm');
+        $registerForm = new forms\RegisterForm();
         $registerForm->validate();
         if (!$registerForm->isValid()) {
             throw new \MemberErrorException(array(

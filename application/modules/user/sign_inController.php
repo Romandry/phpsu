@@ -14,6 +14,20 @@ class sign_inController extends \BaseController
 
 
     /**
+     * runBefore
+     *
+     * Run before action
+     *
+     * @return null
+     */
+
+    public function runBefore()
+    {
+        \View::addLanguageItem('signInController');
+    }
+
+
+    /**
      * indexAction
      *
      * Index action of sign in controller user module
@@ -23,45 +37,34 @@ class sign_inController extends \BaseController
 
     public function indexAction()
     {
-        \View::assign('title', 'Вход в аккаунт');
+        \View::assign('title', \View::$language->sign_in_title);
         \View::setLayout('user-sign-in.phtml');
     }
 
 
     /**
-     * tryAction
+     * processAction
      *
-     * Try sign in user
+     * User sign in process
      *
      * @return null
      */
 
-    public function tryAction()
+    public function processAction()
     {
         \View::setOutputContext('json');
         \View::lockOutputContext();
 
-        if (!\Request::isPost()) {
+        // validate form
+        $signInForm = new forms\SignInForm();
+        $signInForm->validate();
+        if (!$signInForm->isValid()) {
             throw new \MemberErrorException(array(
-                'title'       => 'Ошибка',
-                'description' => 'Некорректный запрос'
+                'title'         => \View::$language->sign_in_error,
+                'description'   => \View::$language->sign_in_proc_err_descr,
+                'form_messages' => $signInForm->getMessages()
             ));
         }
-
-        $signInValidator = new \modules\user\SignInValidator();
-        $signInValidator->validate();
-
-        /*$signInValidator = \App::getInstance('\\common\\Validator');
-        $signInValidator->validatePostParams(array(
-            'login' => function($value) {
-            }
-        ));*/
-
-        /*$x = array('a' => function() { return 'x'; });
-        \View::assign('x', $x['a']());
-
-        $login = \Request::getPostParam('login');
-        $pass  = \Request::getPostParam('password');
-        $protection = \Request::getPostParam('protection_image');*/
+        $signInData = $signInForm->getData();
     }
 }

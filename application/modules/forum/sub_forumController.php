@@ -26,7 +26,7 @@ class sub_forumController extends \BaseController
         \View::addLanguageItem('forumSubForumController');
 
         // validate request params
-        $gsfForm = new \modules\forum\forms\GetSubForum();
+        $gsfForm = new forms\GetSubForum();
         $gsfForm->validate();
         // invalid request params
         if (!$gsfForm->isValid()) {

@@ -7,7 +7,7 @@
  * User sign-in form validator
  */
 
-namespace modules\user;
+namespace modules\user\forms;
 
 class SignInForm extends \common\Form
 {
