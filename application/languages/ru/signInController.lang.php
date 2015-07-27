@@ -7,8 +7,13 @@
 
 return array(
 
-    'sign_in_error'          => 'Ошибка',
-    'sign_in_proc_err_descr' => 'Некорректно заполнена форма входа',
-    'sign_in_title'          => 'Вход в аккаунт'
+    'sign_in_form_label_login'            => 'Логин или E-mail',
+    'sign_in_form_label_password'         => 'Пароль',
+    'sign_in_form_label_protection_code'  => 'Защитный код',
+    'sign_in_form_label_submit'           => 'Войти',
+    'sign_in_form_title_click_for_update' => 'Кликни чтобы обновить',
+    'sign_in_link_title_recovery'         => 'Забыли логин или пароль?',
+    'sign_in_link_title_register'         => 'Ещё нет аккаунта?',
+    'sign_in_title'                       => 'Вход в аккаунт'
 
 );

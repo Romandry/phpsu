@@ -131,8 +131,8 @@ class RegisterForm extends \common\Form
         // compare protection code
         if (property_exists($this->_data, 'protection_code')) {
             $protectionCode = \Storage::read('protection-code-register');
+            \Storage::remove('protection-code-register');
             if ($this->_data->protection_code !== $protectionCode) {
-                \Storage::remove('protection-code-register');
                 $this->addMessage(
                     'protection_code',
                     \View::$language->register_form_protection_code_invalid

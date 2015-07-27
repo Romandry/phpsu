@@ -37,7 +37,14 @@ class registerController extends \BaseController
 
     public function indexAction()
     {
+        // append breadcrumbs
+        \common\BreadCrumbs::appendItem(
+            // add forum (current) item
+            new \common\BreadCrumbsItem(null, \View::$language->register_title)
+        );
+        // assign data into view
         \View::assign('title', \View::$language->register_title);
+        // set output layout
         \View::setLayout('user-register.phtml');
     }
 
@@ -74,6 +81,7 @@ class registerController extends \BaseController
         $pass = \common\CryptHelper::generateHash($userData->password);
 
         $userData->group_id        = $mCnf->group_id;
+        $userData->cookie          = \common\HashHelper::getUniqueKey();
         $userData->password        = $pass;
         $userData->time_zone       = $mCnf->time_zone;
         $userData->status          = $mCnf->status;

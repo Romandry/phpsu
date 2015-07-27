@@ -128,7 +128,7 @@ class Member
             $cnf = App::getConfig('main')->system;
             if (array_key_exists($cnf->cookie_name, $_COOKIE)) {
                 $value = (string) $_COOKIE[$cnf->cookie_name];
-                $value = trim(substr($value, 0, 512));
+                $value = trim(substr($value, 0, 255));
                 if ($value) {
 
                     $conn = DBI::getConnection('slave');

@@ -66,7 +66,7 @@ class UserModel
                     avatar
                 ) VALUES (
                     :group_id,
-                    '',
+                    :cookie,
                     :email,
                     :login,
                     :password,
@@ -80,6 +80,7 @@ class UserModel
                 )",
             array(
                 ':group_id'        => $userData->group_id,
+                ':cookie'          => $userData->cookie,
                 ':email'           => $userData->email,
                 ':login'           => $userData->login,
                 ':password'        => $userData->password,

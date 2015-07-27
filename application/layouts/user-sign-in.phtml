@@ -7,9 +7,6 @@
     <?php require 'main-menu.phtml'; ?>
 
 
-    <?php require 'breadcrumbs.phtml'; ?>
-
-
     <div class="flex-container">
 
 
@@ -17,50 +14,68 @@
 
 
         <div class="left-box-pad-320">
+
+
+            <?php require 'breadcrumbs.phtml'; ?>
+
+
             <div class="box-wrapper">
                 <div class="box-padding">
 
                     <h1><?=$h1?></h1>
 
-                    <form action="/user/sign-in/process" method="post">
-                        <div class="label">Логин или E-mail</div>
+                    <form class="ajax-form"
+                            action="/user/sign-in/process"
+                            method="post">
+                        <div class="label"><?=View::$language->sign_in_form_label_login?></div>
                         <div class="elem">
                             <input type="text"
                                     name="login"
                                     value=""
                                     autocomplete="off">
+                            <span class="elem-message for-login"></span>
                         </div>
-                        <div class="label">Пароль</div>
+                        <div class="label"><?=View::$language->sign_in_form_label_password?></div>
                         <div class="elem">
                             <input type="password" name="password" value="">
+                            <span class="elem-message for-password"></span>
                         </div>
                         <div class="protection-box">
                             <div class="half-box">
-                                <div class="label">Защитный код</div>
+                                <div class="label"><?=View::$language->sign_in_form_label_protection_code?></div>
                                 <div class="elem">
                                     <input class="short"
                                             type="text"
-                                            name="protection"
+                                            name="protection_code"
                                             value=""
                                             autocomplete="off">
                                 </div>
                             </div>
                             <div class="half-box">
-                                <img title="Кликни чтобы обновить"
+                                <img title="<?=View::$language->sign_in_form_title_click_for_update?>"
                                         alt=""
-                                        src="/protection-image.jpg?action=sign-in&_=<?=md5(microtime(true))?>"
+                                        src="/protection-image.jpg?action=sign-in&_=<?=md5(microtime())?>"
                                         onclick="this.src = '/protection-image.jpg?action=sign-in&_' + Math.random();">
+                                <span class="elem-message for-protection_code"></span>
                             </div>
                             <div class="clear"></div>
                         </div>
                         <div class="label">&nbsp;</div>
                         <div class="elem">
-                            <input type="submit" value="Вход">
+                            <input type="submit"
+                                    value="<?=View::$language->sign_in_form_label_submit?>">
                         </div>
                     </form>
+                    <p>
+                        <a href="/user/register"><?=View::$language->sign_in_link_title_register?></a>
+                        |
+                        <a href="/user/recovery"><?=View::$language->sign_in_link_title_recovery?></a>
+                    </p>
 
                 </div>
             </div>
+
+
         </div>
 
 

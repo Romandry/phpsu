@@ -14,20 +14,6 @@ class sign_inController extends \BaseController
 
 
     /**
-     * runBefore
-     *
-     * Run before action
-     *
-     * @return null
-     */
-
-    public function runBefore()
-    {
-        \View::addLanguageItem('signInController');
-    }
-
-
-    /**
      * indexAction
      *
      * Index action of sign in controller user module
@@ -37,7 +23,16 @@ class sign_inController extends \BaseController
 
     public function indexAction()
     {
+        // add language
+        \View::addLanguageItem('signInController');
+        // append breadcrumbs
+        \common\BreadCrumbs::appendItem(
+            // add current item
+            new \common\BreadCrumbsItem(null, \View::$language->sign_in_title)
+        );
+        // assign data into view
         \View::assign('title', \View::$language->sign_in_title);
+        // set output layout
         \View::setLayout('user-sign-in.phtml');
     }
 
@@ -60,11 +55,12 @@ class sign_inController extends \BaseController
         $signInForm->validate();
         if (!$signInForm->isValid()) {
             throw new \MemberErrorException(array(
-                'title'         => \View::$language->sign_in_error,
-                'description'   => \View::$language->sign_in_proc_err_descr,
+                'title'         => \View::$language->sign_in_form_error,
+                'description'   => \View::$language->sign_in_form_error_description,
                 'form_messages' => $signInForm->getMessages()
             ));
         }
-        $signInData = $signInForm->getData();
+        // sign in
+        helpers\SignInHelper::trySignIn($signInForm->getData());
     }
 }
